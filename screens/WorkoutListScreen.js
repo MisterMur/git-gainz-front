@@ -6,7 +6,7 @@ import Workout from '../components/Workout.js'
 import {connect} from 'react-redux'
 
 
-export default class WorkoutListScreen extends Component {
+class WorkoutListScreen extends Component {
   static navigationOptions = {
     title: 'Workout List',
 
@@ -34,13 +34,14 @@ export default class WorkoutListScreen extends Component {
 
 
   render() {
-    const workouts = this.props.navigation.getParam("workouts",'NO-EXERCISES')
-    console.log('in render workoutlistscreen workouts ',workouts)
-    // console.log('in render workoutlistscreen props',this.props)
+    // const workouts = this.props.navigation.getParam("workouts",'NO-EXERCISES')
+    // console.log('in render workoutlistscreen workouts ',workouts)
+    console.log('in render workoutlistscreen props',this.props)
     return (
       <View className="WorkoutList">
         <WorkoutList
-          workouts={workouts}
+          workouts={this.props.currentSchedule.workouts}
+
           handlePress={this.props.navigation.navigate}
         />
       </View>
@@ -48,11 +49,10 @@ export default class WorkoutListScreen extends Component {
   }
 }
 function mapStateToProps(state){
+  // console.log('workoutlistscreen mapstateprops',state)
   return {
-    workouts:state.workouts
+    currentSchedule:state.currentSchedule,
   }
 }
-function mapDispatchToProps(prevState){
 
-}
-// export default connect(mapStateToProps,mapDispatchToProps)(WorkoutListScreen)
+export default connect(mapStateToProps)(WorkoutListScreen)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput,Text,View,Button,ScrollView} from 'react-native';
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-native-elements'
 
 import ScheduleList from '../components/ScheduleList.js'
@@ -23,7 +24,7 @@ class ScheduleListScreen extends Component {
 
   }
   componentDidMount(){
-    console.log('in did mount')
+    // console.log('in did mount')
     this.props.dispatch(fetchSchedules())
 
   }
@@ -33,14 +34,14 @@ class ScheduleListScreen extends Component {
       name:this.state.text,
       workouts:[]
     }))
-    console.log('posted schedule')
+    // console.log('posted schedule')
     this.props.dispatch(fetchSchedules())
-    console.log('fetched new schedule')
+    // console.log('fetched new schedule')
 
 
 
   }
-  
+
 
 
   render() {
@@ -90,4 +91,5 @@ const mapStateToProps=state=>({
   loading:state.loading,
   error:state.error
 })
+
 export default connect(mapStateToProps)(ScheduleListScreen)

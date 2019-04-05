@@ -1,7 +1,10 @@
 import React from "react";
 import {Text,View,FlatList,StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+
 // import {viewWorkouts} from '../reducer'
+import {setCurrentWorkout} from '../reducers/reducer.js'
 
 // import {colors, fonts, padding, dimensions} from '../styles/base.js'
 import { Card, ListItem, Button ,Divider} from 'react-native-elements'
@@ -14,7 +17,15 @@ class Workout extends React.Component {
   constructor(props){
     super(props)
   }
-  
+
+  handlePressButton=()=>{
+    this.props.handlePress('Workout',this.props.workout)
+    store.dispatch({
+      type:'SET_CURRENT_WORKOUT',
+      payload:this.props.schedule
+    })
+    this.props.handlePress('Workout')
+  }
 
   render() {
     console.log('workout props',this.props)
@@ -31,11 +42,18 @@ class Workout extends React.Component {
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='VIEW NOW'
-            onPress={()=>this.props.handlePress('Workout',this.props.workout)} />
+            onPress={()=>this.handlePressButton()} />
         </Card>
       </View>
     )
   }
 }
+const mapStateToProps=state=>({
+  currentWorkout:state.currentWorkout
 
-export default Workout
+})
+// function mapDispatchToProps(dispatch,ownProps) {
+//   return bindActionCreators({ setCurrentWorkout}, dispatch)
+// }
+
+export default connect(mapStateToProps)(Workout)

@@ -6,19 +6,21 @@ import Workout from './Workout.js'
 
 const WorkoutList = (props) => {
   const renderWorkouts=()=>{
-    console.log('in render workouts',props.workouts)
-    return props.workouts.map((workout,id)=>{
-      console.log('workout:',workout)
-      return (
-        <View>
-          <Workout
-            key={id}
-            workout={workout}
-            handlePress={props.handlePress}
-          />
-        </View>
-      )
-    })
+    console.log('in render workouts',props)
+    if(props.workouts){
+      return props.workouts.map((workout,id)=>{
+        console.log('workout:',workout)
+        return (
+          <View>
+            <Workout
+              key={id}
+              workout={workout}
+              handlePress={props.handlePress}
+            />
+          </View>
+        )
+      })
+    }
   }
   return (
   <View className="WorkoutList">
@@ -26,10 +28,10 @@ const WorkoutList = (props) => {
   </View>
   )
 }
-function mapStateToProps(state){
-  return{
-    workouts: state.workouts
-  }
-}
+// function mapStateToProps(state){
+//   return{
+//     workouts: state.workouts
+//   }
+// }
 
 export default connect()(WorkoutList)
