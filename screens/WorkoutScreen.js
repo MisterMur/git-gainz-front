@@ -15,9 +15,10 @@ class WorkoutScreen extends Component {
 
   }
   renderExercises=()=>{
-    if(currentWorkout.exercises){
-      console.log('render exercises currentworkoutExercises',currentWorkout.exercises)
-      return currentWorkout.exercises.map((exercise,id)=>{
+    console.log('workout screen render exercises',this.props.currentWorkout)
+    if(this.props.currentWorkout.exercises){
+      console.log('render exercises currentworkoutExercises',this.props.currentWorkout.exercises)
+      return this.props.currentWorkout.exercises.map((exercise,id)=>{
         console.log(exercise)
         return(
           <View>
@@ -34,10 +35,10 @@ class WorkoutScreen extends Component {
 
 
   render() {
-    const {navigation} = this.props
-    console.log('workoutscreen props',this.props)
+    // const {navigation} = this.props
+    // console.log('workoutscreen props',this.props)
     // console.log('navigation in render workoutScreen: ',navigation)
-    const name = navigation.getParam("name",'NO-EXERCISES')
+    // const name = navigation.getParam("name",'NO-EXERCISES')
     // const exercises = navigation.getParam("exercises",'NO-EXERCISES')
     // console.log('exercises',exercises)
     return (
@@ -57,7 +58,7 @@ class WorkoutScreen extends Component {
     );
   }
 }
-function mapStateToProps(){
+function mapStateToProps(state){
   return {
     currentWorkout:state.currentWorkout
   }

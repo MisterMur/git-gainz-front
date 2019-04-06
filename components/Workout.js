@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux'
 
 // import {viewWorkouts} from '../reducer'
 import {setCurrentWorkout} from '../reducers/reducer.js'
+import store from '../store.js'
 
 // import {colors, fonts, padding, dimensions} from '../styles/base.js'
 import { Card, ListItem, Button ,Divider} from 'react-native-elements'
@@ -19,10 +20,11 @@ class Workout extends React.Component {
   }
 
   handlePressButton=()=>{
-    this.props.handlePress('Workout',this.props.workout)
+    // console.log('in handlepressbutton workout',this.props.workout
+    console.log('in handlepressbutton store',store)
     store.dispatch({
       type:'SET_CURRENT_WORKOUT',
-      payload:this.props.schedule
+      payload:this.props.workout
     })
     this.props.handlePress('Workout')
   }
