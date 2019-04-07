@@ -1,4 +1,4 @@
-import {ADD_WORKOUT,FETCH_SCHEDULES_SUCCESS,SET_CURRENT_WORKOUT,SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_FAILURE,ADD_NEW_SCHEDULE,SET_WORKOUTS} from '../constants/types.js'
+import {ADD_NEW_WORKOUT,FETCH_SCHEDULES_SUCCESS,SET_CURRENT_WORKOUT,SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_FAILURE,ADD_NEW_SCHEDULE,SET_WORKOUTS,FETCH_EXERCISES_BEGIN,FETCH_EXERCISES_SUCCESS,FETCH_EXERCISES_FAILURE} from '../constants/types.js'
 
 // import store from '../store.js'
 
@@ -36,9 +36,32 @@ function reducer(state=initialState,action){
         error:action.payload.error,
         schedules:[]
       }
+    case FETCH_EXERCISES_BEGIN:
+      return {
+        ...state,
+        loading:true,
+        error:null
+      }
+    case FETCH_EXERCISES_SUCCESS:
+      return{
+        ...state,
+        loading:false,
+        exercises:action.payload.exercises
+      }
+    case FETCH_EXERCISES_FAILURE:
+      return {
+        ...state,
+        loading:false,
+        error:action.payload.error,
+        exercises:[]
+      }
     case ADD_NEW_SCHEDULE:
       return {
         ...state,schedules:[...state.schedules,action.payload]
+      }
+    case ADD_NEW_WORKOUT:
+      return{
+        ...state,workouts:[...state.workouts,action.payload]
       }
     case SET_CURRENT_SCHEDULE:
       console.log('reducer in set current schedule')
@@ -88,8 +111,8 @@ export function setCurrentSchedule(schedule){
 
 export function addWorkout(workout){
   return {
-    type:ADD_WORKOUT,
-    payload:workout
+    type:ADD_NEW_WORKOUT,
+    payload:{workout}
   }
 }
 export function fetchSchedules(){
@@ -110,11 +133,39 @@ export function fetchSchedules(){
     .catch(error=> dispatch(fetchSchedulesFailure(error)))
   }
 }
+export function fetchExercises(){
+  const exercisesUrl = 'http://localhost:3000/api/v1/exercises'
+  return dispatch=>{
+    return fetch(exercisesUrl)
+      .then(handleErrors)
+      .then(res=>{
+        return res.json()
+      })
+      .then(exercises=>{
+        dispatch(fetchExercisesSuccess(exercises))
+        return exercises
+      })
+      .catch(error=> dispatch(fetchExercisesFailure(error)))
+  }
+}
+export const fetchExercisesBegin=()=>({
+  type:FETCH_EXERCISES_BEGIN
+})
+export const fetchExercisesSuccess=(exercises)=>{
+  return {
+    type:FETCH_EXERCISES_SUCCESS,
+    payload:{exercises}
+  }
+}
+export const fetchExercisesFailure=(error)=>({
+  type:FETCH_SCHEDULES_FAILURE,
+  payload:{error}
+})
 export function postNewSchedule(schedule){
-  const userUrl='http://localhost:3000/api/v1/schedules'
+  const scheduleUrl='http://localhost:3000/api/v1/schedules'
   // console.log('in handle add schedule',e)
   return dispatch=>{
-    return fetch(userUrl,{
+    return fetch(scheduleUrl,{
       method:"POST",
       headers:{
         'Content-Type':'application/json',
@@ -122,6 +173,23 @@ export function postNewSchedule(schedule){
       },
       body:JSON.stringify({
         schedule
+      })
+    })
+    .then(handleErrors)
+  }
+}
+export function postNewWorkout(workout){
+  const workoutUrl='http://localhost:3000/api/v1/workouts'
+  // console.log('in handle add schedule',e)
+  return dispatch=>{
+    return fetch(workoutUrl,{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        'Accepts':'application/json'
+      },
+      body:JSON.stringify({
+        workout
       })
     })
     .then(handleErrors)

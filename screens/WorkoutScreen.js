@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput,Text,View,Button} from 'react-native';
+import { AppRegistry, TextInput,Text,ScrollView,View,Button} from 'react-native';
 
 import Exercise from '../components/Exercise.js'
 import {connect} from 'react-redux'
@@ -14,6 +14,7 @@ class WorkoutScreen extends Component {
     super(props);
 
   }
+
   renderExercises=()=>{
     console.log('workout screen render exercises',this.props.currentWorkout)
     if(this.props.currentWorkout.exercises){
@@ -22,10 +23,10 @@ class WorkoutScreen extends Component {
         console.log(exercise)
         return(
           <View>
-          <Exercise
-          key={id}
-          exercise={exercise}
-          />
+            <Exercise
+            key={id}
+            exercise={exercise}
+            />
           </View>
         )
       })
@@ -42,7 +43,7 @@ class WorkoutScreen extends Component {
     // const exercises = navigation.getParam("exercises",'NO-EXERCISES')
     // console.log('exercises',exercises)
     return (
-      <View>
+      <ScrollView>
 
 
         {this.renderExercises()}
@@ -54,7 +55,7 @@ class WorkoutScreen extends Component {
           title="Go back"
           onPress={() => this.props.navigation.navigate('WorkoutList')}
         />
-      </View>
+      </ScrollView>
     );
   }
 }

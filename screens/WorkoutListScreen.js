@@ -1,50 +1,72 @@
 import React, { Component } from 'react';
 import WorkoutList from '../components/WorkoutList.js'
-import { AppRegistry, TextInput,Text,View,Button} from 'react-native';
+import { AppRegistry,Text,ScrollView,Button} from 'react-native';
+
+import { Card,Input, Button as ButtonElement } from 'react-native-elements'
+
 
 import Workout from '../components/Workout.js'
 import {connect} from 'react-redux'
+import { fetchSchedules,postNewWorkout} from '../reducers/reducer.js'
 
 
 class WorkoutListScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
   static navigationOptions = {
     title: 'Workout List',
 
   };
-
-  constructor(props) {
-    super(props);
-    // console.log('workoutlist screen',props)
-
+  state={
+    text:''
   }
+
+
   componentDidMount(){
-    // const userUrl='http://localhost:3000/api/v1/users/13'
-    // fetch(userUrl)
-    // .then(res=>{
-    //
-    //   return res.json()
-    // })
-    // .then(users=>{
-    //   console.log('in fetch',users)
-    //   this.props.dispatch({users})
-    //
-    // })
-    // console.log('fetched')
+  }
+
+  handleAddWorkout=()=>{
+    this.props.dispatch(postNewWorkout({
+      name:this.state.text,
+      workouts:[]
+    }))
+    this.props.dispatch(fetchSchedules())
   }
 
 
   render() {
-    // const workouts = this.props.navigation.getParam("workouts",'NO-EXERCISES')
-    // console.log('in render workoutlistscreen workouts ',workouts)
-    console.log('in render workoutlistscreen props',this.props)
+    // console.log('in render workoutlistscreen props',this.props)
+
+
+
+
     return (
-      <View className="WorkoutList">
+      <ScrollView className="WorkoutList">
         <WorkoutList
           workouts={this.props.currentSchedule.workouts}
-
           handlePress={this.props.navigation.navigate}
         />
-      </View>
+        <Input
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+        />
+        <ButtonElement
+          title="Add New Workout"
+          onPress={() => this.handleAddWorkout()}
+        />
+        <Button
+          title="Go to Home"
+          onPress={() => this.props.navigation.navigate('Home')}
+        />
+        <Button
+          title="Go back"
+          onPress={() => this.props.navigation.navigate('ScheduleList')}
+        />
+
+
+
+      </ScrollView>
     );
   }
 }

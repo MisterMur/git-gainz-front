@@ -34,26 +34,13 @@ class ScheduleListScreen extends Component {
       name:this.state.text,
       workouts:[]
     }))
-    // console.log('posted schedule')
     this.props.dispatch(fetchSchedules())
-    // console.log('fetched new schedule')
-
-
-
   }
 
 
 
   render() {
-    // const {navigation} = this.props
-    // console.log('navigation in render schedule screen: ',navigation)
-    // const scheduleName = navigation.getParam("name",'NO-SCHEDULES')
-    // console.log('schedule name',scheduleName)
-    // const exercises = navigation.getParam("exercises",'NO-EXERCISES')
-    // console.log('exercises',exercises)
     const {error,loading,schedules}=this.props
-
-    console.log('scheduleListScreen props:',this.props)
     return (
       <ScrollView>
 
@@ -80,8 +67,6 @@ class ScheduleListScreen extends Component {
           title="Add New Schedule"
           onPress={() => this.handleAddSchedule()}
         />
-
-
       </ScrollView>
     );
   }
