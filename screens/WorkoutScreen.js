@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { AppRegistry, TextInput,Text,ScrollView,View,Button} from 'react-native';
+import {  Button as ButtonElement ,Input} from 'react-native-elements'
 
 import Exercise from '../components/Exercise.js'
 import {connect} from 'react-redux'
+import {postNewExercise,fetchSchedules} from '../reducers/reducer.js'
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
@@ -13,6 +15,9 @@ class WorkoutScreen extends Component {
   constructor(props) {
     super(props);
 
+  }
+  state={
+    text:''
   }
 
   renderExercises=()=>{
@@ -32,6 +37,17 @@ class WorkoutScreen extends Component {
       })
     }
   }
+  addNewExercise=()=>{
+    console.log('in handle add new exercise', this.props.currentWorkout)
+    this.props.dispatch(postNewExercise({
+      name:this.state.text,
+      sets:[]
+
+      // schedule_id: this.props.currentSchedule.id,
+    },this.props.currentWorkout))
+
+    this.props.dispatch(fetchSchedules())
+  }
 
 
 
@@ -44,9 +60,17 @@ class WorkoutScreen extends Component {
     // console.log('exercises',exercises)
     return (
       <ScrollView>
-
-
         {this.renderExercises()}
+        <Input
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+        />
+        <ButtonElement
+          backgroundColor='#03A9F4'
+          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+          title='Add New Exercise'
+          onPress={this.addNewExercise}
+        />
         <Button
           title="Go to Home"
           onPress={() => this.props.navigation.navigate('Home')}

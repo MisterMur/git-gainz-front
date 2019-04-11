@@ -27,19 +27,18 @@ class WorkoutListScreen extends Component {
   }
 
   handleAddWorkout=()=>{
+    console.log('in handle add workout', this.props.currentSchedule)
     this.props.dispatch(postNewWorkout({
       name:this.state.text,
-      workouts:[]
-    }))
+      exercises:[]
+      // schedule_id: this.props.currentSchedule.id,
+    },this.props.currentSchedule))
+
     this.props.dispatch(fetchSchedules())
   }
 
 
   render() {
-    // console.log('in render workoutlistscreen props',this.props)
-
-
-
 
     return (
       <ScrollView className="WorkoutList">
@@ -71,7 +70,7 @@ class WorkoutListScreen extends Component {
   }
 }
 function mapStateToProps(state){
-  // console.log('workoutlistscreen mapstateprops',state)
+  console.log('workoutlistscreen mapstateprops',state)
   return {
     currentSchedule:state.currentSchedule,
   }

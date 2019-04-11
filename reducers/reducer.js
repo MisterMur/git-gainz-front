@@ -1,5 +1,8 @@
 import {ADD_NEW_WORKOUT,FETCH_SCHEDULES_SUCCESS,SET_CURRENT_WORKOUT,SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_FAILURE,ADD_NEW_SCHEDULE,SET_WORKOUTS,FETCH_EXERCISES_BEGIN,FETCH_EXERCISES_SUCCESS,FETCH_EXERCISES_FAILURE} from '../constants/types.js'
 
+const apiUrl=`http://localhost:3000/api/v1/`
+
+
 // import store from '../store.js'
 
 const initialState={
@@ -178,23 +181,84 @@ export function postNewSchedule(schedule){
     .then(handleErrors)
   }
 }
-export function postNewWorkout(workout){
-  const workoutUrl='http://localhost:3000/api/v1/workouts'
+export function postNewWorkout(workout,currentSchedule){
+  // addWorkout(workout)
   // console.log('in handle add schedule',e)
+  // currentSchedule.workouts=[...currentSchedule.workouts,workout]
+  let schedule = {
+    ...currentSchedule  }
+  console.log('***********************schedule',schedule)
   return dispatch=>{
-    return fetch(workoutUrl,{
+    return fetch(apiUrl+'workouts',{
       method:"POST",
       headers:{
         'Content-Type':'application/json',
         'Accepts':'application/json'
       },
       body:JSON.stringify({
-        workout
-      })
+          workout
+        }
+      )
     })
+    .then(res=>res.json())
+    .then(workout=>{
+
+      console.log('res workout id',workout)
+      // console.log("%c res",  "color: blue",res)
+      return fetch( apiUrl+'workout_schedules',{
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json',
+          'Accepts':'application/json'
+        },
+        body:JSON.stringify({
+          schedule_id:currentSchedule.id,
+          workout_id:workout.id
+        })
+      }).then(handleErrors)
+
+  })
+    // .then(handleErrors)
+  }
+}
+
+export function postNewExercise(exercise,currentWorkout){
+  // addWorkout(workout)
+  console.log('***********************exercise',exercise)
+  return dispatch=>{
+    return fetch(apiUrl+'exercises',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        'Accepts':'application/json'
+      },
+      body:JSON.stringify({
+          exercise
+        }
+      )
+    })
+    .then(res=>{return res.json() })
+    .then(exer=>{
+
+      console.log('res exercise id',exer)
+      return fetch( apiUrl+'workout_exercises',{
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json',
+          'Accepts':'application/json'
+        },
+        body:JSON.stringify({
+          workout_id:currentWorkout.id,
+          exercise_id:exer.id
+        })
+      }).then(handleErrors)
+
+  })
     .then(handleErrors)
   }
 }
+
+
 export const fetchSchedulesBegin=()=>({
   type:FETCH_SCHEDULES_BEGIN
 })
