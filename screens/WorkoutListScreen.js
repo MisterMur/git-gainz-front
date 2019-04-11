@@ -7,7 +7,7 @@ import { Card,Input, Button as ButtonElement } from 'react-native-elements'
 
 import Workout from '../components/Workout.js'
 import {connect} from 'react-redux'
-import { fetchSchedules,postNewWorkout} from '../reducers/reducer.js'
+import { fetchSchedulesWorkouts,fetchWorkouts,postNewWorkout} from '../reducers/reducer.js'
 
 
 class WorkoutListScreen extends Component {
@@ -24,17 +24,20 @@ class WorkoutListScreen extends Component {
 
 
   componentDidMount(){
+    this.props.dispatch(fetchWorkouts())
+
   }
 
   handleAddWorkout=()=>{
-    console.log('in handle add workout', this.props.currentSchedule)
+    // console.log('in handle add workout', this.props)
     this.props.dispatch(postNewWorkout({
       name:this.state.text,
       exercises:[]
       // schedule_id: this.props.currentSchedule.id,
     },this.props.currentSchedule))
 
-    this.props.dispatch(fetchSchedules())
+    // this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
+    // console.warn('handle add workout',this.props.currentSchedule.workouts)
   }
 
 

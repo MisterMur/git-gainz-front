@@ -14,13 +14,13 @@ const ScheduleList = (props) => {
       return props.schedules.map((schedule,id)=>{
         // console.log('schedule:',schedule)
         return (
-          <View>
+
             <Schedule
-            key={id}
+            key={schedule.id}
             schedule={schedule}
             handlePress={props.handlePress}
             />
-          </View>
+          
         )
       })
     }

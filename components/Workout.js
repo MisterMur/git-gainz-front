@@ -21,7 +21,7 @@ class Workout extends React.Component {
 
   handlePressButton=()=>{
     // console.log('in handlepressbutton workout',this.props.workout
-    console.log('in handlepressbutton store',store)
+    // console.log('in handlepressbutton store',store)
     store.dispatch({
       type:'SET_CURRENT_WORKOUT',
       payload:this.props.workout
@@ -30,10 +30,10 @@ class Workout extends React.Component {
   }
 
   render() {
-    console.log('workout props',this.props)
+    // console.warn('workout props',this.props.workout)
     return (
       <View>
-        <Card  title={this.props.workout.name} dividerStyle="3">
+        <Card  dividerStyle="3">
           <Text style={{marginBottom: 10}}>
             {this.props.workout.name}
           </Text>

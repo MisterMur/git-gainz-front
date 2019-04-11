@@ -36,6 +36,7 @@ class Set extends React.Component {
 
         <View style={{width:110,height:50}}>
           <Input
+            
             placeholder='Weight'
             leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />

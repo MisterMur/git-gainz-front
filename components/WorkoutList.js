@@ -11,13 +11,13 @@ const WorkoutList = (props) => {
       return props.workouts.map((workout,id)=>{
         console.log('workout:',workout)
         return (
-          <View>
+
             <Workout
-              key={id}
+              key={workout.id}
               workout={workout}
               handlePress={props.handlePress}
             />
-          </View>
+
         )
       })
     }

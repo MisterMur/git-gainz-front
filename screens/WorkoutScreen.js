@@ -4,7 +4,7 @@ import {  Button as ButtonElement ,Input} from 'react-native-elements'
 
 import Exercise from '../components/Exercise.js'
 import {connect} from 'react-redux'
-import {postNewExercise,fetchSchedules} from '../reducers/reducer.js'
+import {postNewExercise,fetchSchedules,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
@@ -27,12 +27,10 @@ class WorkoutScreen extends Component {
       return this.props.currentWorkout.exercises.map((exercise,id)=>{
         console.log(exercise)
         return(
-          <View>
             <Exercise
-            key={id}
-            exercise={exercise}
+              key={exercise.id}
+              exercise={exercise}
             />
-          </View>
         )
       })
     }
@@ -46,7 +44,12 @@ class WorkoutScreen extends Component {
       // schedule_id: this.props.currentSchedule.id,
     },this.props.currentWorkout))
 
-    this.props.dispatch(fetchSchedules())
+    this.props.dispatch(fetchWorkouts())
+    this.props.dispatch(addWorkout({
+      name:this.state.text,
+      sets:[]
+    }))
+    console.warn(this.props.workouts)
   }
 
 

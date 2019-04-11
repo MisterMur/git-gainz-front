@@ -25,14 +25,14 @@ class Exercise extends React.Component {
     this.setState({sets:newSets})
   }
   renderSets(){
-    return this.state.sets.map( s =><Set/>)
+    return this.state.sets.map( (s,id) =><Set key={id}/>)
   }
 
 
   render() {
     // {this.renderSet()*2}
     return (
-      <View>
+
         <Card title={this.props.exercise.name}>
           {this.renderSets()}
           <Button
@@ -44,7 +44,6 @@ class Exercise extends React.Component {
 
         </Card>
 
-      </View>
     )
   }
 }
