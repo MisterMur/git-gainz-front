@@ -367,8 +367,10 @@ export function postNewExercise(exercise,currentWorkout){
 }
 export function postNewCircuit(circuit){
   console.log('in post new circuit',circuit)
-  return dispatch=>{
-    return fetch(apiUrl+'circuits',{
+  return (dispatch)=>{
+    // dispatch(fetchCircuits(circuit.exercise_id))
+    console.log('in dispatch')
+    fetch(apiUrl+'circuits',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
@@ -377,8 +379,8 @@ export function postNewCircuit(circuit){
       body:JSON.stringify(
         circuit
       )
-    }).then(res=>{console.log('res',res);return res.json()})
-    .then(handleErrors)
+    })//.then(res=> res.json())
+    .then(console.log)
 
     .then(function(){dispatch(fetchCircuits(circuit.exercise_id))})
   }
@@ -437,6 +439,7 @@ export const fetchExercisesFailure=(error)=>({
   payload:{error}
 })
 export const fetchCircuitsSuccess=(circuits)=>{
+  console.log('fetch circuits success',circuits)
   return {
     type:FETCH_CIRCUITS_SUCCESS,
     payload:circuits

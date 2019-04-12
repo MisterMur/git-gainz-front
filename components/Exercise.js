@@ -48,7 +48,7 @@ class Exercise extends React.Component {
     console.log('in handle press return set')
     let newSets = [...this.state.sets]
     newSets.push(<Set/>)
-    this.setState({sets:newSets}, ()=> postNewCircuit({
+    this.setState({sets:newSets}, (obj)=> this.props.postNewCircuit({
         reps:this.state.reps,
         weight:this.state.weight,
         rest:0,
@@ -84,4 +84,7 @@ class Exercise extends React.Component {
     )
   }
 }
-export default Exercise
+const actions={
+  postNewCircuit
+}
+export default connect(null,actions) (Exercise)

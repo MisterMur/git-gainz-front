@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 17989,
-  "expoServerNgrokUrl": "https://8x-hnf.anonymous.git-gainz-front.exp.direct",
-  "packagerNgrokUrl": "https://packager.8x-hnf.anonymous.git-gainz-front.exp.direct",
-  "ngrokPid": 18017,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }
