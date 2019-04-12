@@ -24,7 +24,7 @@ class WorkoutListScreen extends Component {
 
 
   componentDidMount(){
-    this.props.dispatch(fetchWorkouts())
+    this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
 
   }
 

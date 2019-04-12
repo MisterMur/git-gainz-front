@@ -79,7 +79,10 @@ function reducer(state=initialState,action){
       return{
         ...state,
         loading:false,
-        exercises:action.payload.exercises
+        currentWorkout:{
+          ...state.currentWorkout,
+          exercises:action.payload.exercises
+        },
       }
     case FETCH_EXERCISES_FAILURE:
       return {
@@ -202,6 +205,20 @@ export function fetchSchedulesWorkouts(schedule){
     .catch(error=> dispatch(fetchSchedulesFailure(error)))
   }
 }
+export function fetchWorkoutsExercises(workout){
+  return dispatch=>{
+    return fetch(apiUrl+`workouts/${workout.id}`)
+    .then(handleErrors)
+    .then(res=>res.json())
+    .then(exercises=>{
+      dispatch(fetchExercisesSuccess(exercises))
+      return exercises
+    })
+    .catch(error=>
+      dispatch(fetchExercisesFailure(error))
+    )
+  }
+}
 export function fetchExercises(){
   const exercisesUrl = 'http://localhost:3000/api/v1/exercises'
   return dispatch=>{
@@ -223,7 +240,7 @@ export const fetchExercisesBegin=()=>({
 export const fetchExercisesSuccess=(exercises)=>{
   return {
     type:FETCH_EXERCISES_SUCCESS,
-    payload:{exercises}
+    payload:exercises
   }
 }
 export const fetchExercisesFailure=(error)=>({
@@ -324,6 +341,9 @@ export function postNewExercise(exercise,currentWorkout){
 
   })
     .then(handleErrors)
+    .then(function(){
+      dispatch(fetchWorkoutsExercises(currentWorkout))
+    })
   }
 }
 export const fetchWorkoutsBegin=()=>({

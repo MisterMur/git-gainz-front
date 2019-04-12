@@ -17,7 +17,6 @@ const WorkoutList = (props) => {
               workout={workout}
               handlePress={props.handlePress}
             />
-
         )
       })
     }
