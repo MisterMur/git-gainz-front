@@ -73,7 +73,7 @@ class WorkoutListScreen extends Component {
   }
 }
 function mapStateToProps(state){
-  console.log('workoutlistscreen mapstateprops',state)
+  // console.log('workoutlistscreen mapstateprops',state)
   return {
     currentSchedule:state.currentSchedule,
   }

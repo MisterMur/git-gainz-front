@@ -12,6 +12,8 @@ class Set extends React.Component {
   }
 
   render() {
+
+
     return (
       <View style={{
         flex: 4,
@@ -25,6 +27,9 @@ class Set extends React.Component {
 
         <View style={{width:100,height:50}}>
           <Input
+            value={this.props.reps}
+            onChangeText={reps=>this.props.handleRepsOnChange(reps)}
+
             placeholder='Reps'
             leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />
@@ -36,7 +41,9 @@ class Set extends React.Component {
 
         <View style={{width:110,height:50}}>
           <Input
-            
+            value={this.props.weight}
+            onChangeText={weight=>this.props.handleWeightOnChange(weight)}
+
             placeholder='Weight'
             leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />

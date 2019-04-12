@@ -6,7 +6,7 @@ import Workout from './Workout.js'
 
 const WorkoutList = (props) => {
   const renderWorkouts=()=>{
-    console.log('in render workouts',props)
+    // console.log('in render workouts',props)
     if(props.workouts){
       return props.workouts.map((workout,id)=>{
         console.log('workout:',workout)

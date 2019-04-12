@@ -20,7 +20,10 @@ class WorkoutScreen extends Component {
     this.props.dispatch(fetchWorkoutsExercises(this.props.currentWorkout))
   }
   state={
-    text:''
+    text:'',
+    workout:{
+      exercises:{}
+    }
   }
 
   renderExercises=()=>{
@@ -61,6 +64,9 @@ class WorkoutScreen extends Component {
     }))
     this.props.dispatch(fetchSchedules())
   }
+  handleCompleteWorkout=()=>{
+
+  }
 
 
 
@@ -73,7 +79,7 @@ class WorkoutScreen extends Component {
     // console.log('exercises',exercises)
     return (
       <ScrollView>
-        {this.renderExercises()}
+
         <Input
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
@@ -83,6 +89,13 @@ class WorkoutScreen extends Component {
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
           title='Add New Exercise'
           onPress={this.addNewExercise}
+        />
+        {this.renderExercises()}
+        <ButtonElement
+          backgroundColor='#03A9F4'
+          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+          title='Finish Workout'
+          onPress={this.handleCompleteWorkout}
         />
         <Button
           title="Go to Home"
