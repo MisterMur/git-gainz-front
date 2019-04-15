@@ -4,7 +4,7 @@ import {  Button as ButtonElement ,Input} from 'react-native-elements'
 
 import Exercise from '../components/Exercise.js'
 import {connect} from 'react-redux'
-import {postNewExercise,fetchSchedules,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
+import {postNewExercise,postNewCompleteWorkout,fetchSchedules,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
@@ -27,11 +27,11 @@ class WorkoutScreen extends Component {
   }
 
   renderExercises=()=>{
-    console.log('workout screen render exercises',this.props.currentWorkout)
+    // console.log('workout screen render exercises',this.props.currentWorkout)
     if(this.props.currentWorkout.exercises){
-      console.log('render exercises currentworkoutExercises',this.props.currentWorkout.exercises)
+      // console.log('render exercises currentworkoutExercises',this.props.currentWorkout.exercises)
       return this.props.currentWorkout.exercises.map((exercise,id)=>{
-        console.log(exercise)
+        // console.log(exercise)
         return(
             <Exercise
               key={exercise.id}
@@ -42,7 +42,7 @@ class WorkoutScreen extends Component {
     }
   }
   addNewExercise=()=>{
-    console.log('in handle add new exercise', this.props.currentWorkout)
+    // console.log('in handle add new exercise', this.props.currentWorkout)
     this.props.dispatch(postNewExercise({
       name:this.state.text,
       sets:[]
@@ -50,12 +50,13 @@ class WorkoutScreen extends Component {
       // schedule_id: this.props.currentSchedule.id,
     },this.props.currentWorkout))
 
-    this.props.dispatch(fetchWorkouts())
-    this.props.dispatch(addWorkout({
-      name:this.state.text,
-      sets:[]
-    }))
-    console.warn(this.props.workouts)
+    // this.props.dispatch(fetchWorkouts())
+    // this.props.dispatch(addWorkout({
+    //   name:this.state.text,
+    //   sets:[]
+    // }))
+    this.setState({text:''})
+    // console.warn(this.props.workouts)
   }
   handleAddExercise=()=>{
     this.props.dispatch(postNewExercise({
@@ -65,9 +66,40 @@ class WorkoutScreen extends Component {
     this.props.dispatch(fetchSchedules())
   }
   handleCompleteWorkout=()=>{
+    this.props.dispatch(postNewCompleteWorkout(this.props.currentUser,this.props.currentWorkout))
 
   }
+  renderNav=()=>{
+    return (
+      <>
+      <Button
+        title="Go to Home"
+        onPress={() => this.props.navigation.navigate('Home')}
+      />
+      <Button
+        title="Go back"
+        onPress={() => this.props.navigation.navigate('WorkoutList')}
+      />
 
+      </>
+    )
+  }
+  renderAddExerciseForm=()=>{
+    return (
+      <>
+      <Input
+        onChangeText={(text) => this.setState({text})}
+        value={this.state.text}
+      />
+      <ButtonElement
+        backgroundColor='#03A9F4'
+        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+        title='Add New Exercise'
+        onPress={this.addNewExercise}
+      />
+      </>
+    )
+  }
 
 
   render() {
@@ -79,17 +111,7 @@ class WorkoutScreen extends Component {
     // console.log('exercises',exercises)
     return (
       <ScrollView>
-
-        <Input
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-        />
-        <ButtonElement
-          backgroundColor='#03A9F4'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-          title='Add New Exercise'
-          onPress={this.addNewExercise}
-        />
+        {this.renderAddExerciseForm()}
         {this.renderExercises()}
         <ButtonElement
           backgroundColor='#03A9F4'
@@ -97,21 +119,16 @@ class WorkoutScreen extends Component {
           title='Finish Workout'
           onPress={this.handleCompleteWorkout}
         />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.navigate('WorkoutList')}
-        />
+        {this.renderNav()}
+
       </ScrollView>
     );
   }
 }
 function mapStateToProps(state){
   return {
-    currentWorkout:state.currentWorkout
+    currentWorkout:state.currentWorkout,
+    currentUser:state.currentUser
   }
 
 }

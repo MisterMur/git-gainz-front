@@ -29,6 +29,7 @@ HomeStack.navigationOptions = {
 };
 const ScheduleListStack = createStackNavigator({
   ScheduleList: ScheduleListScreen,
+  WorkoutList: WorkoutListScreen
 });
 
 ScheduleListStack.navigationOptions = {
@@ -72,7 +73,8 @@ WorkoutStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  WorkoutListStack,
+
   ScheduleListStack,
   WorkoutStack
 });
+// WorkoutListStack,

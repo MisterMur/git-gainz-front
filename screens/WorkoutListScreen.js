@@ -39,16 +39,19 @@ class WorkoutListScreen extends Component {
     // this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
     // console.warn('handle add workout',this.props.currentSchedule.workouts)
   }
-
-
-  render() {
-
+  renderWorkoutList=()=>{
     return (
-      <ScrollView className="WorkoutList">
-        <WorkoutList
-          workouts={this.props.currentSchedule.workouts}
-          handlePress={this.props.navigation.navigate}
-        />
+      <WorkoutList
+        workouts={this.props.currentSchedule.workouts}
+        handlePress={this.props.navigation.navigate}
+      />
+    )
+
+  }
+  renderAddWorkoutForm=()=>{
+    return (
+      <>
+
         <Input
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
@@ -57,6 +60,13 @@ class WorkoutListScreen extends Component {
           title="Add New Workout"
           onPress={() => this.handleAddWorkout()}
         />
+      </>
+    )
+
+  }
+  renderNav=()=>{
+    return (
+      <>
         <Button
           title="Go to Home"
           onPress={() => this.props.navigation.navigate('Home')}
@@ -65,8 +75,19 @@ class WorkoutListScreen extends Component {
           title="Go back"
           onPress={() => this.props.navigation.navigate('ScheduleList')}
         />
+      </>
+    )
+
+  }
 
 
+  render() {
+    // console.warn(this.props)
+    return (
+      <ScrollView className="WorkoutList">
+        {this.props.currentSchedule?this.renderWorkoutList():null}
+        {this.renderAddWorkoutForm()}
+        {this.renderNav()}
 
       </ScrollView>
     );
