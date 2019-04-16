@@ -22,7 +22,42 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+  renderHelpContainer=()=>{
+    return (
+      <>
+        <View style={styles.helpContainer}>
+          <TouchableOpacity style={styles.helpLink}>
+            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+          </TouchableOpacity>
+        </View>
 
+      </>
+    )
+  }
+  renderLoginForm=()=>{
+    return (
+      <>
+      <Input
+        placeholder='USERNAME'
+        leftIcon={
+          <Icon
+            name='user'
+            size={24}
+            color='black'/>
+        }
+      />
+      <Input
+        placeholder='PASSWORD'
+        leftIcon={
+          <Icon
+            name='plus'
+            size={24}
+            color='black'/>
+        }
+      />
+      </>
+    )
+  }
   render() {
     // <Button title="Show me more of the app" onPress={this._showMoreApp} />
     // <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
@@ -30,39 +65,12 @@ export default class HomeScreen extends React.Component {
 
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      
-
           <View style={styles.getStartedContainer}>
-
             <Text style={styles.getStartedText}>Welcome to Git Gainz</Text>
 
-
-
-            <Input
-              placeholder='USERNAME'
-              leftIcon={
-                <Icon
-                  name='user'
-                  size={24}
-                  color='black'/>
-              }
-            />
-            <Input
-              placeholder='PASSWORD'
-              leftIcon={
-                <Icon
-                  name='plus'
-                  size={24}
-                  color='black'/>
-              }
-            />
           </View>
+          {this.renderLoginForm()}
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>

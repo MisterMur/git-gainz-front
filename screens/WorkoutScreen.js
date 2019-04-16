@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput,Text,ScrollView,View,Button} from 'react-native';
+import {connect} from 'react-redux'
+import { Alert,AppRegistry, TextInput,Text,ScrollView,View,Button} from 'react-native';
 import {  Button as ButtonElement ,Input} from 'react-native-elements'
+import {postNewExercise,postNewCompleteWorkout,fetchSchedules,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
 
 import Exercise from '../components/Exercise.js'
-import {connect} from 'react-redux'
-import {postNewExercise,postNewCompleteWorkout,fetchSchedules,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
+import MusclePicker from '../components/Dropdown.js'
+
+import {styles} from '../constants/Styles.js'
+
+
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
@@ -17,14 +22,22 @@ class WorkoutScreen extends Component {
 
   }
   componentDidMount(){
-    this.props.dispatch(fetchWorkoutsExercises(this.props.currentWorkout))
+    if(this.props.currentWorkout){
+      this.props.dispatch(fetchWorkoutsExercises(this.props.currentWorkout))
+    }
   }
   state={
     text:'',
     workout:{
       exercises:{}
-    }
+    },
+    showAddExercise:false,
+    muscle: 'Please Select a Muscle Group'
   }
+
+  //**************************************************************************************
+  //********************         EVENT HANDLERS           ********************************
+  //**************************************************************************************
 
   renderExercises=()=>{
     // console.log('workout screen render exercises',this.props.currentWorkout)
@@ -33,30 +46,29 @@ class WorkoutScreen extends Component {
       return this.props.currentWorkout.exercises.map((exercise,id)=>{
         // console.log(exercise)
         return(
-            <Exercise
-              key={exercise.id}
-              exercise={exercise}
-            />
+          <Exercise
+          key={exercise.id}
+          exercise={exercise}
+          />
         )
       })
     }
   }
+
   addNewExercise=()=>{
-    // console.log('in handle add new exercise', this.props.currentWorkout)
-    this.props.dispatch(postNewExercise({
-      name:this.state.text,
-      sets:[]
-
-      // schedule_id: this.props.currentSchedule.id,
-    },this.props.currentWorkout))
-
-    // this.props.dispatch(fetchWorkouts())
-    // this.props.dispatch(addWorkout({
-    //   name:this.state.text,
-    //   sets:[]
-    // }))
-    this.setState({text:''})
-    // console.warn(this.props.workouts)
+    if(this.state.showAddExercise){
+      if((this.state.text) && (this.state.muscle!='Please Select a Muscle Group')){
+        this.props.dispatch(postNewExercise({
+          name:this.state.text,
+          muscle:this.state.muscle,
+          sets:[]
+        },this.props.currentWorkout))
+        this.setState({text:''})
+      }else{
+        this.renderAlert()
+      }
+    }
+    this.setState({showAddExercise:!this.state.showAddExercise})
   }
   handleAddExercise=()=>{
     this.props.dispatch(postNewExercise({
@@ -65,10 +77,33 @@ class WorkoutScreen extends Component {
     }))
     this.props.dispatch(fetchSchedules())
   }
+  handleCancelExerciseForm=()=>{
+    this.setState({showAddExercise:false})
+  }
   handleCompleteWorkout=()=>{
     this.props.dispatch(postNewCompleteWorkout(this.props.currentUser,this.props.currentWorkout))
 
   }
+  handleMuscleChange = (muscle) => {
+     this.setState({  muscle })
+  }
+
+  //**************************************************************************************
+  //********************         RENDER FUNCTIONS
+  //**************************************************************************************
+
+  renderAlert=()=>{
+    // Works on both iOS and Android
+    Alert.alert(
+      'Invalid Exercise Information',
+      'Please Enter a Workout Name and select a muscle group before continuing',
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      {cancelable: false},
+    );
+  }
+
   renderNav=()=>{
     return (
       <>
@@ -84,42 +119,61 @@ class WorkoutScreen extends Component {
       </>
     )
   }
+
   renderAddExerciseForm=()=>{
     return (
+      <View style={{flex:1,flexDirection:'column',justifycontent:'space-between'}}>
+        <View >
+          <Input
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text}
+          />
+          <MusclePicker handleMuscleChange={this.handleMuscleChange} muscle={this.state.muscle}/>
+        </View>
+        <ButtonElement
+          backgroundColor={styles.button.backgroundColor}
+          buttonStyle={styles.buttonStyle}
+          title='Cancel'
+          onPress={this.handleCancelExerciseForm}
+        />
+
+      </View>
+    )
+  }
+  renderWorkoutScreen=()=>{
+    return (
       <>
-      <Input
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-      />
-      <ButtonElement
-        backgroundColor='#03A9F4'
-        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-        title='Add New Exercise'
-        onPress={this.addNewExercise}
-      />
+        <ButtonElement
+          backgroundColor={styles.button.backgroundColor}
+          buttonStyle={styles.buttonStyle}
+          title='Add New Exercise'
+          onPress={this.addNewExercise}
+        />
+        {this.state.showAddExercise? this.renderAddExerciseForm():null}
+        {this.renderExercises()}
+        <ButtonElement
+          backgroundColor={styles.button.backgroundColor}
+          buttonStyle={styles.buttonStyle}
+          title='Finish Workout'
+          onPress={this.handleCompleteWorkout}
+        />
+        {this.renderNav()}
       </>
+    )
+  }
+  renderNoWorkoutError=()=>{
+    return (
+      <Text>Please select a workout</Text>
     )
   }
 
 
   render() {
-    // const {navigation} = this.props
-    // console.log('workoutscreen props',this.props)
-    // console.log('navigation in render workoutScreen: ',navigation)
-    // const name = navigation.getParam("name",'NO-EXERCISES')
-    // const exercises = navigation.getParam("exercises",'NO-EXERCISES')
-    // console.log('exercises',exercises)
+
     return (
       <ScrollView>
-        {this.renderAddExerciseForm()}
-        {this.renderExercises()}
-        <ButtonElement
-          backgroundColor='#03A9F4'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-          title='Finish Workout'
-          onPress={this.handleCompleteWorkout}
-        />
-        {this.renderNav()}
+        {this.props.currentWorkout?this.renderWorkoutScreen():this.renderNoWorkoutError()}
+
 
       </ScrollView>
     );

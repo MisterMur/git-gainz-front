@@ -12,7 +12,8 @@ const initialState={
   error:null,
   currentSchedule:null,
   currentWorkout:null,
-  currentUser:{id:29,name:'Brad',password:'1234'}
+  currentUser:{id:29,name:'Brad',password:'1234'},
+  completedWorkouts:[]
 }
 
 function reducer(state=initialState,action){
@@ -50,7 +51,7 @@ function reducer(state=initialState,action){
       return {
         ...state,
         loading:false,
-        userWorkouts:action.payload.workouts
+        completedWorkouts:action.payload.workouts
       }
     case FETCH_WORKOUTS_BEGIN:
       // console.log('fetch begin')
@@ -181,7 +182,6 @@ export function addWorkout(workout){
   }
 }
 export function fetchSchedules(){
-  const schedulesUrl='http://localhost:3000/api/v1/schedules'
   return dispatch=>{
     // dispatch(fetchSchedulesBegin())
     return fetch(apiUrl+'schedules')
@@ -264,7 +264,7 @@ export function fetchCircuits(exercise_id){
 
 }
 export function fetchExercises(){
-  const exercisesUrl = 'http://localhost:3000/api/v1/exercises'
+  const exercisesUrl = 'http://192.168.2.181:3000/api/v1/exercises'
   return dispatch=>{
     return fetch(exercisesUrl)
       .then(handleErrors)
@@ -429,7 +429,7 @@ export function postNewCircuit(circuit){
         circuit
       )
     })//.then(res=> res.json())
-    
+
 
     .then(function(){dispatch(fetchCircuits(circuit.exercise_id))})
   }

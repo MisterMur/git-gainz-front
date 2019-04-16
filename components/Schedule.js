@@ -12,7 +12,7 @@ import {setCurrentSchedule} from '../reducers/reducer.js'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
+import {styles,cardStyles}from '../constants/Styles.js'
 class Schedule extends React.Component {
 
   constructor(props){
@@ -37,8 +37,8 @@ class Schedule extends React.Component {
   render() {
     // console.log('schedule props',this.props.schedule)
     return (
-      <View>
-        <Card  title={this.props.schedule.name} dividerStyle="3">
+      <View style={cardStyles.cardColor}>
+        <Card  title={this.props.schedule.name} dividerStyle='3' containerStyle={cardStyles.cardContainer}>
           <Text style={{marginBottom: 10,flex:2}}>
             {this.props.schedule.workouts.length} Workout(s)
           </Text>
@@ -46,8 +46,8 @@ class Schedule extends React.Component {
 
           <Button
             icon={<Icon name="user" color="#4F8EF7" />}
-            backgroundColor='#03A9F4'
-            buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+            backgroundColor={styles.button.backgroundColor}
+            buttonStyle={styles.buttonStyle}
             title='VIEW NOW'
             onPress={this.handlePressButton}
            />

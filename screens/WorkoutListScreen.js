@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import WorkoutList from '../components/WorkoutList.js'
-import { AppRegistry,Text,ScrollView,Button} from 'react-native';
+import { Alert,AppRegistry,Text,ScrollView,Button} from 'react-native';
 
 import { Card,Input, Button as ButtonElement } from 'react-native-elements'
 
@@ -27,18 +27,26 @@ class WorkoutListScreen extends Component {
     this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
 
   }
+  //**************************************************************************************
+  //********************         EVENT HANDLERS
+  //**************************************************************************************
 
   handleAddWorkout=()=>{
-    // console.log('in handle add workout', this.props)
-    this.props.dispatch(postNewWorkout({
-      name:this.state.text,
-      exercises:[]
-      // schedule_id: this.props.currentSchedule.id,
-    },this.props.currentSchedule))
-
-    // this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
-    // console.warn('handle add workout',this.props.currentSchedule.workouts)
+    if(this.state.text){
+      this.props.dispatch(postNewWorkout({
+        name:this.state.text,
+        exercises:[]
+      },this.props.currentSchedule))
+    }else{
+      this.renderAlert()
+    }
+    this.setState({text:''})
   }
+
+  //**************************************************************************************
+  //********************         RENDER FUNCTIONS
+  //**************************************************************************************
+
   renderWorkoutList=()=>{
     return (
       <WorkoutList
@@ -46,12 +54,11 @@ class WorkoutListScreen extends Component {
         handlePress={this.props.navigation.navigate}
       />
     )
-
   }
+
   renderAddWorkoutForm=()=>{
     return (
       <>
-
         <Input
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
@@ -62,8 +69,20 @@ class WorkoutListScreen extends Component {
         />
       </>
     )
-
   }
+
+  renderAlert=()=>{
+    // Works on both iOS and Android
+    Alert.alert(
+      'Missing Workout Name',
+      'Please Enter a Workout Name before continuing',
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      {cancelable: false},
+    );
+  }
+
   renderNav=()=>{
     return (
       <>

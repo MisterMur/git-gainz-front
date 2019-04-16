@@ -27,20 +27,7 @@ class Set extends React.Component {
   handleWeightOnChange=(weight)=>{
     this.setState({weight})
   }
-  // addCircuitsButton=()=>{
-  //   // console.log('in handle press return set')
-  //   // let newCircuits = []
-  //   // this.state.circuits.map(c=>{newCircuits.push({...c})})
-  //   // let newCurentCircuit ={ ...this.state.curentCircuit}
-  //   newCircuits.push(  newCurentCircuit)
-  //   this.props.postNewCircuit({
-  //     this.state.reps,
-  //     this.state.weight,
-  //     this.state.exercise_id,
-  //     this.state.rest
-  //   })
-  //   // this.setState({circuit:{exercise_id:this.props.exercise.id,rest:0,reps:0,weight:0},circuits:newCircuits})
-  // }
+
   renderCompleteCircuit=()=>{
     return(
       <Button
@@ -55,8 +42,13 @@ class Set extends React.Component {
 
   renderCircuitInput=()=>{
     return (
-      <>
-      <View style={{width: 40, height: 40, backgroundColor: 'powderblue'}}>
+      <View style={{
+        flex:1,
+        flexDirection:'row',
+        justifyContent: 'space-around',
+        alignItems: 'stretch'
+      }}>
+      <View style={{width: 40,alignItems:'center', height: 40}}>
         <Text>Reps </Text>
       </View>
       <View style={{width:100,height:50}}>
@@ -67,7 +59,7 @@ class Set extends React.Component {
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
         />
       </View>
-      <View style={{width: 50, height: 40, backgroundColor: 'powderblue'}}>
+      <View style={{width: 50, height: 40,alignItems:'center'}}>
         <Text>Weight </Text>
       </View>
       <View style={{width:110,height:50}}>
@@ -78,7 +70,7 @@ class Set extends React.Component {
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
         />
       </View>
-      </>
+      </View>
     )
   }
 
@@ -87,13 +79,13 @@ class Set extends React.Component {
 
     return (
       <View style={{
-        flex: 4,
-        flexDirection: 'row',
+        flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'stretch'
+        alignItems: 'stretch',
       }}>
         {this.renderCircuitInput()}
-        {this.renderCompleteCircuit()}
+        {this.props.showButton?this.renderCompleteCircuit():null}
 
       </View>
     )

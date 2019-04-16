@@ -9,6 +9,8 @@ import {postNewCircuit} from '../reducers/reducer.js'
 
 import Set from './Set.js'
 
+import {styles,cardStyles} from '../constants/Styles.js'
+
 
 
 class Exercise extends React.Component {
@@ -17,7 +19,7 @@ class Exercise extends React.Component {
     super(props)
   }
   state={
-    curentCircuit:{exercise_id:this.props.exercise.id,reps:0,weight:0,rest:0},
+    curentCircuit:{exercise_id:this.props.exercise.id,reps:0,weight:0,rest:0,showButton:true},
     reps:null,
     weight:null,
     circuits:[],
@@ -26,7 +28,7 @@ class Exercise extends React.Component {
   }
   componentDidMount(){
     let newCircuits= [...this.state.circuits]
-    newCircuits.push({reps:null,weight:null,rest:null})
+    newCircuits.push({reps:null,weight:null,rest:null,showButton:true})
     this.setState({circuits:newCircuits})
   }
 
@@ -37,16 +39,18 @@ class Exercise extends React.Component {
   //   this.setState({curentCircuit:{...this.state.curentCircuit,weight}})
   // }
   addCircuitsButton=(reps,weight,rest)=>{
-    let newCircuits = {reps,weight,rest,exercise_id:this.props.exercise.id}
-    let copyCircuits=[...this.state.circuits,newCircuits]
+    let lastCircuit = this.state.circuits.pop()
+    lastCircuit={...lastCircuit,showButton:false}
+    let newCircuits = {reps,weight,rest,showButton:true,exercise_id:this.props.exercise.id}
+    let copyCircuits=[...this.state.circuits,lastCircuit,newCircuits]
     this.setState({circuits:copyCircuits})
     this.props.postNewCircuit(newCircuits)
   }
   renderCompleteCircuit=()=>{
     return(
       <Button
-        backgroundColor='#03A9F4'
-        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+        backgroundColor={styles.button.backgroundColor}
+        buttonStyle={styles.buttonStyle}
         title='Complete Set'
         onPress={this.addCircuitsButton}
        />
@@ -61,6 +65,7 @@ class Exercise extends React.Component {
       exercise={this.props.exercise}
       reps={s.reps}
       weight={s.weight}
+      showButton = {s.showButton}
       handleRepsOnChange={this.handleRepsOnChange} handleWeightOnChange={this.handleWeightOnChange}
       addCircuitsButton={this.addCircuitsButton}
     />)
@@ -73,11 +78,11 @@ class Exercise extends React.Component {
     // {this.renderSet()*2}
     // console.warn(this.state.circuit)
     return (
-
-        <Card  title={this.props.exercise.name}>
+      <View style={cardStyles.cardColor}>
+        <Card  title={this.props.exercise.name}  containerStyle={cardStyles.cardContainer}>
           {this.renderSets()}
         </Card>
-
+      </View>
     )
   }
 }

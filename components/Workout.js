@@ -12,6 +12,7 @@ import { Card, ListItem, Button ,Divider} from 'react-native-elements'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {styles,cardStyles} from '../constants/Styles.js'
 
 class Workout extends React.Component {
 
@@ -32,15 +33,15 @@ class Workout extends React.Component {
   render() {
     // console.warn('workout props',this.props.workout)
     return (
-      <View>
-        <Card  dividerStyle="3">
+      <View style={cardStyles.cardColor}>
+        <Card containerStyle={cardStyles.cardContainer} dividerStyle="1">
           <Text style={{marginBottom: 10}}>
             {this.props.workout.name}
           </Text>
-          <Divider style={{ backgroundColor: 'red' }} />
+          <Divider style={{ backgroundColor: 'black' }} />
 
           <Button
-            icon={<Icon name="user" color="#4F8EF7" />}
+            icon={<Icon name="dumbbell" color="#4F8EF7" />}
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='VIEW NOW'
