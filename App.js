@@ -8,7 +8,7 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 
-import reducer from './reducers/reducer.js'
+// import reducer from './reducers/reducer.js'
 import store from './store.js'
 
 

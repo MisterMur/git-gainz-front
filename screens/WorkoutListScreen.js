@@ -7,7 +7,8 @@ import { Card,Input, Button as ButtonElement } from 'react-native-elements'
 
 import Workout from '../components/Workout.js'
 import {connect} from 'react-redux'
-import { fetchSchedulesWorkouts,fetchWorkouts,postNewWorkout} from '../reducers/reducer.js'
+import {fetchSchedulesWorkouts,fetchWorkout,postNewWorkout} from '../actions/workoutActions.js'
+// import { fetchSchedulesWorkouts,fetchWorkouts,postNewWorkout} from '../reducers/reducer.js'
 
 
 class WorkoutListScreen extends Component {

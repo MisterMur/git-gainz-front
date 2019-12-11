@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
 import fonts from '../styles/base.js'
 
-import {postNewCircuit} from '../reducers/reducer.js'
+import {postNewCircuit} from '../actions/workoutActions.js'
 
 
 class Set extends React.Component {
