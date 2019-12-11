@@ -2,9 +2,9 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 34840,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPid": 48040,
+  "expoServerNgrokUrl": "https://ih-pcy.anonymous.git-gainz-front.exp.direct",
+  "packagerNgrokUrl": "https://packager.ih-pcy.anonymous.git-gainz-front.exp.direct",
+  "ngrokPid": 48656,
   "webpackServerPort": null
 }

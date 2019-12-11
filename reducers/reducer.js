@@ -1,6 +1,7 @@
 import {ADD_NEW_WORKOUT,FETCH_SCHEDULES_SUCCESS,SET_CURRENT_WORKOUT,SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_FAILURE,ADD_NEW_SCHEDULE,SET_WORKOUTS,FETCH_EXERCISES_BEGIN,FETCH_EXERCISES_SUCCESS,FETCH_EXERCISES_FAILURE,FETCH_WORKOUTS_SUCCESS,FETCH_WORKOUTS_BEGIN,FETCH_WORKOUTS_FAILURE,FETCH_SCHEDULES_WORKOUTS,FETCH_CIRCUITS_SUCCESS,FETCH_CIRCUITS_FAILURE,FETCH_USER_WORKOUTS_BEGIN,FETCH_USER_WORKOUTS_SUCCESS,FETCH_USER_WORKOUTS_FAILURE} from '../constants/types.js'
 
-const apiUrl=`http://localhost:3000/api/v1/`
+// const apiUrl=`http://localhost:3000/api/v1/`
+const apiUrl = `http://gitgainze-production.herokuapp.com/api/v1/`
 
 
 // import store from '../store.js'
@@ -19,13 +20,13 @@ function reducer(state=initialState,action){
   console.log('%c reducer:', 'color: orange', action);
   switch(action.type){
     case FETCH_SCHEDULES_BEGIN:
-      // console.log('fetch begin')
+      console.log('fetch begin')
       return {...state,
         loading:true,
         error:null
       }
     case FETCH_SCHEDULES_SUCCESS:
-      // console.log('fetch success')
+      console.log('fetch success')
       return {
         ...state,
         loading:false,
@@ -181,13 +182,14 @@ export function addWorkout(workout){
   }
 }
 export function fetchSchedules(){
-  const schedulesUrl='http://localhost:3000/api/v1/schedules'
+  // const schedulesUrl='http://localhost:3000/api/v1/schedules'
   return dispatch=>{
     // dispatch(fetchSchedulesBegin())
+    console.log('in fetchschedules reducer')
     return fetch(apiUrl+'schedules')
     .then(handleErrors)
     .then(res=>{
-      // console.log('res',res)
+      console.log('res',res)
       return res.json()
     })
     .then(schedules=>{
