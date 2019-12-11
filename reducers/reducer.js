@@ -429,7 +429,7 @@ export function postNewCircuit(circuit){
         circuit
       )
     })//.then(res=> res.json())
-    
+
 
     .then(function(){dispatch(fetchCircuits(circuit.exercise_id))})
   }
