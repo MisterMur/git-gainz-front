@@ -78,7 +78,7 @@ class ScheduleListScreen extends Component {
 // })
 
 function mapStateToProps(state){
-  console.log('mappingstate in schedulelist:',state)
+  // console.log('mappingstate in schedulelist:',state)
   const {schedule}=state;
   return {
     schedules:schedule.schedules,

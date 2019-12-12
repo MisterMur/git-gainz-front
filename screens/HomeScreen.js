@@ -12,7 +12,7 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-import Login from '../components/Login.js'
+import LoginForm from '../components/LoginForm.js'
 
 import { Input,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,6 +22,32 @@ export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  renderLogin=()=>{
+    return (
+
+      <>
+      <Input
+        placeholder='USERNAME'
+        leftIcon={
+          <Icon
+            name='user'
+            size={24}
+            color='black'/>
+        }/>
+      <Input
+        placeholder='PASSWORD'
+        leftIcon={
+          <Icon
+            name='plus'
+            size={24}
+            color='black'/>
+        }/>
+      </>
+    )
+
+
+  }
 
   render() {
     // <Button title="Show me more of the app" onPress={this._showMoreApp} />
@@ -35,27 +61,11 @@ export default class HomeScreen extends React.Component {
           <View style={styles.getStartedContainer}>
 
             <Text style={styles.getStartedText}>Welcome to Git Gainz</Text>
+            <LoginForm  />
 
 
 
-            <Input
-              placeholder='USERNAME'
-              leftIcon={
-                <Icon
-                  name='user'
-                  size={24}
-                  color='black'/>
-              }
-            />
-            <Input
-              placeholder='PASSWORD'
-              leftIcon={
-                <Icon
-                  name='plus'
-                  size={24}
-                  color='black'/>
-              }
-            />
+
           </View>
 
           <View style={styles.helpContainer}>
