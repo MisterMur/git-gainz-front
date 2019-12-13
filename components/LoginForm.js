@@ -4,17 +4,17 @@ import { Hoshi } from 'react-native-textinput-effects';
 import Button from 'react-native-button';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions/authActions.js';
+import { usernameChanged, passwordChanged, loginUser } from '../actions/authActions.js';
 
 class LoginForm extends Component {
   onButtonSubmit() {
-    console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
-    const { email, password } = this.props;
-    this.props.loginUser({ email, password });
+    console.log('Submitted: ', `${this.props.username} ${this.props.password}`);
+    const { username, password } = this.props;
+    this.props.loginUser({ username, password });
   }
-  emailChanged(value) {
-    const email = _.lowerCase(value.trim());
-    this.props.emailChanged(email);
+  usernameChanged(value) {
+    const username =value.trim();
+    this.props.usernameChanged(username);
   }
   passwordChanged(value) {
     // console.log('Value:', value);
@@ -88,8 +88,8 @@ class LoginForm extends Component {
           // this is used to set backgroundColor of label mask.
           // please pass the backgroundColor of your TextInput container.
           // backgroundColor={'gray'}
-          onChangeText={this.emailChanged.bind(this)}
-          value={this.props.email}
+          onChangeText={this.usernameChanged.bind(this)}
+          value={this.props.username}
         />
 
         <Hoshi
@@ -120,11 +120,11 @@ const styles = {
 const mapStateToProps = (state) => {
   // console.log('mapstate to props in loginform',state)
   return {
-    email: state.auth.email,
+    username: state.auth.username,
     password: state.auth.password,
     error: state.auth.errorFlag,
     spinner: state.auth.spinner
   };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
+export default connect(mapStateToProps, { usernameChanged, passwordChanged, loginUser })(LoginForm);

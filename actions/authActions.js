@@ -1,9 +1,9 @@
 import {API_URL} from '../constants/types.js'
 
-export const emailChanged = (email) => {
+export const usernameChanged = (username) => {
   return {
-    type: 'EMAIL_CHANGED',
-    payload: email
+    type: 'USERNAME_CHANGED',
+    payload: username
   };
 };
 
@@ -14,11 +14,12 @@ export const passwordChanged = (password) => {
   };
 };
 
-export const loginUser = ({ email, password }) => {
+export const loginUser = ({ username, password }) => {
   return (dispatch) => {
     dispatch({
       type: 'LOAD_SPINNER'
     });
+    debugger
     fetch(API_URL+'/login', {
         method: 'POST',
         headers: {
@@ -27,7 +28,7 @@ export const loginUser = ({ email, password }) => {
         },
         body: JSON.stringify({
           user: {
-            email,
+            username,
             password,
           }
         })
