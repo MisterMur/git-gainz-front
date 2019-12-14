@@ -8,6 +8,11 @@ import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions/authActions.js';
 
 class LoginForm extends Component {
+  componentDidMount() {
+   if (this.props.currentUser) {
+     this.props.navigation.navigate('Main')
+   }
+ }
   onButtonSubmit() {
     console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
     const { email, password } = this.props;
@@ -131,9 +136,10 @@ const mapStateToProps = (state) => {
   return {
     email: state.auth.email,
     password: state.auth.password,
+    currentUser: state.auth.currentUser,
     error: state.auth.errorFlag,
     spinner: state.auth.spinner
   };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser,setCurrentUser })(LoginForm);

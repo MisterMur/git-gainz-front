@@ -6,7 +6,7 @@ import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-na
 
 import ScheduleList from '../components/ScheduleList.js'
 
-import { fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
+import { fetchMyschedules,fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
 
 
 class ScheduleListScreen extends Component {
@@ -34,7 +34,7 @@ class ScheduleListScreen extends Component {
       name:this.state.text,
       workouts:[]
     }))
-    this.props.dispatch(fetchSchedules())
+    this.props.dispatch(fetchMySchedules())
   }
 
 

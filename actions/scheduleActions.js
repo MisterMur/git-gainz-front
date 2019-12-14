@@ -2,7 +2,7 @@
 import {API_URL} from '../constants/types.js'
 import {ADD_NEW_SCHEDULE,SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_SUCCESS,FETCH_SCHEDULES_FAILURE}  from '../constants/types.js'
 
-
+import {AsyncStorage} from 'react-native'
 export function setCurrentSchedule(schedule){
   return {
       type: SET_CURRENT_SCHEDULE,
@@ -31,11 +31,23 @@ export const addNewSchedule=(schedule)=>({
   type:ADD_NEW_SCHEDULE,
   payload:{schedule}
 })
+export function fetchMySchedules(id){
+  return (dispatch)=>{
+    ScheduleAdapter.fetchSchedules(id)
+    .then(userObj => {
+     if (userObj.schedules.length > 0) {
+       dispatch(fetchSchedulesSuccess(userObj.schedules))
+     }
+   })
+  }
+}
 
-export function fetchSchedules(){
+export async function fetchSchedules(){
   // const schedulesUrl='http://localhost:3000/api/v1/schedules'
+  const item = await AsyncStorage.getItem('user_id')
   return dispatch=>{
     // dispatch(fetchSchedulesBegin())
+
     console.log('in fetchschedules reducer: ',API_URL+'schedules')
     return fetch(API_URL+'schedules')
     .then(handleErrors)

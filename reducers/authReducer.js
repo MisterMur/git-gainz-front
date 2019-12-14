@@ -2,6 +2,7 @@ import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPIN
 const initialState = {
   email: '',
   password: '',
+  currentUser:'',
   authentication_token: '',
   errorFlag: false,
   spinner: false
@@ -16,7 +17,7 @@ export default (state = initialState, action) => {
     case LOGIN_FAILED:
       return { ...state, errorFlag: true, password: '', spinner: false };
     case LOGIN_USER_SUCCESS:
-      return { ...state, ...action.payload, ...initialState };
+      return { ...state, currentUser:action.payload };
     case LOAD_SPINNER:
       return { ...state, spinner: true };
     default:
