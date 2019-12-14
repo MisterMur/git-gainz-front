@@ -31,7 +31,8 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^7.0.0",
-    "jest-expo": "^35.0.0"
+    "jest-expo": "^35.0.0",
+     "js-yaml": ">=3.13.1"
   },
   "private": true
 }

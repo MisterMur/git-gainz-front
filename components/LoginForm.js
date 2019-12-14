@@ -4,17 +4,18 @@ import { Hoshi } from 'react-native-textinput-effects';
 import Button from 'react-native-button';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-import { usernameChanged, passwordChanged, loginUser } from '../actions/authActions.js';
+// import {input,inputMain}from '../styles/base'
+import { emailChanged, passwordChanged, loginUser } from '../actions/authActions.js';
 
 class LoginForm extends Component {
   onButtonSubmit() {
-    console.log('Submitted: ', `${this.props.username} ${this.props.password}`);
-    const { username, password } = this.props;
-    this.props.loginUser({ username, password });
+    console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
+    const { email, password } = this.props;
+    this.props.loginUser({ email, password });
   }
-  usernameChanged(value) {
-    const username =value.trim();
-    this.props.usernameChanged(username);
+  emailChanged(value) {
+    const email =value.trim();
+    this.props.emailChanged(email);
   }
   passwordChanged(value) {
     // console.log('Value:', value);
@@ -27,11 +28,12 @@ class LoginForm extends Component {
           style={{
           textAlign: 'center',
           fontSize: 20,
-          color: '#cc3333'
+          color: 'red'
         }}
         >Sorry authentication failed!</Text>
       );
     }
+
     return null;
   }
 
@@ -78,33 +80,40 @@ class LoginForm extends Component {
   }
 
   render() {
+    // <View style={styles.viewStyle}>
     return (
-      <View style={styles.viewStyle}>
+      <View style={
+
+          {
+            borderRadius: 4,
+          borderStyle: 'solid',
+          borderWidth: 2,
+          borderColor: '#e3e3e3',
+          /*padding: 1,*/
+          marginBottom: 15}
+        }
+
+        >
         {this.renderError()}
+
         <Hoshi
-          label={'Username'}
-          // this is used as active border color
+
+          label={'Email'}
           borderColor={'#b76c94'}
-          // this is used to set backgroundColor of label mask.
-          // please pass the backgroundColor of your TextInput container.
-          // backgroundColor={'gray'}
-          onChangeText={this.usernameChanged.bind(this)}
-          value={this.props.username}
+          onChangeText={this.emailChanged.bind(this)}
+          value={this.props.email}
         />
 
         <Hoshi
           label={'Password'}
-          // this is used as active border color
           borderColor={'#b76c94'}
-          // this is used to set backgroundColor of label mask.
-          // please pass the backgroundColor of your TextInput container.
-          // backgroundColor={'grey'}
           onChangeText={this.passwordChanged.bind(this)}
           value={this.props.password}
           secureTextEntry
         />
 
         {this.renderButton()}
+
       </View>
     );
   }
@@ -120,11 +129,11 @@ const styles = {
 const mapStateToProps = (state) => {
   // console.log('mapstate to props in loginform',state)
   return {
-    username: state.auth.username,
+    email: state.auth.email,
     password: state.auth.password,
     error: state.auth.errorFlag,
     spinner: state.auth.spinner
   };
 };
 
-export default connect(mapStateToProps, { usernameChanged, passwordChanged, loginUser })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);

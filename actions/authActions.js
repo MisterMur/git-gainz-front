@@ -1,25 +1,27 @@
 import {API_URL} from '../constants/types.js'
+import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER} from '../constants/authTypes.js'
 
-export const usernameChanged = (username) => {
+
+export const emailChanged = (email) => {
   return {
-    type: 'USERNAME_CHANGED',
-    payload: username
+    type: EMAIL_CHANGED,
+    payload: email
   };
 };
 
 export const passwordChanged = (password) => {
   return {
-    type: 'PASSWORD_CHANGED',
+    type: PASSWORD_CHANGED,
     payload: password
   };
 };
 
-export const loginUser = ({ username, password }) => {
+export const loginUser = ({ email, password }) => {
   return (dispatch) => {
     dispatch({
-      type: 'LOAD_SPINNER'
+      type: LOAD_SPINNER
     });
-    debugger
+    // debugger
     fetch(API_URL+'/login', {
         method: 'POST',
         headers: {
@@ -28,23 +30,30 @@ export const loginUser = ({ username, password }) => {
         },
         body: JSON.stringify({
           user: {
-            username,
+            email,
             password,
           }
         })
       }).then((response) => {
         console.log(response);
         if (response.status === 401) {
-          console.log('AUTHENTICATION ERROR!!');
+          console.log('AUTHENTICATION server 401 ERROR!!');
           dispatch({
-            type: 'LOGIN_FAILED'
+            type: LOGIN_FAILED
           });
-        } else {
+        }
+        if (response.status === 500) {
+          console.log('unkown server 500 ERROR!!');
+          dispatch({
+            type: LOGIN_FAILED
+          });
+        }
+        else {
           console.log('SUCCESS!!');
           response.json().then(data => {
             console.log(data);
             dispatch({
-              type: 'LOGIN_USER_SUCCESS',
+              type: LOGIN_USER_SUCCESS,
               payload: data
             });
           });

@@ -55,25 +55,12 @@ export default class HomeScreen extends React.Component {
     return (
 
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
 
           <View style={styles.getStartedContainer}>
-
             <Text style={styles.getStartedText}>Welcome to Git Gainz</Text>
-            <LoginForm  />
-
-
-
-
           </View>
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+        <LoginForm  />
 
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a Monkeybar</Text>
@@ -218,4 +205,33 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  //custom
+inputMain: {
+  borderRadius: 4,
+  borderStyle: 'solid',
+  borderWidth: 2,
+  borderColor: '#e3e3e3',
+  /*padding: 1,*/
+  marginBottom: 15,
+  overflow: 'hidden',
+  height: 26,
+  alignContent: 'flex-start',
+  alignItems: 'flex-start',
+  alignSelf:  'flex-start',
+},
+inputContainer: {
+  flex: 1,
+  backgroundColor: 'red',
+  padding: 1,
+  alignContent: 'flex-start',
+  alignItems: 'flex-start',
+  alignSelf:  'flex-start'
+},
+input: {
+  height: 26,
+  width: 200,
+  fontSize: 12,
+  justifyContent: 'center',
+  alignItems: 'center'
+},
 });

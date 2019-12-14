@@ -70,8 +70,6 @@ class Exercise extends React.Component {
 
 
   render() {
-    // {this.renderSet()*2}
-    // console.warn(this.state.circuit)
     return (
 
         <Card  title={this.props.exercise.name}>
