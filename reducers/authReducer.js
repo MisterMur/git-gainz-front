@@ -7,6 +7,7 @@ const initialState = {
   errorFlag: false,
   spinner: false
 };
+import {AsyncStorage} from 'react-native'
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -17,7 +18,18 @@ export default (state = initialState, action) => {
     case LOGIN_FAILED:
       return { ...state, errorFlag: true, password: '', spinner: false };
     case LOGIN_USER_SUCCESS:
-      return { ...state, currentUser:action.payload };
+      // if (action.payload.access_token) {
+      //   console.log('access token',action.payload.access_token)
+      //   AsyncStorage.setItem('authentication_token', action.payload.authentication_token);
+      // }
+      // if (action.payload.user_id) {
+      //   console.log('action payload user_id',action.payload.user_id)
+      //   AsyncStorage.setItem('userId', action.payload.user_id);
+      // };
+      // AsyncStorage.setItem('user', action.payload);
+
+
+      return { ...state, currentUser:action.payload,spinner:false };
     case LOAD_SPINNER:
       return { ...state, spinner: true };
     default:

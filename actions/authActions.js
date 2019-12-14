@@ -52,7 +52,7 @@ export const loginUser = ({ email, password }) => {
           console.log('SUCCESS!!');
           response.json().then(data => {
             console.log(data);
-            AsyncStorage.setItem('user_id', data.jwt)
+            AsyncStorage.setItem('user_id', data.access_token)
             dispatch({
               type: LOGIN_USER_SUCCESS,
               payload: data

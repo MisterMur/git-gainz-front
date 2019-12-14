@@ -1,7 +1,7 @@
 // import { createActions ,handleActions} from 'redux-actions';
 import {API_URL} from '../constants/types.js'
 import {ADD_NEW_SCHEDULE,SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_SUCCESS,FETCH_SCHEDULES_FAILURE}  from '../constants/types.js'
-
+// import axios from 'axios'
 import {AsyncStorage} from 'react-native'
 export function setCurrentSchedule(schedule){
   return {
@@ -41,15 +41,36 @@ export function fetchMySchedules(id){
    })
   }
 }
-
-export async function fetchSchedules(){
+// export function fetchSchedules() {
+//   return function action(dispatch) {
+//     dispatch({ type: FETCH_SCHEDULES_BEGIN })
+//     const item =  AsyncStorage.getItem('user')
+//
+//
+//     const request = axios({
+//       method: 'GET',
+//       url: `${API_URL}/schedules`,
+//       headers: {Authorization:item}
+//     });
+//
+//     return request.then(
+//       response => dispatch(fetchSchedulesSuccess(response)),
+//       err => dispatch(fetchSchedulesFailure(err))
+//     );
+//   }
+// }
+export  function fetchSchedules(){
   // const schedulesUrl='http://localhost:3000/api/v1/schedules'
-  const item = await AsyncStorage.getItem('user_id')
+  const item =  AsyncStorage.getItem('user_id')
+  console.log('async storage item',item)
   return dispatch=>{
     // dispatch(fetchSchedulesBegin())
 
     console.log('in fetchschedules reducer: ',API_URL+'schedules')
-    return fetch(API_URL+'schedules')
+    return fetch(API_URL+'schedules',{
+      method:"GET",
+      headers:{Authorization:item}
+    })
     .then(handleErrors)
     .then(res=>{
       console.log('res',res)

@@ -40,7 +40,7 @@ class ScheduleListScreen extends Component {
 
 
   render() {
-    console.log('rendering props in schedule',this.props)
+    // console.log('rendering props in schedule',this.props)
     const {error,loading,schedules}=this.props
     return (
       <ScrollView>
