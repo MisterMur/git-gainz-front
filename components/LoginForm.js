@@ -1,13 +1,61 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator,AsyncStorage,Alert } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 import Button from 'react-native-button';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 // import {input,inputMain}from '../styles/base'
-import { emailChanged, passwordChanged, loginUser } from '../actions/authActions.js';
+import {API_URL} from '../constants/types.js'
+
+import { emailChanged, passwordChanged, loginUser,setCurrentUser } from '../actions/authActions.js';
 
 class LoginForm extends Component {
+  state = {
+  error: null,
+  response: "",
+  loading: true
+}
+
+logIn = () => {
+  this.setState({ error: false, response: ''})
+  const user = {
+    email: this.props.email,
+    password: this.props.password
+  }
+  fetch(API_URL+"login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+      user
+    })
+  })
+  .then(res => res.json())
+  .then(response => {
+    if (response.errors) {
+      console.log("response: ", response);
+      this.setState({ response: response, error: true, errMsg: response.errors })
+      Alert.alert(
+      'Invalid Credentials',
+      'Please verify your information is correct',
+      [
+        {
+          text: 'OK',
+          onPress: () => console.log("ok pressed"),
+          style: 'cancel',
+        },
+      ],
+      {cancelable: false},
+    )
+    } else {
+      AsyncStorage.setItem('user_id', response.jwt)
+      this.setState({loading: false})
+      this.props.setCurrentUser(this.props.email, response.jwt, this.props.navigation, "log-in")
+    }
+  })
+}
   componentDidMount() {
    if (this.props.currentUser) {
      this.props.navigation.navigate('Main')
@@ -15,8 +63,9 @@ class LoginForm extends Component {
  }
   onButtonSubmit() {
     console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
-    const { email, password } = this.props;
-    this.props.loginUser({ email, password });
+    // const { email, password } = this.props;
+    this.logIn()
+    // this.props.loginUser({ email, password });
   }
   emailChanged(value) {
     const email =value.trim();
@@ -142,4 +191,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser })(LoginForm);
+export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser , setCurrentUser})(LoginForm);

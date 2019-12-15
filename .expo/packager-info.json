@@ -1,10 +1,9 @@
 {
+  "packagerPort": 19001,
+  "packagerPid": 31384,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 21124,
   "expoServerNgrokUrl": "https://ih-t4v.anonymous.git-gainz-front.exp.direct",
   "packagerNgrokUrl": "https://packager.ih-t4v.anonymous.git-gainz-front.exp.direct",
-  "ngrokPid": 69828,
-  "webpackServerPort": null
+  "ngrokPid": 66828
 }

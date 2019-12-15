@@ -1,4 +1,5 @@
 import {API_URL} from '../constants/types.js'
+import UserAdapter from '../adapters/adapters'
 import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER} from '../constants/authTypes.js'
 
 import {AsyncStorage} from 'react-native'
@@ -66,7 +67,7 @@ export const loginUser = ({ email, password }) => {
 
 export function setCurrentUser(email, response, nav, from) {
   return dispatch => {
-    PetAdapter.getUsers()
+    UserAdapter.getUsers()
     .then(users => {
       let userAttempt = users.filter(user => user.email === email)
       let foundUser = userAttempt[0]
