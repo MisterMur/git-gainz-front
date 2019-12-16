@@ -5,7 +5,8 @@ import MainTabNavigator from './MainTabNavigator';
 import HomeScreen from '../screens/HomeScreen.js'
 import LoginScreen from '../screens/LoginScreen.js'
 import SignInScreen from '../screens/SignInScreen.js'
-import AuthLoadingScreen from '../screens/AuthLoadingScreen'
+import AuthLoadingScreen from '../screens/AuthLoadingScreen.js'
+import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 
 const AppStack = createStackNavigator({ Home: HomeScreen });
 // const AuthStack = createStackNavigator({ SignIn: SignInScreen });
@@ -20,6 +21,7 @@ export default createAppContainer(createSwitchNavigator({
     Main: MainTabNavigator,
     Login: LoginScreen,
     SignIn: SignInScreen,
+    ScheduleList: {screen:ScheduleListScreen},
     // AuthLoading: AuthLoadingScreen,
     App: AppStack,
     // Auth: AuthStack,

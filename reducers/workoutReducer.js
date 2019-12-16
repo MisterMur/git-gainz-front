@@ -104,7 +104,7 @@ export default function workoutReducer(state=initialState,action){
           }
 
         default:
-          console.log('no action type found')
+          // console.log('no action type found')
           return state;
       }
   }

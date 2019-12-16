@@ -24,8 +24,8 @@ class ScheduleListScreen extends Component {
 
   }
   componentDidMount(){
-    // console.log('in did mount')
-    this.props.dispatch(fetchSchedules())
+    console.log('in did mount')
+    // this.props.dispatch(fetchSchedules())
 
   }
 
@@ -72,10 +72,10 @@ class ScheduleListScreen extends Component {
     );
   }
 }
-// const mapDispatchToProps = dispatch => ({
-//   fetchSchedules: () => dispatch(fetchSchedules()),
-//   postNewSchedule: (s)=>dispatch(postNewSchedule(s))
-// })
+const mapDispatchToProps = dispatch => ({
+  fetchSchedules: () => dispatch(fetchSchedules()),
+  postNewSchedule: (s)=>dispatch(postNewSchedule(s))
+})
 
 function mapStateToProps(state){
   // console.log('mappingstate in schedulelist:',state)
@@ -88,4 +88,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(ScheduleListScreen)
+export default connect(mapStateToProps,mapDispatchToProps)(ScheduleListScreen)

@@ -19,10 +19,15 @@ import { Input,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class LoginScreen extends React.Component {
+  static navigationOptions = {
+    header: "LOGIN",
+  };
+
 
   render() {
     return (
       <View>
+        <LoginForm navigation={this.props.navigation} />
 
       </View>
     )

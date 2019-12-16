@@ -21,7 +21,7 @@ export default function scheduleReducer(state=initialState,action){
         error:null
       }
     case FETCH_SCHEDULES_SUCCESS:
-      console.log('fetch success')
+      console.log('fetch success',action.payload)
       return {
         ...state,
         loading:false,
@@ -55,7 +55,7 @@ export default function scheduleReducer(state=initialState,action){
       }
 
     default:
-      console.log('no action type found')
+      // console.log('no action type found')
       return state;
   }
 }

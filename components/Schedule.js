@@ -35,7 +35,7 @@ class Schedule extends React.Component {
   }
 
   render() {
-    // console.log('schedule props',this.props.schedule)
+    console.log('schedule props',this.props.schedule)
     return (
       <View>
         <Card  title={this.props.schedule.name} dividerStyle="3">

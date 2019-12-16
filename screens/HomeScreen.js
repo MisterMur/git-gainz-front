@@ -13,6 +13,7 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import LoginForm from '../components/LoginForm.js'
+import {  navigate, NavigationActions, navigation } from 'react-navigation';
 
 import { Input,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -60,7 +61,7 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.getStartedText}>Welcome to Git Gainz</Text>
           </View>
 
-        <LoginForm  />
+        <LoginForm navigation={this.props.navigation} />
 
         <View style={styles.tabBarInfoContainer}>
           <Text style={styles.tabBarInfoText}>This is a Monkeybar</Text>

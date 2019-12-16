@@ -9,7 +9,7 @@ export default function userReducer(state=initialState,action){
   // console.log('%c Schedule reducer:', 'color: orange', action);
   switch(action.type){
     default:
-      console.log('no action type found')
+      // console.log('no action type found')
       return state;
   }
 }

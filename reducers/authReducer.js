@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
       // AsyncStorage.setItem('user', action.payload);
 
 
+
       return { ...state, currentUser:action.payload,spinner:false };
     case LOAD_SPINNER:
       return { ...state, spinner: true };

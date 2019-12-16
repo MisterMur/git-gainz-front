@@ -1,6 +1,9 @@
 import {API_URL} from '../constants/types.js'
-import UserAdapter from '../adapters/adapters'
+import UserAdapter from '../adapters/userAdapter'
 import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER} from '../constants/authTypes.js'
+import {Alert} from 'react-native'
+import {FETCH_SCHEDULES_SUCCESS} from '../constants/types.js'
+import {  navigate, NavigationActions, navigation } from 'react-navigation';
 
 import {AsyncStorage} from 'react-native'
 export const emailChanged = (email) => {
@@ -69,19 +72,28 @@ export function setCurrentUser(email, response, nav, from) {
   return dispatch => {
     UserAdapter.getUsers()
     .then(users => {
+      // console.log(users)
       let userAttempt = users.filter(user => user.email === email)
       let foundUser = userAttempt[0]
       let userId = foundUser.id
       if (response) {
+        console.log(foundUser.schedules)
+        dispatch({
+          type: FETCH_SCHEDULES_SUCCESS,
+          payload: foundUser
+        })
 
         dispatch({
-          type: SET_USER,
+          type: LOGIN_USER_SUCCESS ,
           payload: userId
         })
         if (from === "sign-up") {
-          nav.navigate('Slider')
+          // console.log('navigating from sign up to scheudles: ', nav)
+          nav.navigate('ScheduleList')
         } else {
-          nav.navigate('Main')
+          // console.log('navigating from else to scheudles ')
+
+          nav.navigate('ScheduleList')
         }
       } else {
         Alert.alert(
@@ -99,7 +111,7 @@ export function setCurrentUser(email, response, nav, from) {
       }
     })
     .catch(function(error) {
-      console.log('There has been a problem with your fetch operation: ' + error.message);
+      console.log('Set Current User There has been a problem with your fetch operation: ' + error.message);
         throw error;})
   }
 }

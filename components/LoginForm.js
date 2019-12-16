@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator,AsyncStorage,Alert } from 'react-native';
+import { View, Text, ActivityIndicator,AsyncStorage, Alert } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 import Button from 'react-native-button';
 import _ from 'lodash';
 import { connect } from 'react-redux';
-// import {input,inputMain}from '../styles/base'
+
 import {API_URL} from '../constants/types.js'
 
 import { emailChanged, passwordChanged, loginUser,setCurrentUser } from '../actions/authActions.js';
@@ -35,7 +35,6 @@ logIn = () => {
   .then(res => res.json())
   .then(response => {
     if (response.errors) {
-      console.log("response: ", response);
       this.setState({ response: response, error: true, errMsg: response.errors })
       Alert.alert(
       'Invalid Credentials',
@@ -50,29 +49,26 @@ logIn = () => {
       {cancelable: false},
     )
     } else {
-      AsyncStorage.setItem('user_id', response.jwt)
+      AsyncStorage.setItem('user_id', response.access_token)
       this.setState({loading: false})
-      this.props.setCurrentUser(this.props.email, response.jwt, this.props.navigation, "log-in")
+      this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
     }
   })
 }
   componentDidMount() {
    if (this.props.currentUser) {
-     this.props.navigation.navigate('Main')
+     this.props.navigation.navigate('ScheduleList')
    }
  }
   onButtonSubmit() {
-    console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
-    // const { email, password } = this.props;
+    // console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
     this.logIn()
-    // this.props.loginUser({ email, password });
   }
   emailChanged(value) {
     const email =value.trim();
     this.props.emailChanged(email);
   }
   passwordChanged(value) {
-    // console.log('Value:', value);
     this.props.passwordChanged(value.trim());
   }
   renderError() {
@@ -134,7 +130,6 @@ logIn = () => {
   }
 
   render() {
-    // <View style={styles.viewStyle}>
     return (
       <View style={
 
@@ -181,7 +176,6 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  // console.log('mapstate to props in loginform',state)
   return {
     email: state.auth.email,
     password: state.auth.password,
