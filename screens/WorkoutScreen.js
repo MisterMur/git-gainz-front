@@ -128,6 +128,7 @@ class WorkoutScreen extends Component {
   }
 }
 function mapStateToProps(state){
+  console.log('workout screen state:', state)
   return {
     currentWorkout:state.currentWorkout,
     currentUser:state.currentUser

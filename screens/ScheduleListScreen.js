@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput,Text,View,Button,ScrollView} from 'react-native';
+import { AppRegistry, TextInput,Text,View,Button,ScrollView,AsyncStorage} from 'react-native';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-native-elements'
@@ -24,7 +24,6 @@ class ScheduleListScreen extends Component {
 
   }
   componentDidMount(){
-    console.log('in did mount')
     // this.props.dispatch(fetchSchedules())
 
   }
@@ -41,13 +40,12 @@ class ScheduleListScreen extends Component {
 
   render() {
     // console.log('rendering props in schedule',this.props)
-    const {error,loading,schedules}=this.props
     return (
       <ScrollView>
 
 
         <ScheduleList
-          schedules={schedules}
+          schedules={this.props.schedules}
           handlePress={this.props.navigation.navigate}
         />
 
@@ -79,7 +77,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 function mapStateToProps(state){
-  // console.log('mappingstate in schedulelist:',state)
+
   const {schedule}=state;
   return {
     schedules:schedule.schedules,

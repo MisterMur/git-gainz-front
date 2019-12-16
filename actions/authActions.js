@@ -56,7 +56,7 @@ export const loginUser = ({ email, password }) => {
           console.log('SUCCESS!!');
           response.json().then(data => {
             console.log(data);
-            AsyncStorage.setItem('user_id', data.access_token)
+            // AsyncStorage.setItem('user_id', data.access_token)
             dispatch({
               type: LOGIN_USER_SUCCESS,
               payload: data
@@ -77,7 +77,7 @@ export function setCurrentUser(email, response, nav, from) {
       let foundUser = userAttempt[0]
       let userId = foundUser.id
       if (response) {
-        console.log(foundUser.schedules)
+        // console.log('in set current user found user:',foundUser)
         dispatch({
           type: FETCH_SCHEDULES_SUCCESS,
           payload: foundUser

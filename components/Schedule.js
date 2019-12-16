@@ -19,23 +19,17 @@ class Schedule extends React.Component {
     super(props)
   }
   handlePressButton=()=>{
-    // console.log('in handlePressButton Schedule,',this.props.schedule)
     store.dispatch({
       type:'SET_CURRENT_SCHEDULE',
       payload:this.props.schedule
     }
 
     )
+      this.props.handlePress('WorkoutList')
 
-
-    // console.log('in handlepressbutton after setcurrentschedule',this.props.currentSchedule)
-    this.props.handlePress('WorkoutList')
-    // console.log('after handlepress ')
-    // onChangeText={(text)=>this.handleChangeText(text)}
   }
 
   render() {
-    console.log('schedule props',this.props.schedule)
     return (
       <View>
         <Card  title={this.props.schedule.name} dividerStyle="3">

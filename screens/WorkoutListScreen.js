@@ -25,7 +25,7 @@ class WorkoutListScreen extends Component {
 
 
   componentDidMount(){
-    this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
+    // this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
 
   }
 
@@ -96,8 +96,9 @@ class WorkoutListScreen extends Component {
 }
 function mapStateToProps(state){
   // console.log('workoutlistscreen mapstateprops',state)
+  const {schedule} = state
   return {
-    currentSchedule:state.currentSchedule,
+    currentSchedule:schedule.currentSchedule,
   }
 }
 
