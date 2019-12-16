@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fonts from '../styles/base.js'
-import {postNewCircuit} from '../reducers/reducer.js'
+import {postNewCircuit} from '../actions/workoutActions.js'
 
 import Set from './Set.js'
 
@@ -70,8 +70,6 @@ class Exercise extends React.Component {
 
 
   render() {
-    // {this.renderSet()*2}
-    // console.warn(this.state.circuit)
     return (
 
         <Card  title={this.props.exercise.name}>

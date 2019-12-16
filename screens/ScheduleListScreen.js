@@ -6,7 +6,7 @@ import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-na
 
 import ScheduleList from '../components/ScheduleList.js'
 
-import { fetchSchedules,postNewSchedule} from '../reducers/reducer.js'
+import { fetchMyschedules,fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
 
 
 class ScheduleListScreen extends Component {
@@ -24,8 +24,8 @@ class ScheduleListScreen extends Component {
 
   }
   componentDidMount(){
-    // console.log('in did mount')
-    this.props.dispatch(fetchSchedules())
+    console.log('in did mount')
+    // this.props.dispatch(fetchSchedules())
 
   }
 
@@ -34,12 +34,13 @@ class ScheduleListScreen extends Component {
       name:this.state.text,
       workouts:[]
     }))
-    this.props.dispatch(fetchSchedules())
+    this.props.dispatch(fetchMySchedules())
   }
 
 
 
   render() {
+    // console.log('rendering props in schedule',this.props)
     const {error,loading,schedules}=this.props
     return (
       <ScrollView>
@@ -71,10 +72,20 @@ class ScheduleListScreen extends Component {
     );
   }
 }
-const mapStateToProps=state=>({
-  schedules:state.schedules,
-  loading:state.loading,
-  error:state.error
+const mapDispatchToProps = dispatch => ({
+  fetchSchedules: () => dispatch(fetchSchedules()),
+  postNewSchedule: (s)=>dispatch(postNewSchedule(s))
 })
 
-export default connect(mapStateToProps)(ScheduleListScreen)
+function mapStateToProps(state){
+  // console.log('mappingstate in schedulelist:',state)
+  const {schedule}=state;
+  return {
+    schedules:schedule.schedules,
+    loading:state.loading,
+    error:state.error
+
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ScheduleListScreen)

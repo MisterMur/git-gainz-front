@@ -12,7 +12,8 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-import Login from '../components/Login.js'
+import LoginForm from '../components/LoginForm.js'
+import {  navigate, NavigationActions, navigation } from 'react-navigation';
 
 import { Input,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,53 +24,50 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
+  renderLogin=()=>{
+    return (
+
+      <>
+      <Input
+        placeholder='USERNAME'
+        leftIcon={
+          <Icon
+            name='user'
+            size={24}
+            color='black'/>
+        }/>
+      <Input
+        placeholder='PASSWORD'
+        leftIcon={
+          <Icon
+            name='plus'
+            size={24}
+            color='black'/>
+        }/>
+      </>
+    )
+
+
+  }
+
   render() {
     // <Button title="Show me more of the app" onPress={this._showMoreApp} />
     // <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
     return (
 
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      
 
           <View style={styles.getStartedContainer}>
-
             <Text style={styles.getStartedText}>Welcome to Git Gainz</Text>
-
-
-
-            <Input
-              placeholder='USERNAME'
-              leftIcon={
-                <Icon
-                  name='user'
-                  size={24}
-                  color='black'/>
-              }
-            />
-            <Input
-              placeholder='PASSWORD'
-              leftIcon={
-                <Icon
-                  name='plus'
-                  size={24}
-                  color='black'/>
-              }
-            />
           </View>
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+        <LoginForm navigation={this.props.navigation} />
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+          <Text style={styles.tabBarInfoText}>This is a Monkeybar</Text>
 
           <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
+            <MonoText style={styles.codeHighlightText}>MainTabNavigator.js</MonoText>
           </View>
         </View>
       </View>
@@ -208,4 +206,33 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  //custom
+inputMain: {
+  borderRadius: 4,
+  borderStyle: 'solid',
+  borderWidth: 2,
+  borderColor: '#e3e3e3',
+  /*padding: 1,*/
+  marginBottom: 15,
+  overflow: 'hidden',
+  height: 26,
+  alignContent: 'flex-start',
+  alignItems: 'flex-start',
+  alignSelf:  'flex-start',
+},
+inputContainer: {
+  flex: 1,
+  backgroundColor: 'red',
+  padding: 1,
+  alignContent: 'flex-start',
+  alignItems: 'flex-start',
+  alignSelf:  'flex-start'
+},
+input: {
+  height: 26,
+  width: 200,
+  fontSize: 12,
+  justifyContent: 'center',
+  alignItems: 'center'
+},
 });

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
 // import {viewWorkouts} from '../reducer'
-import {setCurrentWorkout} from '../reducers/reducer.js'
+import {setCurrentWorkout} from '../actions/workoutActions.js'
 import store from '../store.js'
 
 // import {colors, fonts, padding, dimensions} from '../styles/base.js'

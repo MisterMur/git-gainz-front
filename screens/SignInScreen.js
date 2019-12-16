@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
-
+import {connect} from 'react-redux'
 class SignInScreen extends React.Component {
   static navigationOptions = {
     title: 'Please sign in',
@@ -48,6 +48,7 @@ class SignInScreen extends React.Component {
 //     this.props.navigation.navigate('Auth');
 //   };
 // }
+export default connect()(SignInScreen)
 
 
 const styles = StyleSheet.create({

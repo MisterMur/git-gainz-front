@@ -1,14 +1,14 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { AppLoading, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
-
+import {Asset} from 'expo-asset'
 
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 
-import reducer from './reducers/reducer.js'
+// import reducer from './reducers/reducer.js'
 import store from './store.js'
 
 
@@ -46,13 +46,13 @@ export default class App extends React.Component {
         require('./assets/images/robot-dev.png'),
         require('./assets/images/robot-prod.png'),
       ]),
-      Font.loadAsync({
-        // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      }),
+      // Font.loadAsync({
+      //   // This is the font that we are using for our tab bar
+      //   ...Icon.Ionicons.font,
+      //   // We include SpaceMono because we use it in HomeScreen.js. Feel free
+      //   // to remove this if you are not using it in your app
+      //   'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+      // }),
     ]);
   };
 

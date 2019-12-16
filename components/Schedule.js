@@ -8,7 +8,7 @@ import store from '../store.js'
 
 // import {colors, fonts, padding, dimensions} from '../styles/base.js'
 import { Card, ListItem, Button ,Divider,FormInput,FormLabel} from 'react-native-elements'
-import {setCurrentSchedule} from '../reducers/reducer.js'
+import {setCurrentSchedule} from '../actions/scheduleActions.js'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -35,7 +35,7 @@ class Schedule extends React.Component {
   }
 
   render() {
-    // console.log('schedule props',this.props.schedule)
+    console.log('schedule props',this.props.schedule)
     return (
       <View>
         <Card  title={this.props.schedule.name} dividerStyle="3">
