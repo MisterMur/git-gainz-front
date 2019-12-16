@@ -1,6 +1,7 @@
 import {fetchSchedulesFailure} from './scheduleActions.js'
 import {fetchExercisesSuccess,fetchExercisesFailure} from './exerciseActions.js'
 import {API_URL} from '../constants/types.js'
+import WorkoutAdapter from '../adapters/workoutAdapter.js'
 
 export function setWorkouts(workouts){
   // console.log('in setworkouts',workouts)
@@ -23,19 +24,29 @@ export function addWorkout(workout){
     payload:{workout}
   }
 }
+export function fetchWorkoutsBegin(){
+  type:FETCH_WORKOUTS_BEGIN
+}
+export function fetchWorkoutsSuccess(workouts){
+  // console.log('fetch success: ',schedules)
+  return {
+
+    type:FETCH_WORKOUTS_SUCCESS,
+    payload: workouts
+  }
+}
+export function fetchWorkoutsFailure(error){
+  return {
+
+    type:FETCH_WORKOUTS_FAILURE,
+    payload:{error}
+  }
+}
 
 export function fetchWorkouts(){
   return dispatch=>{
-    // dispatch(fetchSchedulesBegin())
-    return fetch(API_URL+'workouts')
-    .then(handleErrors)
-    .then(res=>{
-      // console.log('res',res)
-      return res.json()
-    })
+    return WorkoutAdapter.getWorkouts()
     .then(workouts=>{
-      // console.warn('fetch workouts',workouts)
-      // console.log('schedules *************',schedules)
       dispatch(fetchWorkoutsSuccess(workouts))
       return workouts
     })
@@ -44,34 +55,26 @@ export function fetchWorkouts(){
 }
 export function fetchSchedulesWorkouts(schedule){
   return dispatch=>{
-    // dispatch(fetchSchedulesBegin())
-    return fetch(API_URL+`schedules/${schedule.id}`)
-    .then(handleErrors)
-    .then(res=>{
-      // console.log('res',res)
-      return res.json()
-    })
+    return ScheduleAdapter.getSchedulesWorkouts(schedule)
     .then(workouts=>{
-      // console.warn('fetch schedules workouts',workouts)
-      // console.log('schedules *************',schedules)
+
       dispatch(fetchWorkoutsSuccess(workouts))
       return workouts
     })
     .catch(error=> dispatch(fetchWorkoutsFailure(error)))
   }
 }
+
 export function fetchWorkoutsExercises(workout){
   return dispatch=>{
-    return fetch(API_URL+`workouts/${workout.id}`)
-    .then(handleErrors)
-    .then(res=>res.json())
-    .then(exercises=>{
-      dispatch(fetchExercisesSuccess(exercises))
-      return exercises
-    })
-    .catch(error=>
-      dispatch(fetchExercisesFailure(error))
-    )
+    return WorkoutAdapter.getWorkoutsExercises(workout)
+        .then(exercises=>{
+          dispatch(fetchExercisesSuccess(exercises))
+          return exercises
+        })
+        .catch(error=>
+          dispatch(fetchExercisesFailure(error))
+        )
   }
 }
 function handleErrors(response) {

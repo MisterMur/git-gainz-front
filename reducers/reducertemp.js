@@ -237,20 +237,20 @@ export function fetchWorkouts(){
 //     .catch(error=> dispatch(fetchSchedulesFailure(error)))
 //   }
 // }
-export function fetchWorkoutsExercises(workout){
-  return dispatch=>{
-    return fetch(API_URL+`workouts/${workout.id}`)
-    .then(handleErrors)
-    .then(res=>res.json())
-    .then(exercises=>{
-      dispatch(fetchExercisesSuccess(exercises))
-      return exercises
-    })
-    .catch(error=>
-      dispatch(fetchExercisesFailure(error))
-    )
-  }
-}
+// export function fetchWorkoutsExercises(workout){
+//   return dispatch=>{
+//     return fetch(API_URL+`workouts/${workout.id}`)
+//     .then(handleErrors)
+//     .then(res=>res.json())
+//     .then(exercises=>{
+//       dispatch(fetchExercisesSuccess(exercises))
+//       return exercises
+//     })
+//     .catch(error=>
+//       dispatch(fetchExercisesFailure(error))
+//     )
+//   }
+// }
 export function fetchCircuits(exercise_id){
   return dispatch=>{
     return fetch(API_URL+`exercises/${exercise_id}`)
@@ -452,21 +452,21 @@ export const fetchUserWorkoutsFailure=(error)=>({
   type:FETCH_USER_WORKOUTS_FAILURE,
   payload:{error}
 })
-export const fetchWorkoutsBegin=()=>({
-  type:FETCH_WORKOUTS_BEGIN
-})
-export const fetchWorkoutsSuccess=(workouts)=>{
-  // console.log('fetch success: ',schedules)
-  return {
-
-    type:FETCH_WORKOUTS_SUCCESS,
-    payload: workouts
-  }
-}
-export const fetchWorkoutsFailure=(error)=>({
-  type:FETCH_WORKOUTS_FAILURE,
-  payload:{error}
-})
+// export const fetchWorkoutsBegin=()=>({
+//   type:FETCH_WORKOUTS_BEGIN
+// })
+// export const fetchWorkoutsSuccess=(workouts)=>{
+//   // console.log('fetch success: ',schedules)
+//   return {
+//
+//     type:FETCH_WORKOUTS_SUCCESS,
+//     payload: workouts
+//   }
+// }
+// export const fetchWorkoutsFailure=(error)=>({
+//   type:FETCH_WORKOUTS_FAILURE,
+//   payload:{error}
+// })
 export const fetchSchedulesWorkoutsSuccess=(currentSchedule)=>({
   type:FETCH_SCHEDULES_WORKOUTS,
   payload:{currentSchedule}
@@ -492,19 +492,19 @@ export const fetchSchedulesWorkoutsSuccess=(currentSchedule)=>({
 //   type:ADD_NEW_SCHEDULE,
 //   payload:{schedule}
 // })
-export const fetchExercisesBegin=()=>({
-  type:FETCH_EXERCISES_BEGIN
-})
-export const fetchExercisesSuccess=(exercises)=>{
-  return {
-    type:FETCH_EXERCISES_SUCCESS,
-    payload:exercises
-  }
-}
-export const fetchExercisesFailure=(error)=>({
-  type:FETCH_EXERCISES_FAILURE,
-  payload:{error}
-})
+// export const fetchExercisesBegin=()=>({
+//   type:FETCH_EXERCISES_BEGIN
+// })
+// export const fetchExercisesSuccess=(exercises)=>{
+//   return {
+//     type:FETCH_EXERCISES_SUCCESS,
+//     payload:exercises
+//   }
+// }
+// export const fetchExercisesFailure=(error)=>({
+//   type:FETCH_EXERCISES_FAILURE,
+//   payload:{error}
+// })
 export const fetchCircuitsSuccess=(circuits)=>{
   // console.log('fetch circuits success',circuits)
   return {

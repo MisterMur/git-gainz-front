@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fonts from '../styles/base.js'
-import {postNewCircuit} from '../actions/workoutActions.js'
+import {addNewCircuit} from '../actions/exerciseActions.js'
 
 import Set from './Set.js'
 
@@ -40,7 +40,7 @@ class Exercise extends React.Component {
     let newCircuits = {reps,weight,rest,exercise_id:this.props.exercise.id}
     let copyCircuits=[...this.state.circuits,newCircuits]
     this.setState({circuits:copyCircuits})
-    this.props.postNewCircuit(newCircuits)
+    this.props.addNewCircuit(newCircuits,this.props.currentWorkout)
   }
   renderCompleteCircuit=()=>{
     return(
@@ -79,7 +79,17 @@ class Exercise extends React.Component {
     )
   }
 }
-const actions={
-  postNewCircuit
+// const mapDispatchToProps={
+//   addNewCircuit
+// }
+function mapStateToProps(state){
+  // console.log('exercise componenntn  state:', state)
+  const {workout,user} = state
+
+  return {
+    currentWorkout:workout.currentWorkout,
+    currentUser:user.currentUser
+  }
+
 }
-export default connect(null,actions) (Exercise)
+export default connect(mapStateToProps,{addNewCircuit}) (Exercise)

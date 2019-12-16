@@ -4,7 +4,7 @@ import {  Button as ButtonElement ,Input} from 'react-native-elements'
 
 import Exercise from '../components/Exercise.js'
 import {connect} from 'react-redux'
-import {postNewExercise,postNewCompleteWorkout,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../actions/workoutActions.js'
+import {addNewExercise,postNewCompleteWorkout,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../actions/workoutActions.js'
 import {fetchSchedules} from '../actions/scheduleActions.js'
 // import {postNewExercise,postNewCompleteWorkout,,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
 
@@ -129,9 +129,11 @@ class WorkoutScreen extends Component {
 }
 function mapStateToProps(state){
   console.log('workout screen state:', state)
+  const {workout,user} = state
+
   return {
-    currentWorkout:state.currentWorkout,
-    currentUser:state.currentUser
+    currentWorkout:workout.currentWorkout,
+    currentUser:user.currentUser
   }
 
 }

@@ -56,6 +56,15 @@ export default class ScheduleAdapter {
       .then(this.handleErrors)
     }
   }
+  export async function getSchedulesWorkouts(schedule){
+    return dispatch=>{
+      return fetch(API_URL+`schedules/+${schedule.id}`,{
+        method:"GET",
+        headers:{   Authorization:item}
+      }).then(this.handleErrors)
+      .then(res=>res.json())
+    }
+  }
 
   export function handleErrors(response) {
     if (!response.ok) {
