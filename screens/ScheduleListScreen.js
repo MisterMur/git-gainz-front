@@ -74,6 +74,7 @@ class ScheduleListScreen extends Component {
 }
 const mapDispatchToProps = dispatch => ({
   fetchSchedules: () => dispatch(fetchSchedules()),
+  fetchMySchedules:()=> dispatch(fetchMySchedules(userItem)),
   postNewSchedule: (s)=>dispatch(postNewSchedule(s))
 })
 

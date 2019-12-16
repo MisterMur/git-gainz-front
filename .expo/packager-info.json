@@ -1,9 +1,9 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 13216,
+  "packagerPid": 10484,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://3p-3jv.anonymous.git-gainz-front.exp.direct",
+  "packagerNgrokUrl": "https://packager.3p-3jv.anonymous.git-gainz-front.exp.direct",
+  "ngrokPid": 73948
 }
