@@ -30,12 +30,12 @@ class WorkoutListScreen extends Component {
   }
 
   handleAddWorkout=()=>{
-    // console.log('in handle add workout', this.props)
-    this.props.dispatch(postNewWorkout({
+    console.log('in handle add workout', this.props.currentSchedule)
+    const workout = {
       name:this.state.text,
       exercises:[]
-      // schedule_id: this.props.currentSchedule.id,
-    },this.props.currentSchedule))
+    }
+    this.props.postNewWorkout(workout, this.props.currentSchedule)
 
     // this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
     // console.warn('handle add workout',this.props.currentSchedule.workouts)
@@ -94,6 +94,11 @@ class WorkoutListScreen extends Component {
     );
   }
 }
+const mapDispatchToProps=dispatch=>({
+  postNewWorkout:(w,s)=>dispatch(postNewWorkout(w,s)),
+})
+
+
 function mapStateToProps(state){
   // console.log('workoutlistscreen mapstateprops',state)
   const {schedule} = state
@@ -102,4 +107,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps)(WorkoutListScreen)
+export default connect(mapStateToProps,mapDispatchToProps)(WorkoutListScreen)

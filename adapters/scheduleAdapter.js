@@ -37,7 +37,6 @@ export default class ScheduleAdapter {
 
   static async  addNewSchedule(schedule){
     const userToken = await AsyncStorage.getItem('access_token')
-    console.log('in add new schecudle' , userToken    )
     return fetch(API_URL+'schedules',{
       method:"POST",
       headers:{

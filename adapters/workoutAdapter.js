@@ -55,42 +55,37 @@ export  default class WorkoutAdapter {
     }).then(this.handleErrors)
   }
 
-  static async postNewWorkout(workout,currentSchedule){
-    const item = await AsyncStorage.getItem('access_token')
-    let schedule = { ...currentSchedule  }
-    return dispatch=>{
-      return fetch(API_URL+'workouts',{
+  static async addNewWorkout(workout,schedule){
+    const userToken = await AsyncStorage.getItem('access_token')
+    console.log('in add new workout' , schedule    )
+    return fetch(API_URL+'workouts',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        'Accepts':'application/json',
+        'Authorization':userToken
+      },
+      body:JSON.stringify({
+          workout
+        }
+      )
+    })
+    .then(res=>res.json())
+    .then(workout=>{
+      return fetch( API_URL+'workout_schedules',{
         method:"POST",
         headers:{
           'Content-Type':'application/json',
           'Accepts':'application/json',
-          'Authorization':item
+          'Authorization':userToken
         },
         body:JSON.stringify({
-            workout
-          }
-        )
-      })
-      .then(res=>res.json())
-      .then(workout=>{
-        return fetch( API_URL+'workout_schedules',{
-          method:"POST",
-          headers:{
-            'Content-Type':'application/json',
-            'Accepts':'application/json',
-            'Authorization':item
-          },
-          body:JSON.stringify({
-            schedule_id:currentSchedule.id,
-            workout_id:workout.id
-          })
-        }).then(handleErrors)
-        .then(function(){
-          dispatch(fetchSchedulesWorkouts(currentSchedule))
+          schedule_id:schedule.id,
+          workout_id:workout.id
         })
+      }).then(this.handleErrors)
+    }).then(this.handleErrors)
 
-    })
-    }
   }
 
   handleErrors(response) {

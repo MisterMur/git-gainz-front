@@ -50,9 +50,9 @@ export default function scheduleReducer(state=initialState,action){
       }
 
     case SET_CURRENT_SCHEDULE:
-      console.log('reducer in set current schedule')
+      // console.log('reducer in set current schedule',action.payload.schedule)
       return {
-        ...state,currentSchedule:action.payload
+        ...state,currentSchedule:action.payload.schedule
       }
 
     default:

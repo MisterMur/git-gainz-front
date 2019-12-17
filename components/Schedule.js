@@ -19,13 +19,9 @@ class Schedule extends React.Component {
     super(props)
   }
   handlePressButton=()=>{
-    store.dispatch({
-      type:'SET_CURRENT_SCHEDULE',
-      payload:this.props.schedule
-    }
-
-    )
-      this.props.handlePress('WorkoutList')
+    // console.log('in handle pressbutton schedule:',this.props.schedule)
+    this.props.setCurrentSchedule(this.props.schedule)
+    this.props.handlePress('WorkoutList')
 
   }
 
@@ -50,6 +46,10 @@ class Schedule extends React.Component {
     )
   }
 }
+const mapDispatchToProps= dispatch=> ({
+  setCurrentSchedule:(schedule)=>dispatch(setCurrentSchedule(schedule))
+})
+
 const mapStateToProps=state=>({
   currentSchedule:state.currentSchedule,
   schedules:state.schedules,
@@ -58,4 +58,4 @@ const mapStateToProps=state=>({
 // function mapDispatchToProps(dispatch,ownProps) {
 //   return bindActionCreators({ setCurrentSchedule}, dispatch)
 // }
-export default connect(mapStateToProps)(Schedule)
+export default connect(mapStateToProps,mapDispatchToProps)(Schedule)

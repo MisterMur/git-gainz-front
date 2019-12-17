@@ -6,12 +6,15 @@ import ScheduleAdapter from '../adapters/scheduleAdapter.js'
 import UserAdapter from '../adapters/userAdapter.js'
 
 import {AsyncStorage} from 'react-native'
-export function setCurrentSchedule(schedule){
-  return {
-      type: SET_CURRENT_SCHEDULE,
-      payload:schedule
-    }
-}
+
+export const setCurrentSchedule=(schedule)=>({
+  // console.log('in setcurrent schedule',schedule)
+
+    type: SET_CURRENT_SCHEDULE,
+    payload:{schedule}
+  
+})
+
 
 
 export const fetchSchedulesBegin=()=>({

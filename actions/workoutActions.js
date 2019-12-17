@@ -1,6 +1,7 @@
 import {fetchSchedulesFailure} from './scheduleActions.js'
 import {fetchExercisesSuccess,fetchExercisesFailure} from './exerciseActions.js'
 import {API_URL} from '../constants/types.js'
+import {ADD_NEW_WORKOUT,SET_WORKOUTS,SET_CURRENT_WORKOUT,FETCH_WORKOUTS_BEGIN,FETCH_WORKOUTS_SUCCESS,FETCH_WORKOUTS_FAILURE} from '../constants/types.js'
 import WorkoutAdapter from '../adapters/workoutAdapter.js'
 
 export function setWorkouts(workouts){
@@ -75,6 +76,19 @@ export function fetchWorkoutsExercises(workout){
         .catch(error=>
           dispatch(fetchExercisesFailure(error))
         )
+  }
+}
+export function postNewWorkout(workout,schedule){
+  // const scheduleUrl='http://localhost:3000/api/v1/schedules'
+  // console.log('in handle add schedule',e)
+  return (dispatch)=>{
+    // console.log('in workout actions posting workout',workout)
+    return WorkoutAdapter.addNewWorkout(workout,schedule)
+    .then(function (){
+      dispatch({type:ADD_NEW_WORKOUT,payload:{workout}})
+
+    })
+
   }
 }
 function handleErrors(response) {
