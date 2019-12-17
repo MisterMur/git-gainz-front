@@ -44,8 +44,9 @@ export default function scheduleReducer(state=initialState,action){
       }
 
     case ADD_NEW_SCHEDULE:
+    console.log('adding new schedule',action.payload.schedule)
       return {
-        ...state,schedules:[...state.schedules,action.payload]
+        ...state,schedules:[...state.schedules,action.payload.schedule]
       }
 
     case SET_CURRENT_SCHEDULE:

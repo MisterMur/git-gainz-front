@@ -296,23 +296,23 @@ export function fetchUserWorkouts(user){
   }
 }
 
-export function postNewSchedule(schedule){
-  const scheduleUrl='http://localhost:3000/api/v1/schedules'
-  // console.log('in handle add schedule',e)
-  return dispatch=>{
-    return fetch(scheduleUrl,{
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json',
-        'Accepts':'application/json'
-      },
-      body:JSON.stringify({
-        schedule
-      })
-    })
-    .then(handleErrors)
-  }
-}
+// export function postNewSchedule(schedule){
+//   const scheduleUrl='http://localhost:3000/api/v1/schedules'
+//   // console.log('in handle add schedule',e)
+//   return dispatch=>{
+//     return fetch(scheduleUrl,{
+//       method:"POST",
+//       headers:{
+//         'Content-Type':'application/json',
+//         'Accepts':'application/json'
+//       },
+//       body:JSON.stringify({
+//         schedule
+//       })
+//     })
+//     .then(handleErrors)
+//   }
+// }
 export function postNewWorkout(workout,currentSchedule){
   // addWorkout(workout)
   // console.log('in handle add schedule',e)
@@ -380,43 +380,43 @@ export function postNewCompleteWorkout(currentUser,workout){
   }
 }
 
-export function postNewExercise(exercise,currentWorkout){
-  // addWorkout(workout)
-  // console.log('***********************exercise',exercise)
-  return dispatch=>{
-    return fetch(API_URL+'exercises',{
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json',
-        'Accepts':'application/json'
-      },
-      body:JSON.stringify({
-          exercise
-        }
-      )
-    })
-    .then(res=>{return res.json() })
-    .then(exer=>{
-
-      // console.log('res exercise id',exer)
-      return fetch( API_URL+'workout_exercises',{
-        method:"POST",
-        headers:{
-          'Content-Type':'application/json',
-          'Accepts':'application/json'
-        },
-        body:JSON.stringify({
-          workout_id:currentWorkout.id,
-          exercise_id:exer.id
-        })
-      }).then(handleErrors)
-  })
-    .then(handleErrors)
-    .then(function(){
-      dispatch(fetchWorkoutsExercises(currentWorkout))
-    })
-  }
-}
+// export function postNewExercise(exercise,currentWorkout){
+//   // addWorkout(workout)
+//   // console.log('***********************exercise',exercise)
+//   return dispatch=>{
+//     return fetch(API_URL+'exercises',{
+//       method:"POST",
+//       headers:{
+//         'Content-Type':'application/json',
+//         'Accepts':'application/json'
+//       },
+//       body:JSON.stringify({
+//           exercise
+//         }
+//       )
+//     })
+//     .then(res=>{return res.json() })
+//     .then(exer=>{
+//
+//       // console.log('res exercise id',exer)
+//       return fetch( API_URL+'workout_exercises',{
+//         method:"POST",
+//         headers:{
+//           'Content-Type':'application/json',
+//           'Accepts':'application/json'
+//         },
+//         body:JSON.stringify({
+//           workout_id:currentWorkout.id,
+//           exercise_id:exer.id
+//         })
+//       }).then(handleErrors)
+//   })
+//     .then(handleErrors)
+//     .then(function(){
+//       dispatch(fetchWorkoutsExercises(currentWorkout))
+//     })
+//   }
+// }
 export function postNewCircuit(circuit){
   // console.log('in post new circuit',circuit)
   return (dispatch)=>{

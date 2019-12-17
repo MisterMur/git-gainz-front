@@ -3,8 +3,8 @@ import {API_URL} from '../constants/types.js'
 
 export default class ScheduleAdapter {
   static async getSchedules() {
-  const item = await AsyncStorage.getItem('user_id')
-  console.log('in user adapter',item)
+  const item = await AsyncStorage.getItem('access_token')
+  console.log('in schedule adapter',item)
   return fetch(`${API_URL+`schedules`}`, {
     method: "GET",
     headers: {
@@ -13,67 +13,68 @@ export default class ScheduleAdapter {
     })
     .then(res => res.json())
   }
-  export async function fetchSchedules(){
+
+
+  static async fetchSchedules(){
     // const schedulesUrl='http://localhost:3000/api/v1/schedules'
-    const item =  AsyncStorage.getItem('user_id')
+    const item = await AsyncStorage.getItem('access_token')
     console.log('async storage item',item)
-    return dispatch=>{
+
       // dispatch(fetchSchedulesBegin())
 
-      console.log('in fetchschedules reducer: ',API_URL+'schedules')
-      return fetch(API_URL+'schedules',{
-        method:"GET",
-        headers:{Authorization:item}
-      })
-      .then(this.handleErrors)
-      .then(res=>{
-        console.log('res',res)
-        return res.json()
-      })
-      .then(schedules=>{
-        // console.log('schedules *************',schedules)
-        dispatch(fetchSchedulesSuccess(schedules))
-        return schedules
-      })
-      .catch(error=> dispatch(fetchSchedulesFailure(error)))
-    }
+    console.log('in fetchschedules reducer: ',API_URL+'schedules')
+    return fetch(API_URL+'schedules',{
+      method:"GET",
+      headers:{Authorization:item}
+    })
+    .then(this.handleErrors)
+    .then(res=>{
+      console.log('res',res)
+      return res.json()
+    })
+
   }
 
-  export async function postNewSchedule(schedule){
-    // const scheduleUrl='http://localhost:3000/api/v1/schedules'
-    // console.log('in handle add schedule',e)
-    return dispatch=>{
-      return fetch(API_URL+'schedules',{
+  static async  addNewSchedule(schedule){
+    const userToken = await AsyncStorage.getItem('access_token')
+    console.log('in add new schecudle' , userToken    )
+    return fetch(API_URL+'schedules',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        'Accepts':'application/json',
+        'Authorization':userToken
+      },
+      body:JSON.stringify({
+        schedule
+      })
+    })
+    .then(res=>{return res.json() })
+    .then(sched=>{
+      return fetch( API_URL+'user_schedules',{
         method:"POST",
         headers:{
           'Content-Type':'application/json',
-          'Accepts':'application/json'
+          'Accepts':'application/json',
+          Authorization:userToken
         },
         body:JSON.stringify({
-          schedule
+          schedule_id:sched.id,
+          user_id: userToken[0]
         })
-      })
-      .then(this.handleErrors)
-    }
-  }
-  export async function getSchedulesWorkouts(schedule){
-    return dispatch=>{
-      return fetch(API_URL+`schedules/+${schedule.id}`,{
-        method:"GET",
-        headers:{   Authorization:item}
       }).then(this.handleErrors)
-      .then(res=>res.json())
-    }
+    }).then(this.handleErrors)
+
   }
 
-  export function handleErrors(response) {
-    if (!response.ok) {
+
+    handleErrors(response) {
       console.log('in handle errors, response:', response)
+      if (!response.ok) {
 
-      throw Error(response.statusText);
+        throw Error(response.statusText);
+      }
+      return response;
     }
-    return response;
-  }
-
 
 }

@@ -6,7 +6,7 @@ import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-na
 
 import ScheduleList from '../components/ScheduleList.js'
 
-import { fetchMyschedules,fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
+import { fetchMySchedules,fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
 
 
 class ScheduleListScreen extends Component {
@@ -29,20 +29,18 @@ class ScheduleListScreen extends Component {
   }
 
   handleAddSchedule=(e)=>{
-    this.props.dispatch(postNewSchedule({
+    this.props.postNewSchedule({
       name:this.state.text,
       workouts:[]
-    }))
-    this.props.dispatch(fetchMySchedules())
+    })
+    this.setState({text:''})
   }
 
 
 
   render() {
-    // console.log('rendering props in schedule',this.props)
     return (
       <ScrollView>
-
 
         <ScheduleList
           schedules={this.props.schedules}
@@ -66,13 +64,13 @@ class ScheduleListScreen extends Component {
           title="Add New Schedule"
           onPress={() => this.handleAddSchedule()}
         />
+
       </ScrollView>
     );
   }
 }
 const mapDispatchToProps = dispatch => ({
-  fetchSchedules: () => dispatch(fetchSchedules()),
-  fetchMySchedules:()=> dispatch(fetchMySchedules(userItem)),
+  fetchMySchedules: () => dispatch(fetchMySchedules()),
   postNewSchedule: (s)=>dispatch(postNewSchedule(s))
 })
 
@@ -83,7 +81,6 @@ function mapStateToProps(state){
     schedules:schedule.schedules,
     loading:state.loading,
     error:state.error
-
   }
 }
 

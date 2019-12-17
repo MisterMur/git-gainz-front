@@ -30,17 +30,11 @@ class Exercise extends React.Component {
     this.setState({circuits:newCircuits})
   }
 
-  // handleRepsOnChange=(reps)=>{
-  //   this.setState({curentCircuit:{...this.state.curentCircuit,reps}})
-  // }
-  // handleWeightOnChange=(weight)=>{
-  //   this.setState({curentCircuit:{...this.state.curentCircuit,weight}})
-  // }
+
   addCircuitsButton=(reps,weight,rest)=>{
     let newCircuits = {reps,weight,rest,exercise_id:this.props.exercise.id}
     let copyCircuits=[...this.state.circuits,newCircuits]
     this.setState({circuits:copyCircuits})
-    this.props.addNewCircuit(newCircuits,this.props.currentWorkout)
   }
   renderCompleteCircuit=()=>{
     return(
@@ -79,11 +73,8 @@ class Exercise extends React.Component {
     )
   }
 }
-// const mapDispatchToProps={
-//   addNewCircuit
-// }
+
 function mapStateToProps(state){
-  // console.log('exercise componenntn  state:', state)
   const {workout,user} = state
 
   return {
@@ -92,4 +83,4 @@ function mapStateToProps(state){
   }
 
 }
-export default connect(mapStateToProps,{addNewCircuit}) (Exercise)
+export default connect(mapStateToProps) (Exercise)

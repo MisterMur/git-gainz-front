@@ -1,9 +1,9 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 78880,
+  "packagerPid": 15228,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://qs-bwf.anonymous.git-gainz-front.exp.direct",
-  "packagerNgrokUrl": "https://packager.qs-bwf.anonymous.git-gainz-front.exp.direct",
-  "ngrokPid": 66272
+  "expoServerNgrokUrl": "https://bw-r8b.anonymous.git-gainz-front.exp.direct",
+  "packagerNgrokUrl": "https://packager.bw-r8b.anonymous.git-gainz-front.exp.direct",
+  "ngrokPid": 22628
 }
