@@ -25,7 +25,7 @@ class WorkoutListScreen extends Component {
 
 
   componentDidMount(){
-    // this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
+    this.props.fetchSchedulesWorkouts(this.props.currentSchedule)
 
   }
 
@@ -36,9 +36,7 @@ class WorkoutListScreen extends Component {
       exercises:[]
     }
     this.props.postNewWorkout(workout, this.props.currentSchedule)
-
-    // this.props.dispatch(fetchSchedulesWorkouts(this.props.currentSchedule))
-    // console.warn('handle add workout',this.props.currentSchedule.workouts)
+    this.setState({text:''})
   }
   renderWorkoutList=()=>{
     return (
@@ -83,7 +81,6 @@ class WorkoutListScreen extends Component {
 
 
   render() {
-    // console.warn(this.props)
     return (
       <ScrollView className="WorkoutList">
         {this.props.currentSchedule?this.renderWorkoutList():null}
@@ -95,6 +92,7 @@ class WorkoutListScreen extends Component {
   }
 }
 const mapDispatchToProps=dispatch=>({
+  fetchSchedulesWorkouts:(w)=>dispatch(fetchSchedulesWorkouts(w)),
   postNewWorkout:(w,s)=>dispatch(postNewWorkout(w,s)),
 })
 

@@ -12,7 +12,7 @@ export const setCurrentSchedule=(schedule)=>({
 
     type: SET_CURRENT_SCHEDULE,
     payload:{schedule}
-  
+
 })
 
 
@@ -103,10 +103,8 @@ export function addNewCircuit(exercise,currentWorkout){
   }
 }
 export function postNewSchedule(schedule){
-  // const scheduleUrl='http://localhost:3000/api/v1/schedules'
-  // console.log('in handle add schedule',e)
+
   return (dispatch)=>{
-    console.log('in schedule actions posting schedule',schedule)
     return ScheduleAdapter.addNewSchedule(schedule)
     .then(function (){
       dispatch(addNewSchedule(schedule))

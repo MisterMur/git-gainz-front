@@ -55,6 +55,21 @@ export  default class WorkoutAdapter {
     }).then(this.handleErrors)
   }
 
+
+  static async addCompletedWorkout(workout){
+    const userToken = await AsyncStorage.getItem('access_token')
+    return fetch(API_URL+'user_workouts',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        'Accepts':'application/json',
+        'Authorization':userToken
+      },
+      body:JSON.stringify({workout,user_id:usertoken[0]})
+    }).then(this.handleErrors)
+
+  }
+  
   static async addNewWorkout(workout,schedule){
     const userToken = await AsyncStorage.getItem('access_token')
     console.log('in add new workout' , schedule    )

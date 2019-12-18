@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux'
 
 // import {viewWorkouts} from '../reducer'
 import {setCurrentWorkout} from '../actions/workoutActions.js'
+import {SET_CURRENT_WORKOUT} from '../constants/types.js'
 import store from '../store.js'
 
 // import {colors, fonts, padding, dimensions} from '../styles/base.js'
@@ -22,10 +23,11 @@ class Workout extends React.Component {
   handlePressButton=()=>{
     // console.log('in handlepressbutton workout',this.props.workout
     // console.log('in handlepressbutton store',store)
-    store.dispatch({
-      type:'SET_CURRENT_WORKOUT',
-      payload:this.props.workout
-    })
+    // store.dispatch({
+    //   type:SET_CURRENT_WORKOUT,
+    //   payload:this.props.workout
+    // })
+    this.props.setCurrentWorkout(this.props.workout)
     this.props.handlePress('Workout')
   }
 
@@ -50,12 +52,21 @@ class Workout extends React.Component {
     )
   }
 }
-const mapStateToProps=state=>({
-  currentWorkout:state.currentWorkout
-
+const mapDispatchToProps=dispatch=>({
+  setCurrentWorkout:(w)=>dispatch(setCurrentWorkout(w))
 })
+function mapStateToProps(state){
+  const {workout}=state
+  return {
+
+    currentWorkout:state.currentWorkout
+  }
+
+}
+
+
 // function mapDispatchToProps(dispatch,ownProps) {
 //   return bindActionCreators({ setCurrentWorkout}, dispatch)
 // }
 
-export default connect(mapStateToProps)(Workout)
+export default connect(mapStateToProps,mapDispatchToProps)(Workout)

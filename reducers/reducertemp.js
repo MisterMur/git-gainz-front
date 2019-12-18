@@ -160,27 +160,27 @@ const initialState={
     //
     // }
 
-export function setWorkouts(workouts){
-  // console.log('in setworkouts',workouts)
-  return{
-    type:SET_WORKOUTS,
-    payload:workouts
-  }
-}
-export function setCurrentWorkout(workout){
-  // console.log('in set current workout',workout)
-  return {
-    type: SET_CURRENT_WORKOUT,
-    payload:workout
-  }
-}
-
-export function addWorkout(workout){
-  return {
-    type:ADD_NEW_WORKOUT,
-    payload:{workout}
-  }
-}
+// export function setWorkouts(workouts){
+//   // console.log('in setworkouts',workouts)
+//   return{
+//     type:SET_WORKOUTS,
+//     payload:workouts
+//   }
+// }
+// export function setCurrentWorkout(workout){
+//   // console.log('in set current workout',workout)
+//   return {
+//     type: SET_CURRENT_WORKOUT,
+//     payload:workout
+//   }
+// }
+//
+// export function addWorkout(workout){
+//   return {
+//     type:ADD_NEW_WORKOUT,
+//     payload:{workout}
+//   }
+// }
 //
 // export function fetchSchedules(){
 //   // const schedulesUrl='http://localhost:3000/api/v1/schedules'
@@ -201,24 +201,24 @@ export function addWorkout(workout){
 //     .catch(error=> dispatch(fetchSchedulesFailure(error)))
 //   }
 // }
-export function fetchWorkouts(){
-  return dispatch=>{
-    // dispatch(fetchSchedulesBegin())
-    return fetch(API_URL+'workouts')
-    .then(handleErrors)
-    .then(res=>{
-      // console.log('res',res)
-      return res.json()
-    })
-    .then(workouts=>{
-      // console.warn('fetch workouts',workouts)
-      // console.log('schedules *************',schedules)
-      dispatch(fetchWorkoutsSuccess(workouts))
-      return workouts
-    })
-    .catch(error=> dispatch(fetchSchedulesFailure(error)))
-  }
-}
+// export function fetchWorkouts(){
+//   return dispatch=>{
+//     // dispatch(fetchSchedulesBegin())
+//     return fetch(API_URL+'workouts')
+//     .then(handleErrors)
+//     .then(res=>{
+//       // console.log('res',res)
+//       return res.json()
+//     })
+//     .then(workouts=>{
+//       // console.warn('fetch workouts',workouts)
+//       // console.log('schedules *************',schedules)
+//       dispatch(fetchWorkoutsSuccess(workouts))
+//       return workouts
+//     })
+//     .catch(error=> dispatch(fetchSchedulesFailure(error)))
+//   }
+// }
 // export function fetchSchedulesWorkouts(schedule){
 //   return dispatch=>{
 //     // dispatch(fetchSchedulesBegin())

@@ -51,9 +51,7 @@ export function fetchWorkoutsExercises(workout){
 
 
 
-export function addNewCircuit(exercise,currentWorkout){
-  // addWorkout(workout)
-  // console.log('***********************exercise',exercise)
+export function postNewExercise(exercise,currentWorkout){
   return dispatch=>{
     console.log('exercise action add new circuit ',currentWorkout)
     return WorkoutAdapter.postWorkoutExercise(exercise,currentWorkout)

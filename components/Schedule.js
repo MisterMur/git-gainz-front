@@ -50,11 +50,16 @@ const mapDispatchToProps= dispatch=> ({
   setCurrentSchedule:(schedule)=>dispatch(setCurrentSchedule(schedule))
 })
 
-const mapStateToProps=state=>({
-  currentSchedule:state.currentSchedule,
-  schedules:state.schedules,
+function mapStateToProps(state){
+  const {schedule}=state
 
-})
+  return {
+
+    currentSchedule:schedule.currentSchedule,
+    schedules:schedule.schedules,
+  }
+
+}
 // function mapDispatchToProps(dispatch,ownProps) {
 //   return bindActionCreators({ setCurrentSchedule}, dispatch)
 // }

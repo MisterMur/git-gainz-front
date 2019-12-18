@@ -4,7 +4,8 @@ import {  Button as ButtonElement ,Input} from 'react-native-elements'
 
 import Exercise from '../components/Exercise.js'
 import {connect} from 'react-redux'
-import {addNewExercise,postNewCompleteWorkout,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../actions/workoutActions.js'
+import {postNewExercise} from '../actions/exerciseActions'
+import {postNewCompleteWorkout,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../actions/workoutActions.js'
 import {fetchSchedules} from '../actions/scheduleActions.js'
 // import {postNewExercise,postNewCompleteWorkout,,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
 
@@ -19,7 +20,7 @@ class WorkoutScreen extends Component {
 
   }
   componentDidMount(){
-    this.props.dispatch(fetchWorkoutsExercises(this.props.currentWorkout))
+    this.props.fetchWorkoutsExercises(this.props.currentWorkout)
   }
   state={
     text:'',
@@ -44,31 +45,22 @@ class WorkoutScreen extends Component {
     }
   }
   addNewExercise=()=>{
-    // console.log('in handle add new exercise', this.props.currentWorkout)
-    this.props.dispatch(postNewExercise({
+    this.props.postNewExercise({
       name:this.state.text,
       sets:[]
+    },this.props.currentWorkout)
 
-      // schedule_id: this.props.currentSchedule.id,
-    },this.props.currentWorkout))
-
-    // this.props.dispatch(fetchWorkouts())
-    // this.props.dispatch(addWorkout({
-    //   name:this.state.text,
-    //   sets:[]
-    // }))
     this.setState({text:''})
-    // console.warn(this.props.workouts)
   }
   handleAddExercise=()=>{
-    this.props.dispatch(postNewExercise({
+    this.props.postNewExercise({
       name:this.state.text,
       sets:[]
-    }))
-    this.props.dispatch(fetchSchedules())
+    })
+    this.props.fetchSchedules()
   }
   handleCompleteWorkout=()=>{
-    this.props.dispatch(postNewCompleteWorkout(this.props.currentUser,this.props.currentWorkout))
+    this.props.postNewCompleteWorkout(this.props.currentWorkout)
 
   }
   renderNav=()=>{
@@ -127,6 +119,12 @@ class WorkoutScreen extends Component {
     );
   }
 }
+const mapDispatchToProps=dispatch=>({
+  postNewExercise:(e,w)=>dispatch(postNewExercise(e,w)),
+  fetchSchedules:()=>dispatch(fetchSchedules()),
+  fetchWorkoutsExercises:(w)=>dispatch(fetchWorkoutsExercises(w)),
+  postNewCompleteWorkout:(w)=>dispatch(postNewCompleteWorkout(w))
+})
 function mapStateToProps(state){
   console.log('workout screen state:', state)
   const {workout,user} = state
@@ -137,4 +135,4 @@ function mapStateToProps(state){
   }
 
 }
-export default connect(mapStateToProps)(WorkoutScreen)
+export default connect(mapStateToProps,mapDispatchToProps)(WorkoutScreen)

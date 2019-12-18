@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import fonts from '../styles/base.js'
-import {addNewCircuit} from '../actions/exerciseActions.js'
 
 import Set from './Set.js'
 
