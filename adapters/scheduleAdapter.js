@@ -19,10 +19,6 @@ export default class ScheduleAdapter {
     // const schedulesUrl='http://localhost:3000/api/v1/schedules'
     const item = await AsyncStorage.getItem('access_token')
     console.log('async storage item',item)
-
-      // dispatch(fetchSchedulesBegin())
-
-    console.log('in fetchschedules reducer: ',API_URL+'schedules')
     return fetch(API_URL+'schedules',{
       method:"GET",
       headers:{Authorization:item}
@@ -64,6 +60,21 @@ export default class ScheduleAdapter {
       }).then(this.handleErrors)
     }).then(this.handleErrors)
 
+  }
+
+
+  static async getSchedulesWorkouts(schedule){
+    const userToken = await AsyncStorage.getItem('access_token')
+    return dispatch=>{
+        return fetch(API_URL+`schedules/${schedule.id}`,{
+        method:"GET",
+        headers:{Authorization:item}
+      })
+      .then(this.handleErrors)
+      .then(res=>{
+        return res.json()
+      })
+    }
   }
 
 

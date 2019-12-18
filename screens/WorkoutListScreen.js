@@ -41,7 +41,7 @@ class WorkoutListScreen extends Component {
   renderWorkoutList=()=>{
     return (
       <WorkoutList
-        workouts={this.props.currentSchedule.workouts}
+        workouts={this.props.workouts}
         handlePress={this.props.navigation.navigate}
       />
     )
@@ -99,8 +99,9 @@ const mapDispatchToProps=dispatch=>({
 
 function mapStateToProps(state){
   // console.log('workoutlistscreen mapstateprops',state)
-  const {schedule} = state
+  const {schedule,workout} = state
   return {
+    workouts:workout.workouts,
     currentSchedule:schedule.currentSchedule,
   }
 }

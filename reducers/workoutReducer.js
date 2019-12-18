@@ -38,7 +38,7 @@ export default function workoutReducer(state=initialState,action){
           workouts:[]
         }
         case ADD_NEW_WORKOUT:
-        console.log('workout reducer add new workout',action.payload)
+        console.log('workout reducer add new workout',action.payload.workout)
 
           return{
             ...state,workouts:[...state.workouts,action.payload.workout]
