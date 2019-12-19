@@ -1,6 +1,6 @@
 import {API_URL} from '../constants/types.js'
 import UserAdapter from '../adapters/userAdapter'
-import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER} from '../constants/authTypes.js'
+import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER,LOGOUT} from '../constants/authTypes.js'
 import {Alert} from 'react-native'
 import {FETCH_SCHEDULES_SUCCESS} from '../constants/types.js'
 import {  navigate, NavigationActions, navigation } from 'react-navigation';
@@ -12,6 +12,8 @@ export const emailChanged = (email) => {
     payload: email
   };
 };
+
+
 
 export const passwordChanged = (password) => {
   return {
@@ -114,5 +116,14 @@ export function setCurrentUser(email, response, nav, from) {
     .catch(function(error) {
       console.log('Set Current User There has been a problem with your fetch operation: ' + error.message);
         throw error;})
+  }
+}
+
+export function logoutCurrentUser() {
+  AsyncStorage.setItem('user_id', '')
+  AsyncStorage.setItem('access_token','')
+
+  return {
+    type: LOGOUT
   }
 }

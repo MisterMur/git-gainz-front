@@ -15,6 +15,7 @@ import SignInScreen from '../screens/SignInScreen.js';
 import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 import LoginScreen from '../screens/LoginScreen.js'
 
+
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
 // const WorkoutListStack = createStackNavigator({
 //   WorkoutList: WorkoutListScreen,
@@ -54,13 +55,15 @@ const WorkoutStack = createStackNavigator({
   WorkoutList:WorkoutListScreen,
   Workout: WorkoutScreen,
 },
-  
+
 );
 
 const DrawerStack =createDrawerNavigator({
 
   screen1: { screen: LoginScreen },
-  screen2: { screen: WorkoutStack}
+  screen2: { screen: WorkoutStack},
+  screen3: { screen: SettingsScreen},
+
 })
 
 // screen2: { screen: ScheduleListScreen },

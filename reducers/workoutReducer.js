@@ -1,4 +1,5 @@
 import {FETCH_USER_WORKOUTS_BEGIN,FETCH_USER_WORKOUTS_SUCCESS,FETCH_EXERCISES_BEGIN,FETCH_EXERCISES_SUCCESS,FETCH_EXERCISES_FAILURE,FETCH_CIRCUITS_SUCCESS,FETCH_CIRCUITS_FAILURE,FETCH_WORKOUTS_BEGIN,FETCH_WORKOUTS_SUCCESS,FETCH_WORKOUTS_FAILURE,ADD_NEW_WORKOUT,SET_WORKOUTS,SET_CURRENT_WORKOUT} from '../constants/types.js'
+import {LOGOUT} from '../constants/authTypes'
 
 const initialState={
   workouts:[],
@@ -105,8 +106,17 @@ export default function workoutReducer(state=initialState,action){
             error:action.payload.error,
             circuits:[]
           }
+        case LOGOUT:
+          return{
+            workouts:[],
+
+            loading:false,
+            error:null,
+            currentWorkout:null,
+          }
 
         default:
+
           // console.log('no action type found')
           return state;
       }

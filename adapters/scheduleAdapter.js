@@ -62,7 +62,7 @@ export default class ScheduleAdapter {
 
   static async getSchedulesWorkouts(schedule){
     const userToken = await AsyncStorage.getItem('access_token')
-
+    console.log('in getschedulewokouts schedule:',schedule)
     return fetch(API_URL+`schedules/${schedule.id}`,{
       method:"GET",
       headers:{Authorization:userToken}

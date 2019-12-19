@@ -1,4 +1,4 @@
-import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER} from '../constants/authTypes.js'
+import {LOGOUT,EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER} from '../constants/authTypes.js'
 const initialState = {
   email: '',
   password: '',
@@ -33,6 +33,15 @@ export default (state = initialState, action) => {
       return { ...state, currentUser:action.payload,spinner:false };
     case LOAD_SPINNER:
       return { ...state, spinner: true };
+    case LOGOUT:
+      return {
+        email: '',
+        password: '',
+        currentUser:'',
+        authentication_token: '',
+        errorFlag: false,
+        spinner: false
+      }
     default:
       return state;
   }

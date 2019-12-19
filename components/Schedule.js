@@ -60,7 +60,5 @@ function mapStateToProps(state){
   }
 
 }
-// function mapDispatchToProps(dispatch,ownProps) {
-//   return bindActionCreators({ setCurrentSchedule}, dispatch)
-// }
+
 export default connect(mapStateToProps,mapDispatchToProps)(Schedule)

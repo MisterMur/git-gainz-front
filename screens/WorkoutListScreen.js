@@ -100,7 +100,7 @@ function mapStateToProps(state){
 
   const {schedule,workout} = state
   return {
-    workouts: workout.workouts,
+    workouts: schedule.currentSchedule.workouts,
     currentSchedule:schedule.currentSchedule,
   }
 }

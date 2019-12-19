@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
-import { StyleSheet,TouchableOpacity, TextInput,Text,View,Button,ScrollView,AsyncStorage} from 'react-native';
+import {
+   StyleSheet,
+   TouchableOpacity,
+    TextInput,
+    Text,
+    View,
+    Button,
+    ScrollView,
+    AsyncStorage
+  } from 'react-native';
 
 import { DrawerActions } from 'react-navigation';
 import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-native-elements'
@@ -63,16 +72,20 @@ class ScheduleListScreen extends Component {
     return (
       <>
         {this.renderNavBar()}
-        <Container style={[ styles.container, this.props.style || {} ]}>
+        <Input
+          onChangeText={(text) => this.setState({text})}
+          value={this.state.text}
+          />
+        <TouchableOpacity
+          style={styles.addButton}
+          title="Add New Schedule"
+          onPress={() => this.handleAddSchedule()}
+          >
+          <FAIcon name='plus' size={35} style={{ color: colors.txtWhite,bottom:-5,right:-5, }} />
 
-          <Input
-            onChangeText={(text) => this.setState({text})}
-            value={this.state.text}
-            />
-          <ButtonElements
-            title="Add New Schedule"
-            onPress={() => this.handleAddSchedule()}
-            />
+      </TouchableOpacity>
+        <ScrollView style={[ styles.container, this.props.style || {} ]}>
+
 
           <ScheduleList
             schedules={this.props.schedules}
@@ -84,7 +97,7 @@ class ScheduleListScreen extends Component {
             onPress={() => this.props.navigation.navigate('Home')}
             />
 
-        </Container>
+        </ScrollView>
       </>
     );
   }
@@ -111,6 +124,18 @@ const styles = StyleSheet.create({
       height: 50,
       justifyContent: 'center',
       paddingHorizontal: 25
+  },
+  addButton:{
+    position: 'absolute',
+    bottom:20,
+    right:20,
+    padding: 5,
+    height: 50,
+    width: 50,  //The Width must be the same as the height
+    borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+    backgroundColor:colors.bgMainRed,
+    zIndex:999,
+
   },
 
 })

@@ -39,9 +39,9 @@ export const addNewSchedule=(schedule)=>({
 })
 export function fetchMySchedules(){
   return (dispatch)=>{
-    UserAdapter.getUserSchedules()
+    return UserAdapter.getUserSchedules()
     .then(user=>{
-      console.log('user adapter fetch my schedules',user)
+      console.log('schedule actions fetch my schedules',user)
       dispatch(fetchSchedulesSuccess(user.schedules))
       return user.schedules
     })

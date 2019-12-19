@@ -50,8 +50,7 @@ logIn = () => {
     )
     } else {
       console.log('in login ', response.user_id)
-      AsyncStorage.setItem('user_id', response.user_id)
-
+      AsyncStorage.setItem('user_id', response.access_token)
       AsyncStorage.setItem('access_token', response.access_token)
       this.setState({loading: false})
       this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")

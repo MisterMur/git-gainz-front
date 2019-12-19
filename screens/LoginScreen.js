@@ -32,7 +32,9 @@ class LoginScreen extends React.Component {
 
   };
   componentDidMount() {
-    if (AsyncStorage.getItem('user_id')) {
+    item = AsyncStorage.getItem('access_token')
+    console.log('login access_token',item)
+    if (item) {
       //navigate to away from login screen if already loggedin
 
       this.props.navigation.navigate('ScheduleList')

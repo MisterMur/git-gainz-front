@@ -1,3 +1,4 @@
+import {LOGOUT} from '../constants/authTypes'
 
 const initialState={
 
