@@ -1,6 +1,6 @@
 import React from "react";
 
-
+import {connect} from 'react-redux'
 import {
   Image,
   Platform,
@@ -18,7 +18,7 @@ import LoginForm from '../components/LoginForm.js'
 import { Input,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class SignUpScreen extends React.Component {
+class SignupScreen extends React.Component {
   static navigationOptions = {
     header: null,
     drawerLabel: 'SignUpScreen',
@@ -32,3 +32,12 @@ export default class SignUpScreen extends React.Component {
     )
   }
 }
+function mapStateToProps(state){
+  const {auth}=state
+
+  return {
+    
+
+  }
+}
+export default connect(mapStateToProps,)(SignupScreen)

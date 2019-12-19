@@ -29,13 +29,15 @@ class WorkoutListScreen extends React.Component {
   }
 
   handleAddWorkout=()=>{
-    // console.log('in handle add workout', this.props.currentSchedule)
-    const workout = {
-      name:this.state.text,
-      exercises:[]
+    if ( this.state.text!=null){
+
+      const workout = {
+        name:this.state.text,
+        exercises:[]
+      }
+      this.props.postNewWorkout(workout, this.props.currentSchedule)
+      this.setState({text:''})
     }
-    this.props.postNewWorkout(workout, this.props.currentSchedule)
-    this.setState({text:''})
   }
   renderWorkoutList=()=>{
     return (

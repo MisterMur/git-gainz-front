@@ -59,11 +59,14 @@ class ScheduleListScreen extends Component {
   }
 
   handleAddSchedule=(e)=>{
-    this.props.postNewSchedule({
-      name:this.state.text,
-      workouts:[]
-    })
-    this.setState({text:''})
+    if(this.state.text!=null){
+
+      this.props.postNewSchedule({
+        name:this.state.text,
+        workouts:[]
+      })
+      this.setState({text:''})
+    }
   }
 
 
