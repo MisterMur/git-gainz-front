@@ -19,7 +19,7 @@ class WorkoutListScreen extends React.Component {
 
   };
   state={
-    text:''
+    text:'Enter Workout Name Here'
   }
 
   componentDidMount(){
@@ -29,7 +29,7 @@ class WorkoutListScreen extends React.Component {
   }
 
   handleAddWorkout=()=>{
-    if ( this.state.text!=null){
+    if ( this.state.text!=''){
 
       const workout = {
         name:this.state.text,

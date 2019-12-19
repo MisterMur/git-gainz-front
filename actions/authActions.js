@@ -69,7 +69,15 @@ export const loginUser = ({ email, password }) => {
   };
 };
 
+export function postNewUser(user){
+  return dispatch =>{
+    return UserAdapter.addNewUser(user)
+    .then(function(){
+      // dispatch()
+    })
 
+  }
+}
 export function setCurrentUser(email, response, nav, from) {
   return dispatch => {
     UserAdapter.getUsers()

@@ -31,7 +31,7 @@ class ScheduleListScreen extends Component {
 
   };
   state={
-    text:''
+    text:'Enter Schedule Name Here'
   }
 
 
@@ -59,7 +59,7 @@ class ScheduleListScreen extends Component {
   }
 
   handleAddSchedule=(e)=>{
-    if(this.state.text!=null){
+    if(this.state.text!=''){
 
       this.props.postNewSchedule({
         name:this.state.text,

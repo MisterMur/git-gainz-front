@@ -11,9 +11,9 @@ import {Text} from 'react-native'
 
 import WorkoutScreen from '../screens/WorkoutScreen'
 import SettingsScreen from '../screens/SettingsScreen';
-import SignInScreen from '../screens/SignInScreen.js';
 import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 import LoginScreen from '../screens/LoginScreen.js'
+import SignupScreen from '../screens/AuthScreens/SignupScreen.js';
 
 
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
@@ -26,7 +26,7 @@ import WorkoutListScreen from '../screens/WorkoutListScreen.js';
 // login stack
 const LoginStack = createStackNavigator({
   loginScreen: { screen: LoginScreen },
-  // signupScreen: { screen: SignupScreen },
+  signupScreen: { screen: SignupScreen },
   // forgottenPasswordScreen: { screen: ForgottenPasswordScreen, navigationOptions: { title: 'Forgot Password' } }
 }, {
   headerMode: 'float',
