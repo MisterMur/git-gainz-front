@@ -141,7 +141,9 @@ logIn = () => {
           borderWidth: 2,
           borderColor: '#e3e3e3',
           /*padding: 1,*/
-          marginBottom: 15}
+          width:'90%',
+          marginBottom: 150,
+          marginLeft:'5%'}
         }
 
         >

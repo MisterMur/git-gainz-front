@@ -68,10 +68,7 @@ export default class ScheduleAdapter {
       headers:{Authorization:userToken}
     })
     .then(this.handleErrors)
-    .then(res=>{
-      console.log('get schedule workouts res',res.json())
-      return res.json()
-    })
+    .then(res=> res.json())
 
   }
 
@@ -79,7 +76,6 @@ export default class ScheduleAdapter {
     handleErrors(response) {
       console.error('in handle errors, response:', response)
       if (!response.ok) {
-
         throw Error(response.statusText);
       }
       return response;

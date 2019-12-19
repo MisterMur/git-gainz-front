@@ -126,7 +126,6 @@ const mapDispatchToProps=dispatch=>({
   postNewCompleteWorkout:(w)=>dispatch(postNewCompleteWorkout(w))
 })
 function mapStateToProps(state){
-  console.log('workout screen state:', state)
   const {workout,user} = state
 
   return {

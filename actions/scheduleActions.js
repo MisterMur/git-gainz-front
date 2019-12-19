@@ -21,7 +21,6 @@ export const fetchSchedulesBegin=()=>({
   type:FETCH_SCHEDULES_BEGIN
 })
 export const fetchSchedulesSuccess=(schedules)=>{
-  console.log('fetch success: ',schedules)
   return {
 
     type:FETCH_SCHEDULES_SUCCESS,
@@ -41,7 +40,6 @@ export function fetchMySchedules(){
   return (dispatch)=>{
     return UserAdapter.getUserSchedules()
     .then(user=>{
-      console.log('schedule actions fetch my schedules',user)
       dispatch(fetchSchedulesSuccess(user.schedules))
       return user.schedules
     })

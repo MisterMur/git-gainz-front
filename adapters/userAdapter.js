@@ -14,15 +14,22 @@ export  default class UserAdapter {
     .then(res => res.json())
   }
   static async getUserSchedules() {
-  const item = await AsyncStorage.getItem('access_token')
-  const userId = await AsyncStorage.getItem('user_id')
-  return fetch(API_URL+`users/${userId[0]}`, {
+  const token = await AsyncStorage.getItem('access_token')
+  return fetch(API_URL+`users/${token.split(':')[0]}`, {
     method: "GET",
     headers: {
-      Authorization: item
+      Authorization: token
     }
     })
     .then(res => res.json())
+  }
+  static async isLoggedIn(){
+    const token = await AsyncStorage.getItem('access_token')
+    if (token){
+      return true
+    }
+    else{
+      return false}
   }
 
 }

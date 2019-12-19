@@ -25,6 +25,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux'
 import {setCurrentUser}from '../actions/authActions.js'
 
+import UserAdapter from '../adapters/userAdapter'
+
 class LoginScreen extends React.Component {
   static navigationOptions = {
     title: "Login",
@@ -32,11 +34,10 @@ class LoginScreen extends React.Component {
 
   };
   componentDidMount() {
-    item = AsyncStorage.getItem('access_token')
-    console.log('login access_token',item)
-    if (item) {
+    // item = AsyncStorage.getItem('access_token')
+    // console.log('login access_token',item)
+    if (UserAdapter.isLoggedIn()) {
       //navigate to away from login screen if already loggedin
-
       this.props.navigation.navigate('ScheduleList')
     }
   }

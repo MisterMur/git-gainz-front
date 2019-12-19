@@ -49,7 +49,6 @@ export default function workoutReducer(state=initialState,action){
             ...state,workouts:[...state.workouts,action.payload]
           }
         case SET_CURRENT_WORKOUT:
-          console.log('workout reducer set current workout')
           return{
             ...state,currentWorkout:action.payload
           }
