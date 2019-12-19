@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
-
+// import {getUserToken} from ''
 class AuthLoadingScreen extends React.Component {
   constructor() {
     super();
@@ -20,10 +20,26 @@ class AuthLoadingScreen extends React.Component {
 
 
   };
+  componentDidMount() {
+      // this._bootstrapAsync();
+  }
+
+  // Fetch the token from storage then navigate to our appropriate place
+  // _bootstrapAsync = () => {
+  //
+  //     this.props.getUserToken().then(() => {
+  //         this.props.navigation.navigate('ScheduleList');
+  //     })
+  //         .catch(error => {
+  //             this.setState({ error })
+  //         })
+  //
+  // };
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
+    console.log('in auth loading',userToken)
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
@@ -40,10 +56,25 @@ class AuthLoadingScreen extends React.Component {
     );
   }
 }
-function mapStateToProps(state){
-  return{
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
 
+function mapStateToProps(state) {
+  return {
+    token: state.user.token,
   }
-}
+};
+
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     // getUserToken: () => dispatch(getUserToken()),
+//   }
+// }
 
 export default connect(mapStateToProps) (AuthLoadingScreen)

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 import {API_URL} from '../constants/types.js'
 
-import { emailChanged, passwordChanged, loginUser,setCurrentUser } from '../actions/authActions.js';
+import { emailChanged, passwordChanged, loginUser,setCurrentUser , getUserToken} from '../actions/authActions.js';
 
 class LoginForm extends Component {
   state = {
@@ -53,15 +53,13 @@ logIn = () => {
       AsyncStorage.setItem('user_id', response.access_token)
       AsyncStorage.setItem('access_token', response.access_token)
       this.setState({loading: false})
-      this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
+      // this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
     }
   })
 }
   componentDidMount() {
-   if (this.props.currentUser) {
-     this.props.navigation.navigate('ScheduleList')
-   }
  }
+
   onButtonSubmit() {
     // console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
     this.logIn()
@@ -180,13 +178,17 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
+  const {auth,user}=state;
   return {
-    email: state.auth.email,
-    password: state.auth.password,
-    currentUser: state.auth.currentUser,
-    error: state.auth.errorFlag,
-    spinner: state.auth.spinner
+    email: auth.email,
+    password: auth.password,
+    currentUser: auth.currentUser,
+    error: auth.errorFlag,
+    spinner: auth.spinner,
+    token: user.token,
+
   };
 };
 
-export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUser , setCurrentUser})(LoginForm);
+
+export default connect(mapStateToProps, { getUserToken,emailChanged, passwordChanged, loginUser , setCurrentUser})(LoginForm);

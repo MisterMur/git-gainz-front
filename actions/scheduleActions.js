@@ -40,6 +40,7 @@ export function fetchMySchedules(){
   return (dispatch)=>{
     return UserAdapter.getUserSchedules()
     .then(user=>{
+      console.log(user)
       dispatch(fetchSchedulesSuccess(user.schedules))
       return user.schedules
     })

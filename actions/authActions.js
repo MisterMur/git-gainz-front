@@ -80,7 +80,7 @@ export function postNewUser(user){
 }
 export function setCurrentUser(email, response, nav, from) {
   return dispatch => {
-    UserAdapter.getUsers()
+    return UserAdapter.getUsers()
     .then(users => {
       // console.log(users)
       let userAttempt = users.filter(user => user.email === email)
@@ -124,6 +124,11 @@ export function setCurrentUser(email, response, nav, from) {
     .catch(function(error) {
       console.log('Set Current User There has been a problem with your fetch operation: ' + error.message);
         throw error;})
+  }
+}
+export function getUserToken(){
+  return dispatch=>{
+    UserAdapter.isLoggedIn()
   }
 }
 

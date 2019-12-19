@@ -31,13 +31,7 @@ const LoginStack = createStackNavigator({
     headerStyle: {backgroundColor: '#E73536'},
     title: 'You are not logged in',
     headerTintColor: 'white',
-    headerLeft: <Text onPress={() =>{
-        navigation.navigate('DrawerOpen')
-      // navigation.dispatch(DrawerActions.openDrawer());
-      console.log('open drawer',navigation)
-      // navigation.openDrawer()
-    }
-    }>Menu</Text>
+
   })
 
 })
@@ -56,7 +50,7 @@ const WorkoutStack = createStackNavigator({
 
 const DrawerStack =createDrawerNavigator({
 
-  screen1: { screen: LoginScreen },
+  // screen1: { screen: LoginScreen },
   screen2: { screen: WorkoutStack},
   screen3: { screen: SettingsScreen},
 
@@ -78,7 +72,7 @@ const DrawerNavigation = createStackNavigator({
 const PrimaryNav = createStackNavigator({
   loginStack: { screen: LoginStack },
   drawerStack: { screen: DrawerNavigation },
-  WorkoutStack,
+  workoutStack:{screen:WorkoutStack}
 }, {
   // Default config for all screens
 
