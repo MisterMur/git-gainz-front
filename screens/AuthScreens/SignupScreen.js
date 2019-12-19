@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
-import { MonoText } from '../components/StyledText';
-import LoginForm from '../components/LoginForm.js'
+import LoginForm from '../../components/LoginForm.js'
 
 import { Input,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';

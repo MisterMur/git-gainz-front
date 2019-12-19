@@ -14,20 +14,16 @@ import SettingsScreen from '../screens/SettingsScreen';
 import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 import LoginScreen from '../screens/LoginScreen.js'
 import SignupScreen from '../screens/AuthScreens/SignupScreen.js';
-
+import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen.js'
 
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
-// const WorkoutListStack = createStackNavigator({
-//   WorkoutList: WorkoutListScreen,
-// });
-
 
 
 // login stack
 const LoginStack = createStackNavigator({
+  splashScreen: {screen: AuthLoadingScreen},
   loginScreen: { screen: LoginScreen },
   signupScreen: { screen: SignupScreen },
-  // forgottenPasswordScreen: { screen: ForgottenPasswordScreen, navigationOptions: { title: 'Forgot Password' } }
 }, {
   headerMode: 'float',
   defaultNavigationOptions:  ({ navigation }) => ({

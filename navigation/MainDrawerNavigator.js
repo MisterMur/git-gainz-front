@@ -4,7 +4,7 @@ import { createDrawerNavigator,createAppContainer, createSwitchNavigator ,create
 // import MainTabNavigator from './MainTabNavigator';
 import HomeScreen from '../screens/HomeScreen.js'
 import SignInScreen from '../screens/SignInScreen.js'
-import AuthLoadingScreen from '../screens/AuthLoadingScreen'
+// import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen'
 
 
 import ScheduleListScreen from '../screens/ScheduleListScreen'

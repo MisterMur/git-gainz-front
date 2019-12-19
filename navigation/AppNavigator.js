@@ -5,7 +5,7 @@ import MainTabNavigator from './MainTabNavigator';
 import HomeScreen from '../screens/HomeScreen.js'
 import LoginScreen from '../screens/LoginScreen.js'
 import SignInScreen from '../screens/SignInScreen.js'
-import AuthLoadingScreen from '../screens/AuthLoadingScreen.js'
+import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen.js'
 import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 
 const AppStack = createStackNavigator({ Home: HomeScreen });
