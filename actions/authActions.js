@@ -76,6 +76,7 @@ export function setCurrentUser(email, response, nav, from) {
       let userAttempt = users.filter(user => user.email === email)
       let foundUser = userAttempt[0]
       let userId = foundUser.id
+      console.log('setcurrent user found user',foundUser)
       if (response) {
         // console.log('in set current user found user:',foundUser)
         dispatch({

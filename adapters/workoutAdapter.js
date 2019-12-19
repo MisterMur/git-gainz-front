@@ -69,7 +69,7 @@ export  default class WorkoutAdapter {
     }).then(this.handleErrors)
 
   }
-  
+
   static async addNewWorkout(workout,schedule){
     const userToken = await AsyncStorage.getItem('access_token')
     console.log('in add new workout' , schedule    )
@@ -104,7 +104,7 @@ export  default class WorkoutAdapter {
   }
 
   handleErrors(response) {
-    console.log('in handle errors, response:', response)
+    console.error('in handle errors, response:', response)
     if (!response.ok) {
 
       throw Error(response.statusText);

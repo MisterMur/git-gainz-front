@@ -1,7 +1,7 @@
 
 const initialState={
 
-  currentUser:{id:29,name:'Brad',password:'1234'}
+  // currentUser:{id:29,name:'Brad',password:'1234'}
 }
 
 

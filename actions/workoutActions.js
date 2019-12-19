@@ -30,7 +30,7 @@ export function fetchWorkoutsBegin(){
   type:FETCH_WORKOUTS_BEGIN
 }
 export function fetchWorkoutsSuccess(workouts){
-  // console.log('fetch success: ',schedules)
+  console.log('fetch success wrokouts: ',workouts)
   return {
 
     type:FETCH_WORKOUTS_SUCCESS,
@@ -38,6 +38,7 @@ export function fetchWorkoutsSuccess(workouts){
   }
 }
 export function fetchWorkoutsFailure(error){
+  console.error('fetch workouts failure,',error)
   return {
 
     type:FETCH_WORKOUTS_FAILURE,
@@ -59,7 +60,7 @@ export function fetchSchedulesWorkouts(schedule){
   return dispatch=>{
     return ScheduleAdapter.getSchedulesWorkouts(schedule)
     .then(workouts=>{
-
+      console.log('fetching scheudle workouts',workouts)
       dispatch(fetchWorkoutsSuccess(workouts))
       return workouts
     })

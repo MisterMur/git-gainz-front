@@ -1,14 +1,20 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity } from 'react-native';
 import { AppLoading, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
+import PrimaryNav from './navigation/AppNavigation';
+import { DrawerActions } from 'react-navigation';
+
+import ReduxNavigation from './navigation/ReduxNavigation';
+
+import MainDrawerNavigator from './navigation/MainDrawerNavigator'
+import HorizontalMenu from './screens/drawers/HorizontalMenu'
 import {Asset} from 'expo-asset'
 
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 
-// import reducer from './reducers/reducer.js'
 import store from './store.js'
 
 
@@ -16,6 +22,7 @@ export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -33,7 +40,7 @@ export default class App extends React.Component {
         <Provider store={store}>
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
+          <PrimaryNav />
         </View>
         </Provider>
       );
@@ -66,6 +73,7 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
+// AppRegistry.registerComponent('HorizontalMenu', () => App);
 
 const styles = StyleSheet.create({
   container: {

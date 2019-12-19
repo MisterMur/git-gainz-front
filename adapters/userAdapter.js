@@ -4,7 +4,7 @@ import {API_URL} from '../constants/types.js'
 export  default class UserAdapter {
   static async getUsers() {
   const item = await AsyncStorage.getItem('user_id')
-  console.log('in user adapter',item)
+
   return fetch(`${API_URL+`users`}`, {
     method: "GET",
     headers: {
@@ -16,7 +16,6 @@ export  default class UserAdapter {
   static async getUserSchedules() {
   const item = await AsyncStorage.getItem('access_token')
   const userId = await AsyncStorage.getItem('user_id')
-  console.log('in user adapter',userId)
   return fetch(API_URL+`users/${userId[0]}`, {
     method: "GET",
     headers: {

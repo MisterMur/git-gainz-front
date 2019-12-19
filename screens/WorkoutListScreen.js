@@ -1,36 +1,35 @@
-import React, { Component } from 'react';
-import WorkoutList from '../components/WorkoutList.js'
-import { AppRegistry,Text,ScrollView,Button} from 'react-native';
+import React from "react";
+import {connect} from 'react-redux'
+
+import { Text,ScrollView,Button} from 'react-native';
 
 import { Card,Input, Button as ButtonElement } from 'react-native-elements'
 
-
-import Workout from '../components/Workout.js'
-import {connect} from 'react-redux'
 import {fetchSchedulesWorkouts,fetchWorkout,postNewWorkout} from '../actions/workoutActions.js'
+
+import WorkoutList from '../components/WorkoutList.js'
+import Workout from '../components/Workout.js'
 // import { fetchSchedulesWorkouts,fetchWorkouts,postNewWorkout} from '../reducers/reducer.js'
 
 
-class WorkoutListScreen extends Component {
-  constructor(props) {
-    super(props);
-  }
+class WorkoutListScreen extends React.Component {
   static navigationOptions = {
     title: 'Workout List',
+    drawerLabel:'Workout Lists'
 
   };
   state={
     text:''
   }
 
-
   componentDidMount(){
+    console.log('workoutlist current schedule',this.props)
     this.props.fetchSchedulesWorkouts(this.props.currentSchedule)
 
   }
 
   handleAddWorkout=()=>{
-    console.log('in handle add workout', this.props.currentSchedule)
+    // console.log('in handle add workout', this.props.currentSchedule)
     const workout = {
       name:this.state.text,
       exercises:[]
@@ -98,12 +97,12 @@ const mapDispatchToProps=dispatch=>({
 
 
 function mapStateToProps(state){
-  // console.log('workoutlistscreen mapstateprops',state)
+
   const {schedule,workout} = state
   return {
-    workouts:workout.workouts,
+    workouts: workout.workouts,
     currentSchedule:schedule.currentSchedule,
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(WorkoutListScreen)
+export default connect(mapStateToProps,mapDispatchToProps)(WorkoutListScreen);

@@ -15,20 +15,20 @@ export default function scheduleReducer(state=initialState,action){
   // console.log('%c Schedule reducer:', 'color: orange', action);
   switch(action.type){
     case FETCH_SCHEDULES_BEGIN:
-      console.log('fetch begin')
+      // console.log('fetch begin')
       return {...state,
         loading:true,
         error:null
       }
     case FETCH_SCHEDULES_SUCCESS:
-      console.log('fetch success',action.payload)
+      // console.log('fetch success',action.payload)
       return {
         ...state,
         loading:false,
         schedules:action.payload.schedules
       }
     case FETCH_SCHEDULES_FAILURE:
-      console.log('fetch failure')
+      console.error('fetch failure')
       return {
         ...state,
         loading:false,
@@ -44,7 +44,7 @@ export default function scheduleReducer(state=initialState,action){
       }
 
     case ADD_NEW_SCHEDULE:
-    console.log('adding new schedule',action.payload.schedule)
+    // console.log('adding new schedule',action.payload.schedule)
       return {
         ...state,schedules:[...state.schedules,action.payload.schedule]
       }

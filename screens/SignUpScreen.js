@@ -18,8 +18,12 @@ import LoginForm from '../components/LoginForm.js'
 import { Input,Button} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-class SignUpScreen extends React.Component {
-
+export default class SignUpScreen extends React.Component {
+  static navigationOptions = {
+    header: null,
+    drawerLabel: 'SignUpScreen',
+    // drawerIcon: ({ }) => (   ),
+  };
   render() {
     return (
       <View>
@@ -28,4 +32,3 @@ class SignUpScreen extends React.Component {
     )
   }
 }
-export default SignUpScreen

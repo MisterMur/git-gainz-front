@@ -4,7 +4,7 @@ import {API_URL} from '../constants/types.js'
 export default class ScheduleAdapter {
   static async getSchedules() {
   const item = await AsyncStorage.getItem('access_token')
-  console.log('in schedule adapter',item)
+  // console.log('in schedule adapter',item)
   return fetch(`${API_URL+`schedules`}`, {
     method: "GET",
     headers: {
@@ -16,16 +16,13 @@ export default class ScheduleAdapter {
 
 
   static async fetchSchedules(){
-    // const schedulesUrl='http://localhost:3000/api/v1/schedules'
     const item = await AsyncStorage.getItem('access_token')
-    console.log('async storage item',item)
     return fetch(API_URL+'schedules',{
       method:"GET",
       headers:{Authorization:item}
     })
     .then(this.handleErrors)
     .then(res=>{
-      console.log('res',res)
       return res.json()
     })
 
@@ -65,21 +62,22 @@ export default class ScheduleAdapter {
 
   static async getSchedulesWorkouts(schedule){
     const userToken = await AsyncStorage.getItem('access_token')
-    return dispatch=>{
-        return fetch(API_URL+`schedules/${schedule.id}`,{
-        method:"GET",
-        headers:{Authorization:item}
-      })
-      .then(this.handleErrors)
-      .then(res=>{
-        return res.json()
-      })
-    }
+
+    return fetch(API_URL+`schedules/${schedule.id}`,{
+      method:"GET",
+      headers:{Authorization:userToken}
+    })
+    .then(this.handleErrors)
+    .then(res=>{
+      console.log('get schedule workouts res',res.json())
+      return res.json()
+    })
+
   }
 
 
     handleErrors(response) {
-      console.log('in handle errors, response:', response)
+      console.error('in handle errors, response:', response)
       if (!response.ok) {
 
         throw Error(response.statusText);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator ,createStackNavigator} from 'react-navigation';
+import {StackNavigator, createAppContainer, createSwitchNavigator ,createStackNavigator} from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import HomeScreen from '../screens/HomeScreen.js'
@@ -12,7 +12,13 @@ const AppStack = createStackNavigator({ Home: HomeScreen });
 // const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
 
-
+// const PrimaryNav = StackNavigator({
+//   Home: { screen: HomeScreen }
+//   }, {
+//     // Default config for all screens
+//     headerMode: 'none',
+//     initialRouteName: 'LoginScreen'
+// })
 
 export default createAppContainer(createSwitchNavigator({
   // You could add another route here for authentication.

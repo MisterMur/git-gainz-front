@@ -21,7 +21,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title:'Home',
+    drawerLabel: 'Home',
+    // drawerIcon: ({ }) => (   ),
   };
 
   renderLogin=()=>{
@@ -58,17 +60,14 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
 
           <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>Welcome to Git Gainz</Text>
+            <Text style={styles.getStartedText}>Please Login</Text>
           </View>
 
         <LoginForm navigation={this.props.navigation} />
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a Monkeybar</Text>
 
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>MainTabNavigator.js</MonoText>
-          </View>
+
         </View>
       </View>
     );

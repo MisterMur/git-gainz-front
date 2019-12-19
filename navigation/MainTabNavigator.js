@@ -35,12 +35,7 @@ const ScheduleListStack = createStackNavigator({
 
 ScheduleListStack.navigationOptions = {
   tabBarLabel: 'My Schedules'
-  // tabBarIcon: ({ focused }) => (
-  //   <TabBarIcon
-  //     focused={focused}
-  //     name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-  //     />
-  // ),
+
 };
 
 const WorkoutListStack = createStackNavigator({
@@ -108,3 +103,4 @@ export default createBottomTabNavigator(
     },
   }
 );
+// export default MainTabNavigator

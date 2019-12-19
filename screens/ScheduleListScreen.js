@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput,Text,View,Button,ScrollView,AsyncStorage} from 'react-native';
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
+import { StyleSheet,TouchableOpacity, TextInput,Text,View,Button,ScrollView,AsyncStorage} from 'react-native';
+
+import { DrawerActions } from 'react-navigation';
 import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-native-elements'
 
 import ScheduleList from '../components/ScheduleList.js'
+import Container from '../components/Container.js'
+
 
 import { fetchMySchedules,fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
 
+import colors from '../styles/colors'
 
 class ScheduleListScreen extends Component {
   static navigationOptions = {
     title: 'Schedules List',
+    drawerLabel: 'All Schedules',
+
 
   };
   state={
@@ -24,8 +31,22 @@ class ScheduleListScreen extends Component {
 
   }
   componentDidMount(){
-    // this.props.dispatch(fetchSchedules())
+    this.props.fetchMySchedules()
 
+  }
+  openDrawer = () => {
+    console.log('opening drawer in schedulelist screen')
+    this.props.navigation.dispatch(DrawerActions.openDrawer());
+  }
+  renderNavBar() {
+    console.log('rendered nav')
+      return (
+          <View style={ styles.navBar }>
+              <TouchableOpacity onPress={ this.openDrawer }>
+                  <FAIcon name='bars' size={22} style={{ color: colors.bdMainRed }} />
+              </TouchableOpacity>
+          </View>
+      )
   }
 
   handleAddSchedule=(e)=>{
@@ -40,32 +61,31 @@ class ScheduleListScreen extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <>
+        {this.renderNavBar()}
+        <Container style={[ styles.container, this.props.style || {} ]}>
 
-        <ScheduleList
-          schedules={this.props.schedules}
-          handlePress={this.props.navigation.navigate}
-        />
+          <Input
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text}
+            />
+          <ButtonElements
+            title="Add New Schedule"
+            onPress={() => this.handleAddSchedule()}
+            />
 
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.navigate('ScheduleList')}
-        />
+          <ScheduleList
+            schedules={this.props.schedules}
+            handlePress={this.props.navigation.navigate}
+            />
 
-        <Input
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-        />
-        <ButtonElements
-          title="Add New Schedule"
-          onPress={() => this.handleAddSchedule()}
-        />
+          <Button
+            title="Go to Home"
+            onPress={() => this.props.navigation.navigate('Home')}
+            />
 
-      </ScrollView>
+        </Container>
+      </>
     );
   }
 }
@@ -85,3 +105,12 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(ScheduleListScreen)
+
+const styles = StyleSheet.create({
+  navBar: {
+      height: 50,
+      justifyContent: 'center',
+      paddingHorizontal: 25
+  },
+
+})
