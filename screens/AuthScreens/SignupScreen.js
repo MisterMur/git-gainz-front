@@ -31,8 +31,9 @@ class SignupScreen extends React.Component {
   state = {
     name: "",
     email: "",
-    password: "",
-    passwordConfirmation: "",
+    username:null,
+    password: null,
+    passwordConfirmation: null,
     phone: "",
     token: { },
     loading: true,
@@ -43,7 +44,7 @@ class SignupScreen extends React.Component {
 
 }
 
-signUp = async(e) => {
+signup = async(e) => {
   e.preventDefault()
   // await this._attemptGeocodeAsync()
     const data = {
@@ -51,29 +52,39 @@ signUp = async(e) => {
       email: this.state.email,
       password: this.state.password,
       phone: this.state.phone,
+      username: this.state.username,
     }
-    if (this.props.password.length > 5 && (this.props.password === this.props.passwordConfirmation) && EmailValidator.validate(this.props.email) && (this.props.phone.length === 10) && (this.props.name !== null)) {
+    if ((this.props.password.length > 5)
+       && (this.props.password === this.props.passwordConfirmation)
+        && EmailValidator.validate(this.props.email)
+         && (this.props.phone.length === 10)
+          && (this.props.name !== null))
+          &(this.props.username !==null) {
+            this.setState({credsChecked: false})
+            UserAdapter.addNewUser(data)
+            .then(() => this.setUserToken())
+            // .then(() => this.props.clearAddPet())
 
-      this.setState({credsChecked: false})
-      UserAdapter.postToUsers(data)
-      .then(() => this.setUserToken())
-      .then(() => this.props.clearAddPet())
-    } else {
-      Alert.alert(
-      'Invalid Credentials',
-      'Please verify your information is correct and unique',
-      [
-        {
-          text: 'OK',
-          onPress: () => console.log('Ok Pressed'),
-          style: 'cancel',
-        },
-      ],
-      {cancelable: false},
-    )
-    }
+            //try to refecator these fetches out and only pull setcurrentuser from
+            //action
+            // .then(()=>this.props.setCurrentUser())
+      }
+      else {
+          Alert.alert(
+          'Invalid Credentials',
+          'Please verify your information is correct and unique',
+          [
+            {
+              text: 'OK',
+              onPress: () => console.log('Ok Pressed'),
+              style: 'cancel',
+            },
+          ],
+          {cancelable: false},
+        )
+      }
+  }
 
-}
 setUserToken = () => {
     const data = {
       email: this.state.email,
@@ -107,9 +118,21 @@ setUserToken = () => {
       } else {
         AsyncStorage.setItem('access_token', response.access_token)
         this.setState({loading: false})
-        this.props.setCurrentUser(this.state.email, response.access_token, this.props.navigation, "sign-up")
+        this.props.setCurrentUser(this.state.email, response.access_token, this.props.navigation, "signup")
       }
     })
+  }
+  renderSignupButon(){
+    return (
+      <View style={{flex: 1, flexDirection: 'row'}}>
+      <TouchableOpacity style={styles.signupButton}  onPress={ ()=>{this.signup()} }>
+        <Text style={styles.buttonText}>Sign Up!</Text>
+        <FAIcon name='sign-out' size={30} style={styles.buttonIcon}  />
+
+
+      </TouchableOpacity>
+    </View>
+    )
   }
   renderInputs() {
   if (this.state.credsChecked) {
@@ -131,6 +154,14 @@ setUserToken = () => {
         placeholderTextColor='white'
         onChangeText={(email) => this.setState({email})}
         value={this.state.email}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder='Username'
+        autoCapitalize="none"
+        placeholderTextColor='white'
+        onChangeText={(username) => this.setState({username})}
+        value={this.state.username}
       />
       {this.state.password.length < 6 && this.state.passSel ? <Text style={{color: 'red', marginLeft: 10}}>Password must be at least 6 characters</Text>: null}
         <TextInput
@@ -163,6 +194,7 @@ setUserToken = () => {
           onChangeText={(phone) => this.setState({phone})}
           value={this.state.phone}
         />
+
       </>
         )
       }
@@ -171,6 +203,7 @@ setUserToken = () => {
     return (
       <View>
         {this.renderInputs()}
+        {this.renderSignupButon()}
       </View>
     )
   }
@@ -209,6 +242,29 @@ const styles = StyleSheet.create({
       fontSize: 18,
       fontWeight: '500',
       justifyContent: 'center'
+    },
+
+    signupButton: {
+        width: '90%',
+        marginLeft:'5%',
+        marginVertical: 70,
+        height: 50,
+        borderColor: colors.bdWhite,
+        backgroundColor: 'transparent',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#e3e3e3',
+        borderRadius:50,
+    },
+    buttonText:{
+        fontSize:20,
+        color:'white',
+        textAlign:'center',
+    },
+    buttonIcon:{
+        color:colors.bdWhite,
+        marginLeft:80,
+        marginTop:-27
     },
 
 })

@@ -98,7 +98,7 @@ export function setCurrentUser(email, response, nav, from) {
           type: LOGIN_USER_SUCCESS ,
           payload: userId
         })
-        if (from === "sign-up") {
+        if (from === "signup") {
           // console.log('navigating from sign up to scheudles: ', nav)
           nav.navigate('drawerStack')
         } else {
@@ -136,7 +136,7 @@ export function logoutCurrentUser() {
   return dispatch=>{
 
     AsyncStorage.clear()
-    
+
     dispatch({type:LOGOUT})
   }
 
