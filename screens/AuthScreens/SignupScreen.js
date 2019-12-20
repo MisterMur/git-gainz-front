@@ -2,13 +2,15 @@ import React from "react";
 
 import {connect} from 'react-redux'
 import {
-  Image,
-  Platform,
   ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -186,3 +188,27 @@ function mapStateToProps(state){
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(SignupScreen)
+
+const styles = StyleSheet.create({
+
+    navBar: {
+      height: 50,
+      justifyContent: 'center',
+      paddingHorizontal: 25
+
+    },
+    input: {
+      width: 350,
+      height: 55,
+      backgroundColor: '#00b894',
+      opacity: 0.6,
+      margin: 10,
+      padding: 8,
+      color: 'white',
+      borderRadius: 14,
+      fontSize: 18,
+      fontWeight: '500',
+      justifyContent: 'center'
+    },
+
+})

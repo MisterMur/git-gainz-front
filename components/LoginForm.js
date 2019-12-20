@@ -113,23 +113,7 @@ logIn = () => {
       </Button>
       );
   }
-  renderAutoButton(){
-    return (
-      <>
-      <Button
-        style={{
-          fontSize: 20,
-          padding: 20,
-          marginTop: 10
-        }}
-        styleDisabled={{ color: 'red' }}
-        onPress={this.onButtonSubmit.bind(this)}
-      >
-      Login
-      </Button>
-      </>
-    )
-  }
+
 
   render() {
     return (

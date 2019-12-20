@@ -135,8 +135,8 @@ export function getUserToken(){
 export function logoutCurrentUser() {
   return dispatch=>{
 
-    AsyncStorage.setItem('user_id', '')
-    AsyncStorage.setItem('access_token','')
+    AsyncStorage.clear()
+    
     dispatch({type:LOGOUT})
   }
 

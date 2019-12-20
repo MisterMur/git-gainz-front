@@ -38,31 +38,21 @@ class LoginScreen extends React.Component {
       this.props.navigation.navigate('drawerStack')
     }
   }
-  openDrawer = () => {
-    this.props.navigation.dispatch(DrawerActions.openDrawer());
-  }
-  renderNavBar() {
-      return (
-          <View style={ styles.navBar }>
-              <TouchableOpacity onPress={ this.openDrawer }>
-                  <FAIcon name='bars' size={22} style={{ color: colors.txtWhite }} />
-              </TouchableOpacity>
-          </View>
-      )
-  }
+
   renderSignup(){
     return (
-      <>
-      <TouchableOpacity onPress={ ()=>{this.props.navagation.navigate('SignUpScreen')} }>
-        <FAIcon name='fa-sign-out' size={22} style={{ color: colors.txtWhite }} />
+      <View style={{flex: 1, flexDirection: 'row'}}>
+      <TouchableOpacity style={styles.signupButton}  onPress={ ()=>{this.props.navigation.navigate('signupScreen')} }>
+        <Text style={styles.buttonText}>Sign Up!</Text>
+        <FAIcon name='sign-out' size={30} style={styles.buttonIcon}  />
+
 
       </TouchableOpacity>
-    </>
+    </View>
     )
   }
 
   renderHeader() {
-    // <FAIcon name='bomb' size={100} style={ styles.logo } />
 
       return (
           <View style={ styles.headerHolder }>
@@ -82,6 +72,7 @@ class LoginScreen extends React.Component {
     return (
       <Container style={[ styles.container, this.props.style || {} ]}>
         { this.renderHeader() }
+        {this.renderSignup()}
           <LoginForm navigation={this.props.navigation} />
       </Container>
     )
@@ -119,20 +110,39 @@ const styles = StyleSheet.create({
         // ...styText,
         marginTop: 10
     },
-    siteName: {
-        marginTop: 30,
-        width: 250
-    },
-    btnHeader: {
-        width: 160,
-        height: 40,
+
+    signupButton: {
+        width: '90%',
+        marginLeft:'5%',
         marginVertical: 70,
-        borderWidth: 2,
+        height: 50,
         borderColor: colors.bdWhite,
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#e3e3e3',
+        borderRadius:50,
     },
-    btnHeaderTitleStyle: {
-        fontSize: 14,
-        fontWeight: '700'
+    button: {
+        height:20,
+        borderRadius: 50,
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#e3e3e3',
+        padding: 1,
+        width:'90%',
+        marginBottom: 20,
+        marginLeft:'5%',
+    },
+    buttonText:{
+        fontSize:20,
+        color:'white',
+        textAlign:'center',
+    },
+    buttonIcon:{
+        color:colors.bdWhite,
+        marginLeft:80,
+        marginTop:-27
     }
+
 })

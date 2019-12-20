@@ -32,6 +32,10 @@ class SettingsScreen extends React.Component {
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   }
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('authStack');
+  };
   handleLogout=()=>{
     this.props.logoutCurrentUser()
     this.props.navigation.navigate('authStack')
@@ -81,7 +85,7 @@ class SettingsScreen extends React.Component {
           backgroundColor='#03A9F4'
           buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
           title='Logout'
-          onPress={this.handleLogout}
+          onPress={this._signOutAsync}
          />
       </>
     )
