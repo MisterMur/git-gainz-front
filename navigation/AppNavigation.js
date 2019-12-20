@@ -18,10 +18,8 @@ import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen.js'
 
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
 
-
-// login stack
+//login stack
 const LoginStack = createStackNavigator({
-  splashScreen: {screen: AuthLoadingScreen},
   loginScreen: { screen: LoginScreen },
   signupScreen: { screen: SignupScreen },
 }, {
@@ -35,26 +33,45 @@ const LoginStack = createStackNavigator({
   })
 
 })
-// const WorkoutListStack = createStackNavigator({
-//   WorkoutList: WorkoutListScreen,
-// });
 
 
 const WorkoutStack = createStackNavigator({
   ScheduleList:ScheduleListScreen,
   WorkoutList:WorkoutListScreen,
   Workout: WorkoutScreen,
-},
+},{
+  // Default config for all screens
+  defaultNavigationOptions:  ({ navigation }) => ({
+
+    title: 'You are not logged in',
+    headerTintColor: 'white',
+
+  }),
+
+  headerStyle: {backgroundColor: '#E73536'},
+
+  headerMode: 'none',
+  title:'Main',
+  drawerLabel: 'Workout Schedules',
+  initialRouteName: 'ScheduleList',
+
+}
 
 );
 
 const DrawerStack =createDrawerNavigator({
 
   // screen1: { screen: LoginScreen },
-  screen2: { screen: WorkoutStack},
+  "Workout Schedules": { screen: WorkoutStack},
   screen3: { screen: SettingsScreen},
 
-})
+},
+  {
+    headerStyle: {backgroundColor: '#E73536'},
+    headerMode: 'float',
+    title:'Main',
+    }
+)
 
 // screen2: { screen: ScheduleListScreen },
 const DrawerNavigation = createStackNavigator({
@@ -63,13 +80,13 @@ const DrawerNavigation = createStackNavigator({
   headerMode: 'float',
   navigationOptions: ({navigation}) => ({
     headerStyle: {backgroundColor: 'green'},
-    title: 'Logged In to your app!',
     headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
   })
 })
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  authStack:{screen:AuthLoadingScreen},
   loginStack: { screen: LoginStack },
   drawerStack: { screen: DrawerNavigation },
   workoutStack:{screen:WorkoutStack}
@@ -79,7 +96,7 @@ const PrimaryNav = createStackNavigator({
 
   headerMode: 'none',
   title:'Main',
-  initialRouteName: 'loginStack',
+  initialRouteName: 'authStack',
 
 }
 )

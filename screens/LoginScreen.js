@@ -34,11 +34,8 @@ class LoginScreen extends React.Component {
 
   };
   componentDidMount() {
-    // item = AsyncStorage.getItem('access_token')
-    // console.log('login access_token',item)
-    if (UserAdapter.isLoggedIn()) {
-      //navigate to away from login screen if already loggedin
-      this.props.navigation.navigate('ScheduleList')
+    if (this.props.currentUser) {
+      this.props.navigation.navigate('drawerStack')
     }
   }
   openDrawer = () => {
@@ -52,6 +49,16 @@ class LoginScreen extends React.Component {
               </TouchableOpacity>
           </View>
       )
+  }
+  renderSignup(){
+    return (
+      <>
+      <TouchableOpacity onPress={ ()=>{this.props.navagation.navigate('SignUpScreen')} }>
+        <FAIcon name='fa-sign-out' size={22} style={{ color: colors.txtWhite }} />
+
+      </TouchableOpacity>
+    </>
+    )
   }
 
   renderHeader() {

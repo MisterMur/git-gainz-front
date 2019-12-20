@@ -52,7 +52,7 @@ export default class ScheduleAdapter {
         },
         body:JSON.stringify({
           schedule_id:sched.id,
-          user_id: userToken[0]
+          user_id: userToken.split(':')[0]
         })
       }).then(this.handleErrors)
     }).then(this.handleErrors)

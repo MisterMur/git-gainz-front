@@ -34,7 +34,7 @@ class SettingsScreen extends React.Component {
   }
   handleLogout=()=>{
     this.props.logoutCurrentUser()
-    this.props.navigation.navigate('loginScreen')
+    this.props.navigation.navigate('authStack')
 
   }
   renderNavBar() {

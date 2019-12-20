@@ -100,11 +100,11 @@ export function setCurrentUser(email, response, nav, from) {
         })
         if (from === "sign-up") {
           // console.log('navigating from sign up to scheudles: ', nav)
-          nav.navigate('ScheduleList')
+          nav.navigate('drawerStack')
         } else {
           // console.log('navigating from else to scheudles ')
 
-          nav.navigate('ScheduleList')
+          nav.navigate('drawerStack')
         }
       } else {
         Alert.alert(
@@ -133,10 +133,11 @@ export function getUserToken(){
 }
 
 export function logoutCurrentUser() {
-  AsyncStorage.setItem('user_id', '')
-  AsyncStorage.setItem('access_token','')
+  return dispatch=>{
 
-  return {
-    type: LOGOUT
+    AsyncStorage.setItem('user_id', '')
+    AsyncStorage.setItem('access_token','')
+    dispatch({type:LOGOUT})
   }
+
 }

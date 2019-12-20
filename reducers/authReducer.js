@@ -34,6 +34,7 @@ export default (state = initialState, action) => {
     case LOAD_SPINNER:
       return { ...state, spinner: true };
     case LOGOUT:
+      console.log('logging out auth reducer')
       return {
         email: '',
         password: '',

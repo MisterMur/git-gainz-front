@@ -1,21 +1,30 @@
 import React from "react";
 import {connect} from 'react-redux'
 
-import { Text,ScrollView,Button} from 'react-native';
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  TouchableOpacity
+} from 'react-native';
+import { DrawerActions } from 'react-navigation';
 
 import { Card,Input, Button as ButtonElement } from 'react-native-elements'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
 
 import {fetchSchedulesWorkouts,fetchWorkout,postNewWorkout} from '../actions/workoutActions.js'
 
 import WorkoutList from '../components/WorkoutList.js'
 import Workout from '../components/Workout.js'
-// import { fetchSchedulesWorkouts,fetchWorkouts,postNewWorkout} from '../reducers/reducer.js'
+
+import colors from '../styles/colors'
 
 
 class WorkoutListScreen extends React.Component {
   static navigationOptions = {
     title: 'Workout List',
-    drawerLabel:'Workout Lists'
 
   };
   state={
@@ -23,9 +32,21 @@ class WorkoutListScreen extends React.Component {
   }
 
   componentDidMount(){
-    console.log('workoutlist current schedule',this.props)
     this.props.fetchSchedulesWorkouts(this.props.currentSchedule)
 
+  }
+  openDrawer = () => {
+    this.props.navigation.dispatch(DrawerActions.openDrawer());
+  }
+
+  renderNavBar() {
+      return (
+          <View style={ styles.navBar }>
+              <TouchableOpacity onPress={ this.openDrawer }>
+                  <FAIcon name='bars' size={22} style={{ color: colors.bdMainRed }} />
+              </TouchableOpacity>
+          </View>
+      )
   }
 
   handleAddWorkout=()=>{
@@ -84,6 +105,7 @@ class WorkoutListScreen extends React.Component {
   render() {
     return (
       <ScrollView className="WorkoutList">
+        {this.renderNavBar()}
         {this.props.currentSchedule?this.renderWorkoutList():null}
         {this.renderAddWorkoutForm()}
         {this.renderNav()}
@@ -108,3 +130,26 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(WorkoutListScreen);
+
+
+
+const styles = StyleSheet.create({
+  navBar: {
+      height: 50,
+      justifyContent: 'center',
+      paddingHorizontal: 25
+  },
+  addButton:{
+    position: 'absolute',
+    bottom:20,
+    right:20,
+    padding: 5,
+    height: 50,
+    width: 50,  //The Width must be the same as the height
+    borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+    backgroundColor:colors.bgMainRed,
+    zIndex:999,
+
+  },
+
+})

@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
-import { AppRegistry, TextInput,Text,ScrollView,View,Button} from 'react-native';
+import {
+   ScrollView,
+   View,
+   StyleSheet,
+   TextInput,
+   Text,
+   Button,
+   TouchableOpacity,
+ } from 'react-native';
+ import { DrawerActions } from 'react-navigation';
+
 import {  Button as ButtonElement ,Input} from 'react-native-elements'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
+
 
 import Exercise from '../components/Exercise.js'
 import {connect} from 'react-redux'
 import {postNewExercise} from '../actions/exerciseActions'
 import {postNewCompleteWorkout,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../actions/workoutActions.js'
 import {fetchSchedules} from '../actions/scheduleActions.js'
-// import {postNewExercise,postNewCompleteWorkout,,fetchWorkouts,addWorkout} from '../reducers/reducer.js'
+
+import colors from '../styles/colors'
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
@@ -27,6 +40,18 @@ class WorkoutScreen extends Component {
     workout:{
       exercises:{}
     }
+  }
+  openDrawer = () => {
+    this.props.navigation.dispatch(DrawerActions.openDrawer());
+  }
+  renderNavBar() {
+      return (
+          <View style={ styles.navBar }>
+              <TouchableOpacity onPress={ this.openDrawer }>
+                  <FAIcon name='bars' size={22} style={{ color: colors.bdMainRed }} />
+              </TouchableOpacity>
+          </View>
+      )
   }
 
   renderExercises=()=>{
@@ -105,6 +130,7 @@ class WorkoutScreen extends Component {
     // console.log('exercises',exercises)
     return (
       <ScrollView>
+        {this.renderNavBar()}
         {this.renderAddExerciseForm()}
         {this.renderExercises()}
         <ButtonElement
@@ -113,7 +139,6 @@ class WorkoutScreen extends Component {
           title='Finish Workout'
           onPress={this.handleCompleteWorkout}
         />
-        {this.renderNav()}
 
       </ScrollView>
     );
@@ -135,3 +160,24 @@ function mapStateToProps(state){
 
 }
 export default connect(mapStateToProps,mapDispatchToProps)(WorkoutScreen)
+
+const styles = StyleSheet.create({
+  navBar: {
+      height: 50,
+      justifyContent: 'center',
+      paddingHorizontal: 25
+  },
+  addButton:{
+    position: 'absolute',
+    bottom:20,
+    right:20,
+    padding: 5,
+    height: 50,
+    width: 50,  //The Width must be the same as the height
+    borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+    backgroundColor:colors.bgMainRed,
+    zIndex:999,
+
+  },
+
+})

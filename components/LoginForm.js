@@ -53,6 +53,8 @@ logIn = () => {
       AsyncStorage.setItem('user_id', response.access_token)
       AsyncStorage.setItem('access_token', response.access_token)
       this.setState({loading: false})
+      // console.log('logging in nav',this.props.navigation)
+      this.props.navigation.navigate('drawerStack')
       // this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
     }
   })

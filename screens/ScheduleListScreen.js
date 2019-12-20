@@ -26,8 +26,6 @@ import colors from '../styles/colors'
 class ScheduleListScreen extends Component {
   static navigationOptions = {
     title: 'Schedules List',
-    drawerLabel: 'All Schedules',
-
 
   };
   state={
@@ -44,11 +42,9 @@ class ScheduleListScreen extends Component {
 
   }
   openDrawer = () => {
-    console.log('opening drawer in schedulelist screen')
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   }
   renderNavBar() {
-    console.log('rendered nav')
       return (
           <View style={ styles.navBar }>
               <TouchableOpacity onPress={ this.openDrawer }>
@@ -113,6 +109,7 @@ const mapDispatchToProps = dispatch => ({
 function mapStateToProps(state){
 
   const {schedule}=state;
+  console.log(schedule)
   return {
     schedules:schedule.schedules,
     loading:state.loading,

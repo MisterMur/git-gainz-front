@@ -65,7 +65,7 @@ export  default class WorkoutAdapter {
         'Accepts':'application/json',
         'Authorization':userToken
       },
-      body:JSON.stringify({workout,user_id:usertoken[0]})
+      body:JSON.stringify({workout,user_id:userToken.split(':')[0]})
     }).then(this.handleErrors)
 
   }
