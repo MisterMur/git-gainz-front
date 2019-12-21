@@ -1,6 +1,6 @@
 import {API_URL} from '../constants/types.js'
 import UserAdapter from '../adapters/userAdapter'
-import {EMAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER,LOGOUT} from '../constants/authTypes.js'
+import {FETCH_CURRENTUSER_SUCCESS,FETCH_CURRENTUSER_FAILURE,MAIL_CHANGED,PASSWORD_CHANGED,LOGIN_FAILED,LOGIN_USER_SUCCESS,LOAD_SPINNER,LOGOUT} from '../constants/authTypes.js'
 import {Alert} from 'react-native'
 import {FETCH_SCHEDULES_SUCCESS} from '../constants/types.js'
 import {  navigate, NavigationActions, navigation } from 'react-navigation';
@@ -98,7 +98,9 @@ export function setCurrentUser(){
       dispatch(fetchCurrentUserSuccess(user))
       return user
     })
-    .catch(error=> dispatch(fetchCurrentUserFailure(error))
+    .catch(error=>
+       dispatch(fetchCurrentUserFailure(error))
+     )
   }
 }
 // export function setCurrentUser(user){

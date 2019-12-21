@@ -21,9 +21,17 @@ import store from './store.js'
 
 import Authentication from './screens/LoginScreen'
 import ScheduleListScreen from './screens/ScheduleListScreen'
+import WorkoutListScreen from './screens/WorkoutListScreen'
+import WorkoutScreen from './screens/WorkoutScreen'
+
+
 import LoginForm from './components/LoginForm'
 
-
+const TabIcon = ({ selected, title }) => {
+  return (
+    <Text style={{color: selected ? 'red' :'black'}}>{title}</Text>
+  );
+}
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -38,6 +46,44 @@ export default class App extends React.Component {
       this.setState({ hasToken: token !== null, isLoaded: true })
     });
   }
+
+  renderWorkoutScenes(){
+    return (
+      <>
+      <Scene
+        key="WorkoutTab"
+        tabs={true}
+        tabBarStyle={{ backgroundColor: '#FFFFFF' }}
+      >
+  {/* Tab and it's scenes */}
+        <Scene key="osu" title="OSU" icon={TabIcon}>
+          <Scene
+            component={ScheduleListScreen}
+            initial={this.state.hasToken}
+            hideNavBar={true}
+            key='Home'
+            title='Schedules'
+            />
+          <Scene
+            component={WorkoutListScreen}
+            initial={this.state.hasToken}
+            hideNavBar={true}
+            key='WorkoutList'
+            title='Workout List'
+            />
+          <Scene
+            component={WorkoutScreen}
+            initial={this.state.hasToken}
+            hideNavBar={true}
+            key='Workout'
+            title='Workout'
+            />
+        </Scene>
+      </Scene>
+      </>
+    )
+
+  }
   render() {
       if (!this.state.isLoaded) {
         return (
@@ -45,24 +91,23 @@ export default class App extends React.Component {
         )
       } else {
         return(
-          <Router>
-            <Scene key='root'>
-              <Scene
-                component={Authentication}
-                initial={!this.state.hasToken}
-                hideNavBar={true}
-                key='Authentication'
-                title='Authentication'
-              />
-              <Scene
-                component={ScheduleListScreen}
-                initial={this.state.hasToken}
-                hideNavBar={true}
-                key='HomePage'
-                title='Schedules'
-              />
+          <Provider store={store}>
+            <Router>
+              <Scene key='root'>
+                <Scene
+                  component={LoginForm}
+                  initial={!this.state.hasToken}
+                  hideNavBar={true}
+                  key='Authentication'
+                  title='Authentication'
+                />
+              {this.renderWorkoutScenes()}
+
+
+
               </Scene>
-          </Router>
+            </Router>
+          </Provider>
         )
       }
     }

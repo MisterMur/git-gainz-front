@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator,AsyncStorage, Alert } from 'react-native';
+import {
+   View,
+   ScrollView,
+   Text,
+    ActivityIndicator,
+    AsyncStorage,
+    Image,
+    TouchableOpacity,
+     Alert,
+     StyleSheet,
+   } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 import Button from 'react-native-button';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import {Actions} from 'react-native-router-flux';
+
 
 import {API_URL} from '../constants/types.js'
 
 import { emailChanged, passwordChanged, loginUser,setCurrentUser , getUserToken} from '../actions/authActions.js';
+
+import colors from '../styles/colors'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
+import Container from './Container'
+
+
 
 class LoginForm extends Component {
   state = {
   error: null,
   response: "",
   loading: true,
-  email:null,
-  password:null,
+  email:'',
+  password:'',
 }
 
 async saveLoginToken(userTok){
@@ -71,16 +89,41 @@ userLogin = () => {
 }
 
   onButtonSubmit() {
-    this.props.userLogin()
+    this.userLogin()
   }
   emailChanged(value) {
     const email =value.trim();
     this.setState({email})
     // this.props.emailChanged(email);
   }
-  passwordChanged() {
+  passwordChanged(password) {
     this.setState({password})
     // this.props.passwordChanged(value.trim());
+  }
+  renderHeader() {
+
+      return (
+          <View style={ styles.headerHolder }>
+            <Text type='h1White' style={ styles.siteName }>Welcome to Git-Gainz</Text>
+              <Image
+                size={100}
+                style={styles.logo}
+                source={require('../assets/images/gitgainzicon.png')}
+              />
+          </View>
+      )
+  }
+  renderSignup(){
+    return (
+      <View style={{flex: 1, flexDirection: 'row'}}>
+      <TouchableOpacity style={styles.signupButton}  onPress={ ()=>{this.props.navigation.navigate('signupScreen')} }>
+        <Text style={styles.buttonText}>Sign Up!</Text>
+        <FAIcon name='sign-out' size={30} style={styles.buttonIcon}  />
+
+
+      </TouchableOpacity>
+    </View>
+    )
   }
   renderError() {
     if (this.props.error) {
@@ -126,6 +169,10 @@ userLogin = () => {
 
   render() {
     return (
+      <Container style={[ styles.container, this.props.style || {} ]}>
+
+      {this.renderHeader()}
+      {this.renderSignup()}
       <View style={
 
           {
@@ -147,30 +194,25 @@ userLogin = () => {
           label={'Email'}
           borderColor={'#b76c94'}
           onChangeText={this.emailChanged.bind(this)}
-          value={this.props.email}
+          value={this.state.email}
         />
 
         <Hoshi
           label={'Password'}
           borderColor={'#b76c94'}
           onChangeText={this.passwordChanged.bind(this)}
-          value={this.props.password}
+          value={this.state.password}
           secureTextEntry
         />
 
         {this.renderButton()}
 
       </View>
+    </Container>
     );
   }
 }
 
-const styles = {
-  viewStyle: {
-    marginTop: 50,
-    padding: 10,
-  }
-};
 
 const mapStateToProps = (state) => {
   const {auth,user}=state;
@@ -187,3 +229,67 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, { getUserToken,emailChanged, passwordChanged, loginUser , setCurrentUser})(LoginForm);
+
+const styText = { color: colors.txtWhite }
+
+const styles = StyleSheet.create({
+    viewStyle: {
+      marginTop: 50,
+      padding: 10,
+    },
+    container: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.4,
+        shadowOffset: { height: -5, width:-5},
+        shadowRadius: 10,
+        backgroundColor: colors.bgMain,
+    },
+    navBar: {
+        height: 50,
+        justifyContent: 'center',
+        paddingHorizontal: 25
+    },
+    headerHolder: {
+        padding: 25,
+        flex: 1
+    },
+    logo: {
+        // ...styText,
+        marginTop: 10
+    },
+
+    signupButton: {
+        width: '90%',
+        marginLeft:'5%',
+        marginVertical: 70,
+        height: 50,
+        borderColor: colors.bdWhite,
+        backgroundColor: 'transparent',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#e3e3e3',
+        borderRadius:50,
+    },
+    button: {
+        height:20,
+        borderRadius: 50,
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#e3e3e3',
+        padding: 1,
+        width:'90%',
+        marginBottom: 20,
+        marginLeft:'5%',
+    },
+    buttonText:{
+        fontSize:20,
+        color:'white',
+        textAlign:'center',
+    },
+    buttonIcon:{
+        color:colors.bdWhite,
+        marginLeft:80,
+        marginTop:-27
+    }
+
+})

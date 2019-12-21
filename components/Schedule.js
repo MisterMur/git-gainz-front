@@ -9,6 +9,7 @@ import store from '../store.js'
 // import {colors, fonts, padding, dimensions} from '../styles/base.js'
 import { Card, ListItem, Button ,Divider,FormInput,FormLabel} from 'react-native-elements'
 import {setCurrentSchedule} from '../actions/scheduleActions.js'
+import {Actions} from 'react-native-router-flux';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -21,8 +22,8 @@ class Schedule extends React.Component {
   handlePressButton=()=>{
     // console.log('in handle pressbutton schedule:',this.props.schedule)
     this.props.setCurrentSchedule(this.props.schedule)
-    this.props.handlePress('WorkoutList')
-
+    // this.props.handlePress('WorkoutList')
+    Actions.WorkoutList()
   }
 
   render() {

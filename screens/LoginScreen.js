@@ -34,9 +34,14 @@ class LoginScreen extends React.Component {
 
   };
   componentDidMount() {
-    if (this.props.currentUser) {
-      this.props.navigation.navigate('drawerStack')
-    }
+    // if (this.props.currentUser) {
+    //   this.props.navigation.navigate('drawerStack')
+    // }
+  }
+  state={
+    response:'',
+    error:null,
+    loading:true,
   }
 
   renderSignup(){
@@ -63,7 +68,7 @@ userSignup() {
 }
 
 userLogin() {
-  this.setState({ error: false, response: ''})
+  // this.setState({ error: false, response: ''})
   const user = {
     email: this.props.email,
     password: this.props.password
@@ -130,13 +135,14 @@ userLogin() {
         { this.renderHeader() }
         {this.renderSignup()}
           <LoginForm
+            userLogin={this.userLogin}
             navigation={this.props.navigation} />
       </Container>
     )
   }
 }
 function mapStateToProps(state) {
-  const {auth} = state
+  const {auth,user} = state
   return {
     email: auth.email,
     password: auth.password,
@@ -144,7 +150,6 @@ function mapStateToProps(state) {
     error: auth.errorFlag,
     spinner: auth.spinner,
     token: user.token,
-    currentUser: auth.currentUser
   }
 }
 

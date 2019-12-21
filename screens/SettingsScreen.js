@@ -36,7 +36,7 @@ class SettingsScreen extends React.Component {
   //   await AsyncStorage.clear();
   //   this.props.navigation.navigate('authStack');
   // };
-  async handleLogout=()=>{
+   async logout (){
     try {
       await AsyncStorage.removeItem('id_token');
       Alert.alert('Logout Success!');
