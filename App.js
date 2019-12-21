@@ -18,7 +18,7 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 
-import store from './store.js'
+import storeObj from './store.js'
 
 import Authentication from './screens/LoginScreen'
 import ScheduleListScreen from './screens/ScheduleListScreen'
@@ -51,7 +51,7 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
-        <Provider store={store}>
+        <Provider store={storeObj.store}>
           <PersistGate persistor={storeObj.persistor} loading={null}>
             <AppLoading
               startAsync={this._loadResourcesAsync}
@@ -63,7 +63,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <Provider store={store}>
+        <Provider store={storeObj.store}>
           <PersistGate persistor={storeObj.persistor}>
             <View style={styles.container}>
               {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
