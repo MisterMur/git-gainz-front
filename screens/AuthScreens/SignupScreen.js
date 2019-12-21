@@ -11,6 +11,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  AsyncStorage,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -20,8 +21,9 @@ import { Input,Button} from 'react-native-elements'
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
 import FAIcon from 'react-native-vector-icons/FontAwesome'
+import {API_URL} from '../../constants/types.js'
 
-import {postNewUser} from '../../actions/authActions'
+import {postNewUser,setCurrentUser} from '../../actions/authActions'
 import colors from '../../styles/colors'
 
 class SignupScreen extends React.Component {
@@ -49,21 +51,21 @@ class SignupScreen extends React.Component {
 signup = () => {
   // e.preventDefault()
   // await this._attemptGeocodeAsync()
-    const data = {
+    const user = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       phone: this.state.phone,
       username: this.state.username,
     }
-    if ((this.props.password.length > 5)
-       && (this.props.password === this.props.passwordConfirmation)
-        && EmailValidator.validate(this.props.email)
-         && (this.props.phone.length === 10)
-          && (this.props.name !== null)
-          &&(this.props.username !==null)) {
+    if ((this.state.password.length > 5)
+       && (this.state.password === this.state.passwordConfirmation)
+        // && EmailValidator.validate(this.state.email)
+         && (this.state.phone.length === 3)
+          && (this.state.name !== null)
+          &&(this.state.username !==null)) {
             this.setState({credsChecked: false})
-            UserAdapter.addNewUser(data)
+            this.props.postNewUser(user)
             .then(() => this.setUserToken())
             // .then(() => this.props.clearAddPet())
 
@@ -86,19 +88,26 @@ signup = () => {
         )
       }
   }
+  async saveLoginToken(userTok){
+    try{
+      await AsyncStorage.setItem('access_token',userTok);
+    } catch(error){
+      console.error('AsyncStorage error: '+error.message);
+    }
+  }
 
 setUserToken = () => {
-    const data = {
+    const user = {
       email: this.state.email,
       password: this.state.password
     }
-    fetch(API_URL`login`, {
+    fetch(API_URL+`login`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({user})
     })
     .then(res => res.json())
     .then(response => {
@@ -118,9 +127,12 @@ setUserToken = () => {
           {cancelable: false},
         )
       } else {
-        AsyncStorage.setItem('access_token', response.access_token)
+        this.saveLoginToken(response.access_token)
+        // AsyncStorage.setItem('access_token', response.access_token)
         this.setState({loading: false})
-        this.props.setCurrentUser(this.state.email, response.access_token, this.props.navigation, "signup")
+        this.props.setCurrentUser()
+        this.props.navigation.navigate('drawerStack')
+
       }
     })
   }

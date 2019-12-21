@@ -31,7 +31,7 @@ export default class UserAdapter {
       headers:{
         'Content-Type':'application/json',
         'Accepts':'application/json',
-        'Authorization':token,
+        // 'Authorization':token,
       },body:JSON.stringify({user})
     }).then(this.handleErrors)
     .then(res=>res.json)
