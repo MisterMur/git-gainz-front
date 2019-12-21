@@ -17,8 +17,9 @@ import { WebBrowser } from 'expo';
 import LoginForm from '../../components/LoginForm.js'
 
 import { Input,Button} from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome';
+// import Icon from 'react-native-vector-icons/FontAwesome';
 
+import FAIcon from 'react-native-vector-icons/FontAwesome'
 
 import {postNewUser} from '../../actions/authActions'
 import colors from '../../styles/colors'
@@ -32,9 +33,9 @@ class SignupScreen extends React.Component {
   state = {
     name: "",
     email: "",
-    username:null,
-    password: null,
-    passwordConfirmation: null,
+    username:'',
+    password: '',
+    passwordConfirmation: '',
     phone: "",
     token: { },
     loading: true,
@@ -45,8 +46,8 @@ class SignupScreen extends React.Component {
 
 }
 
-signup = async(e) => {
-  e.preventDefault()
+signup = () => {
+  // e.preventDefault()
   // await this._attemptGeocodeAsync()
     const data = {
       name: this.state.name,
@@ -250,8 +251,7 @@ const styles = StyleSheet.create({
         marginLeft:'5%',
         marginVertical: 70,
         height: 50,
-        borderColor: colors.bdWhite,
-        backgroundColor: 'transparent',
+        backgroundColor: '#00b894',
         borderStyle: 'solid',
         borderWidth: 2,
         borderColor: '#e3e3e3',

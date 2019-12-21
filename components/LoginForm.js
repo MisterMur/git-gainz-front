@@ -125,7 +125,8 @@ userLogin = () => {
   renderSignup(){
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
-      <TouchableOpacity style={styles.signupButton}  onPress={ ()=>{this.props.navigation.navigate('signupScreen')} }>
+      <TouchableOpacity style={styles.signupButton}
+          onPress={ ()=>{this.props.navigation.navigate('signupScreen')} }>
         <Text style={styles.buttonText}>Sign Up!</Text>
         <FAIcon name='sign-out' size={30} style={styles.buttonIcon}  />
 

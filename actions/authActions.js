@@ -83,8 +83,10 @@ export const fetchCurrentUserFailure=(error)=>({
 export function postNewUser(user){
   return dispatch =>{
     return UserAdapter.addNewUser(user)
-    .then(function(){
+    .then(res=>{
+      console.log(res)
       // dispatch()
+
     })
 
   }
