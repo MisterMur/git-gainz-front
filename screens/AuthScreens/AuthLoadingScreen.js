@@ -32,6 +32,13 @@ class AuthLoadingScreen extends React.Component {
     });
 
   }
+  async saveItem( selectedValue) {
+  try {
+    await AsyncStorage.setItem('access', selectedValue);
+  } catch (error) {
+    console.error('AsyncStorage error: ' + error.message);
+  }
+}
 
   navigate(){
     navTo = this.state.hasToken?'drawerStack':'loginStack'

@@ -51,6 +51,62 @@ class LoginScreen extends React.Component {
     </View>
     )
   }
+  async saveLoginToken( selectedValue) {
+  try {
+    await AsyncStorage.setItem('access', selectedValue);
+  } catch (error) {
+    console.error('AsyncStorage error: ' + error.message);
+  }
+}
+userSignup() {
+  Actions.HomePage();
+}
+
+userLogin() {
+  this.setState({ error: false, response: ''})
+  const user = {
+    email: this.props.email,
+    password: this.props.password
+  }
+  fetch(API_URL+"login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+      user
+    })
+  })
+  .then(res => res.json())
+  .then(response => {
+    if (response.errors) {
+      this.setState({ response: response, error: true, errMsg: response.errors })
+      Alert.alert(
+      'Invalid Credentials',
+      'Please verify your information is correct',
+      [
+        {
+          text: 'OK',
+          onPress: () => console.log("ok pressed"),
+          style: 'cancel',
+        },
+      ],
+      {cancelable: false},
+    )
+    } else {
+      // console.log('in login ', response.user_id)
+      // AsyncStorage.setItem('user_id', response.access_token)
+      AsyncStorage.setItem('access_token', response.access_token)
+      this.setState({loading: false})
+
+      this.saveLoginToken( responseData.id_token),
+      Alert.alert( 'Signup Success!', 'Click the button to get a Chuck Norris quote!'),
+      Actions.HomePage();
+      // this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
+    }
+  })
+}
 
   renderHeader() {
 
@@ -73,7 +129,8 @@ class LoginScreen extends React.Component {
       <Container style={[ styles.container, this.props.style || {} ]}>
         { this.renderHeader() }
         {this.renderSignup()}
-          <LoginForm navigation={this.props.navigation} />
+          <LoginForm
+            navigation={this.props.navigation} />
       </Container>
     )
   }
@@ -81,6 +138,12 @@ class LoginScreen extends React.Component {
 function mapStateToProps(state) {
   const {auth} = state
   return {
+    email: auth.email,
+    password: auth.password,
+    currentUser: auth.currentUser,
+    error: auth.errorFlag,
+    spinner: auth.spinner,
+    token: user.token,
     currentUser: auth.currentUser
   }
 }

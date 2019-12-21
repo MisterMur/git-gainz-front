@@ -21,6 +21,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 import {postNewUser} from '../../actions/authActions'
+import colors from '../../styles/colors'
 
 class SignupScreen extends React.Component {
   static navigationOptions = {
@@ -58,8 +59,8 @@ signup = async(e) => {
        && (this.props.password === this.props.passwordConfirmation)
         && EmailValidator.validate(this.props.email)
          && (this.props.phone.length === 10)
-          && (this.props.name !== null))
-          &(this.props.username !==null) {
+          && (this.props.name !== null)
+          &&(this.props.username !==null)) {
             this.setState({credsChecked: false})
             UserAdapter.addNewUser(data)
             .then(() => this.setUserToken())

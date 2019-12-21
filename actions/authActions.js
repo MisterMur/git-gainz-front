@@ -13,7 +13,9 @@ export const emailChanged = (email) => {
   };
 };
 
-
+// export const getCurrentUser = (userTok)=>{
+//
+// }
 
 export const passwordChanged = (password) => {
   return {
@@ -69,6 +71,16 @@ export const loginUser = ({ email, password }) => {
   };
 };
 
+export const fetchCurrentUserSuccess=(user)=>{
+  return {
+    type:FETCH_CURRENTUSER_SUCCESS,
+    payload:user
+  }
+}
+export const fetchCurrentUserFailure=(error)=>({
+  type:FETCH_CURRENTUSER_FAILURE,
+  payload:{error}
+})
 export function postNewUser(user){
   return dispatch =>{
     return UserAdapter.addNewUser(user)
@@ -78,54 +90,91 @@ export function postNewUser(user){
 
   }
 }
-export function setCurrentUser(email, response, nav, from) {
-  return dispatch => {
-    return UserAdapter.getUsers()
-    .then(users => {
-      // console.log(users)
-      let userAttempt = users.filter(user => user.email === email)
-      let foundUser = userAttempt[0]
-      let userId = foundUser.id
-      console.log('setcurrent user found user',foundUser)
-      if (response) {
-        // console.log('in set current user found user:',foundUser)
-        dispatch({
-          type: FETCH_SCHEDULES_SUCCESS,
-          payload: foundUser
-        })
-
-        dispatch({
-          type: LOGIN_USER_SUCCESS ,
-          payload: userId
-        })
-        if (from === "signup") {
-          // console.log('navigating from sign up to scheudles: ', nav)
-          nav.navigate('drawerStack')
-        } else {
-          // console.log('navigating from else to scheudles ')
-
-          nav.navigate('drawerStack')
-        }
-      } else {
-        Alert.alert(
-        'Invalid Credentials',
-        'Please verify your log in information is correct',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('Ok Pressed'),
-            style: 'cancel',
-          },
-        ],
-        {cancelable: false},
-      )
-      }
+export function setCurrentUser(){
+  return (dispatch)=>{
+    return UserAdapter.fetchCurrentUser()
+    .then(user=>{
+      console.log(user)
+      dispatch(fetchCurrentUserSuccess(user))
+      return user
     })
-    .catch(function(error) {
-      console.log('Set Current User There has been a problem with your fetch operation: ' + error.message);
-        throw error;})
+    .catch(error=> dispatch(fetchCurrentUserFailure(error))
   }
 }
+// export function setCurrentUser(user){
+//   return dispatch=>{
+//     return UserAdapter.userLogin(user)
+//     .then((responseData) => {
+//       if (response.errors) {
+//         Alert.alert(
+//         'Invalid Credentials',
+//         'Please verify your information is correct',
+//         [
+//           {
+//             text: 'OK',
+//             onPress: () => console.log("ok pressed"),
+//             style: 'cancel',
+//           },
+//         ],
+//         {cancelable: false},
+//       )
+//     } else {
+//       this.saveItem('access_token', responseData.access_token),
+//       Alert.alert('Login Success!'),
+//       Actions.HomePage();
+//     }
+//     })
+//     .done();
+//   }
+// }
+// export function setCurrentUser(email, response, nav, from) {
+//   return dispatch => {
+//     return UserAdapter.getUsers()
+//     .then(users => {
+//       // console.log(users)
+//       let userAttempt = users.filter(user => user.email === email)
+//       let foundUser = userAttempt[0]
+//       let userId = foundUser.id
+//       console.log('setcurrent user found user',foundUser)
+//       if (response) {
+//         // console.log('in set current user found user:',foundUser)
+//         dispatch({
+//           type: FETCH_SCHEDULES_SUCCESS,
+//           payload: foundUser
+//         })
+//
+//         dispatch({
+//           type: LOGIN_USER_SUCCESS ,
+//           payload: userId
+//         })
+//         if (from === "signup") {
+//           // console.log('navigating from sign up to scheudles: ', nav)
+//           nav.navigate('drawerStack')
+//         } else {
+//           // console.log('navigating from else to scheudles ')
+//
+//           nav.navigate('drawerStack')
+//         }
+//       } else {
+//         Alert.alert(
+//         'Invalid Credentials',
+//         'Please verify your log in information is correct',
+//         [
+//           {
+//             text: 'OK',
+//             onPress: () => console.log('Ok Pressed'),
+//             style: 'cancel',
+//           },
+//         ],
+//         {cancelable: false},
+//       )
+//       }
+//     })
+//     .catch(function(error) {
+//       console.log('Set Current User There has been a problem with your fetch operation: ' + error.message);
+//         throw error;})
+//   }
+// }
 export function getUserToken(){
   return dispatch=>{
     UserAdapter.isLoggedIn()

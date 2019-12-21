@@ -13,14 +13,24 @@ class LoginForm extends Component {
   state = {
   error: null,
   response: "",
-  loading: true
+  loading: true,
+  email:null,
+  password:null,
 }
 
-logIn = () => {
-  this.setState({ error: false, response: ''})
+async saveLoginToken(userTok){
+  try{
+    await AsyncStorage.setItem('access_token',userTok);
+  } catch(error){
+    console.error('AsyncStorage error: '+error.message);
+  }
+}
+
+userLogin = () => {
+  // this.setState({ error: false, response: ''})
   const user = {
-    email: this.props.email,
-    password: this.props.password
+    email: this.state.email,
+    password: this.state.password
   }
   fetch(API_URL+"login", {
       method: "POST",
@@ -37,7 +47,7 @@ logIn = () => {
     if (response.errors) {
       this.setState({ response: response, error: true, errMsg: response.errors })
       Alert.alert(
-      'Invalid Credentials',
+      'Invalid  From Login form Credentials',
       'Please verify your information is correct',
       [
         {
@@ -49,29 +59,28 @@ logIn = () => {
       {cancelable: false},
     )
     } else {
-      console.log('in login ', response.user_id)
-      AsyncStorage.setItem('user_id', response.access_token)
-      AsyncStorage.setItem('access_token', response.access_token)
       this.setState({loading: false})
-      // console.log('logging in nav',this.props.navigation)
-      this.props.navigation.navigate('drawerStack')
+
+      this.saveLoginToken(response.access_token)
+      this.props.setCurrentUser();
+      Actions.HomePage();
+      // this.props.navigation.navigate('drawerStack')
       // this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
     }
   })
 }
-  componentDidMount() {
- }
 
   onButtonSubmit() {
-    // console.log('Submitted: ', `${this.props.email} ${this.props.password}`);
-    this.logIn()
+    this.props.userLogin()
   }
   emailChanged(value) {
     const email =value.trim();
-    this.props.emailChanged(email);
+    this.setState({email})
+    // this.props.emailChanged(email);
   }
-  passwordChanged(value) {
-    this.props.passwordChanged(value.trim());
+  passwordChanged() {
+    this.setState({password})
+    // this.props.passwordChanged(value.trim());
   }
   renderError() {
     if (this.props.error) {

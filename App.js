@@ -4,11 +4,13 @@ import { AppLoading, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import PrimaryNav from './navigation/AppNavigation';
 import { DrawerActions } from 'react-navigation';
+import {Router, Scene} from 'react-native-router-flux';
 
 import ReduxNavigation from './navigation/ReduxNavigation';
+import {ActivityIndicator, AsyncStorage} from 'react-native';
 
-import MainDrawerNavigator from './navigation/MainDrawerNavigator'
-import HorizontalMenu from './screens/drawers/HorizontalMenu'
+// import MainDrawerNavigator from './navigation/MainDrawerNavigator'
+// import HorizontalMenu from './screens/drawers/HorizontalMenu'
 import {Asset} from 'expo-asset'
 
 import { createStore } from 'redux';
@@ -17,14 +19,56 @@ import { Provider, connect } from 'react-redux';
 
 import store from './store.js'
 
+import Authentication from './screens/LoginScreen'
+import ScheduleListScreen from './screens/ScheduleListScreen'
+import LoginForm from './components/LoginForm'
+
 
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
   };
+  constructor() {
+    super();
+    this.state = { hasToken: false, isLoaded: false };
+  }
 
-
+  componentDidMount() {
+    AsyncStorage.getItem('access_token').then((token) => {
+      this.setState({ hasToken: token !== null, isLoaded: true })
+    });
+  }
   render() {
+      if (!this.state.isLoaded) {
+        return (
+          <ActivityIndicator />
+        )
+      } else {
+        return(
+          <Router>
+            <Scene key='root'>
+              <Scene
+                component={Authentication}
+                initial={!this.state.hasToken}
+                hideNavBar={true}
+                key='Authentication'
+                title='Authentication'
+              />
+              <Scene
+                component={ScheduleListScreen}
+                initial={this.state.hasToken}
+                hideNavBar={true}
+                key='HomePage'
+                title='Schedules'
+              />
+              </Scene>
+          </Router>
+        )
+      }
+    }
+
+
+  oldrender() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <Provider store={store}>

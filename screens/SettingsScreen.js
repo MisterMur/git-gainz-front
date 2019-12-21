@@ -32,13 +32,22 @@ class SettingsScreen extends React.Component {
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   }
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('authStack');
-  };
-  handleLogout=()=>{
-    this.props.logoutCurrentUser()
-    this.props.navigation.navigate('authStack')
+  //  _signOutAsync = async () => {
+  //   await AsyncStorage.clear();
+  //   this.props.navigation.navigate('authStack');
+  // };
+  async handleLogout=()=>{
+    try {
+      await AsyncStorage.removeItem('id_token');
+      Alert.alert('Logout Success!');
+      Actions.Authentication();
+    } catch (error) {
+      console.log('AsyncStorage error: ' + error.message);
+    }
+
+    //without flux logout
+    // this.props.logoutCurrentUser()
+    // this.props.navigation.navigate('authStack')
 
   }
   renderNavBar() {
