@@ -28,6 +28,11 @@ import Container from './Container'
 
 
 class LoginForm extends Component {
+  static navigationOptions = {
+    title: "Login",
+    drawerLabel: 'Login Screen',
+
+  };
   state = {
   error: null,
   response: "",
@@ -35,7 +40,11 @@ class LoginForm extends Component {
   email:'',
   password:'',
 }
-
+componentDidMount(){
+  if(this.props.currentUser){
+    this.props.navigation.navigate('drawerStack')
+  }
+}
 async saveLoginToken(userTok){
   try{
     await AsyncStorage.setItem('access_token',userTok);
@@ -81,8 +90,8 @@ userLogin = () => {
 
       this.saveLoginToken(response.access_token)
       this.props.setCurrentUser();
-      Actions.HomePage();
-      // this.props.navigation.navigate('drawerStack')
+      // Actions.HomePage();
+      this.props.navigation.navigate('drawerStack')
       // this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
     }
   })

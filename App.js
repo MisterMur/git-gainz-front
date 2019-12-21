@@ -5,6 +5,7 @@ import AppNavigator from './navigation/AppNavigator';
 import PrimaryNav from './navigation/AppNavigation';
 import { DrawerActions } from 'react-navigation';
 import {Router, Scene} from 'react-native-router-flux';
+import {PersistGate} from 'redux-persist/integration/react'
 
 import ReduxNavigation from './navigation/ReduxNavigation';
 import {ActivityIndicator, AsyncStorage} from 'react-native';
@@ -27,11 +28,7 @@ import WorkoutScreen from './screens/WorkoutScreen'
 
 import LoginForm from './components/LoginForm'
 
-const TabIcon = ({ selected, title }) => {
-  return (
-    <Text style={{color: selected ? 'red' :'black'}}>{title}</Text>
-  );
-}
+
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
@@ -47,90 +44,32 @@ export default class App extends React.Component {
     });
   }
 
-  renderWorkoutScenes(){
-    return (
-      <>
-      <Scene
-        key="WorkoutTab"
-        tabs={true}
-        tabBarStyle={{ backgroundColor: '#FFFFFF' }}
-      >
-  {/* Tab and it's scenes */}
-        <Scene key="osu" title="OSU" icon={TabIcon}>
-          <Scene
-            component={ScheduleListScreen}
-            initial={this.state.hasToken}
-            hideNavBar={true}
-            key='Home'
-            title='Schedules'
-            />
-          <Scene
-            component={WorkoutListScreen}
-            initial={this.state.hasToken}
-            hideNavBar={true}
-            key='WorkoutList'
-            title='Workout List'
-            />
-          <Scene
-            component={WorkoutScreen}
-            initial={this.state.hasToken}
-            hideNavBar={true}
-            key='Workout'
-            title='Workout'
-            />
-        </Scene>
-      </Scene>
-      </>
-    )
 
-  }
+
+
+
   render() {
-      if (!this.state.isLoaded) {
-        return (
-          <ActivityIndicator />
-        )
-      } else {
-        return(
-          <Provider store={store}>
-            <Router>
-              <Scene key='root'>
-                <Scene
-                  component={LoginForm}
-                  initial={!this.state.hasToken}
-                  hideNavBar={true}
-                  key='Authentication'
-                  title='Authentication'
-                />
-              {this.renderWorkoutScenes()}
-
-
-
-              </Scene>
-            </Router>
-          </Provider>
-        )
-      }
-    }
-
-
-  oldrender() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
         <Provider store={store}>
-          <AppLoading
-            startAsync={this._loadResourcesAsync}
-            onError={this._handleLoadingError}
-            onFinish={this._handleFinishLoading}
-          />
+          <PersistGate persistor={storeObj.persistor} loading={null}>
+            <AppLoading
+              startAsync={this._loadResourcesAsync}
+              onError={this._handleLoadingError}
+              onFinish={this._handleFinishLoading}
+              />
+          </PersistGate>
         </Provider>
       );
     } else {
       return (
         <Provider store={store}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <PrimaryNav />
-        </View>
+          <PersistGate persistor={storeObj.persistor}>
+            <View style={styles.container}>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              <PrimaryNav />
+            </View>
+          </PersistGate>
         </Provider>
       );
     }

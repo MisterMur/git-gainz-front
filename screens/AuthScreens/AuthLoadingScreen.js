@@ -42,8 +42,8 @@ class AuthLoadingScreen extends React.Component {
 
   navigate(){
     navTo = this.state.hasToken?'drawerStack':'loginStack'
-    console.log('this has token',this.state.hasToken)
-    console.log('were going to ',navTo)
+    // console.log('this has token',this.state.hasToken)
+    // console.log('were going to ',navTo)
     this.props.navigation.navigate(navTo)
   }
 
@@ -52,7 +52,8 @@ class AuthLoadingScreen extends React.Component {
       return (
         <>
         <ActivityIndicator /></>
-      )} else{return(<>{this.navigate()}</>)}
+      )} else{
+        return(<>  {this.navigate()}</>)}
   }
 }
 const styles = StyleSheet.create({

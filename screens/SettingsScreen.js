@@ -9,8 +9,10 @@ import {
   View,
   ScrollView,
   StyleSheet,
+  AsyncStorage,
   TouchableOpacity,
   Text,
+  Alert,
 } from 'react-native'
 
 import { Card,
@@ -32,23 +34,10 @@ class SettingsScreen extends React.Component {
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
   }
-  //  _signOutAsync = async () => {
-  //   await AsyncStorage.clear();
-  //   this.props.navigation.navigate('authStack');
-  // };
-   async logout (){
-    try {
-      await AsyncStorage.removeItem('id_token');
-      Alert.alert('Logout Success!');
-      Actions.Authentication();
-    } catch (error) {
-      console.log('AsyncStorage error: ' + error.message);
-    }
 
-    //without flux logout
-    // this.props.logoutCurrentUser()
-    // this.props.navigation.navigate('authStack')
-
+ logout= ()=>{
+    this.props.logoutCurrentUser()
+    this.props.navigation.navigate('loginStack')
   }
   renderNavBar() {
       return (
@@ -74,7 +63,7 @@ class SettingsScreen extends React.Component {
           <Text style={styles.buttonText}>this.state.user.email</Text>
         </TouchableOpacity>
         <TouchableOpacity
-           onPress={this.handleLogout}
+           onPress={this.logout}
            style={styles.inactiveButtons}>
            <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>
@@ -84,21 +73,6 @@ class SettingsScreen extends React.Component {
 
 }
 
-
-  renderLogoutButton(){
-    return (
-      <>
-        <Button
-          style={styles.buttons}
-          icon={<Icon name="user" color="#4F8EF7" />}
-          backgroundColor='#03A9F4'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-          title='Logout'
-          onPress={this._signOutAsync}
-         />
-      </>
-    )
-  }
 
 
   render() {
@@ -112,9 +86,9 @@ class SettingsScreen extends React.Component {
     )
   }
 }
-// const mapDispatchToProps= dispatch=> ({
-//   setCurrentSchedule:(schedule)=>dispatch(setCurrentSchedule(schedule))
-// })
+const mapDispatchToProps= dispatch=> ({
+  logoutCurrentUser:()=>dispatch(logoutCurrentUser())
+})
 
 function mapStateToProps(state){
   const {auth}=state
@@ -126,7 +100,7 @@ function mapStateToProps(state){
 
 }
 
-export default connect(mapStateToProps,{logoutCurrentUser})(SettingsScreen)
+export default connect(mapStateToProps,mapDispatchToProps)(SettingsScreen)
 
 const styles = StyleSheet.create({
     navBar: {

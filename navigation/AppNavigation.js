@@ -15,12 +15,12 @@ import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 import LoginScreen from '../screens/LoginScreen.js'
 import SignupScreen from '../screens/AuthScreens/SignupScreen.js';
 import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen.js'
-
+import LoginForm from '../components/LoginForm'
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
 
 //login stack
 const LoginStack = createStackNavigator({
-  loginScreen: { screen: LoginScreen },
+  loginScreen: { screen: LoginForm },
   signupScreen: { screen: SignupScreen },
 }, {
   headerMode: 'float',
@@ -96,7 +96,7 @@ const PrimaryNav = createStackNavigator({
 
   headerMode: 'none',
   title:'Main',
-  initialRouteName: 'authStack',
+  initialRouteName: 'loginStack',
 
 }
 )
