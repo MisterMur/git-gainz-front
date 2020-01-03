@@ -86,7 +86,7 @@ export  default class WorkoutAdapter {
       )
     })
     .then(res=>res.json())
-    .then(workout=>{
+    .then(workoutRes=>{
       return fetch( API_URL+'workout_schedules',{
         method:"POST",
         headers:{
@@ -96,7 +96,7 @@ export  default class WorkoutAdapter {
         },
         body:JSON.stringify({
           schedule_id:schedule.id,
-          workout_id:workout.id
+          workout_id:workoutRes.id
         })
       }).then(this.handleErrors)
     }).then(this.handleErrors)

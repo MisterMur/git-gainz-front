@@ -183,24 +183,10 @@ userLogin = () => {
 
       {this.renderHeader()}
       {this.renderSignup()}
-      <View style={
-
-          {
-            borderRadius: 4,
-          borderStyle: 'solid',
-          borderWidth: 2,
-          borderColor: '#e3e3e3',
-          /*padding: 1,*/
-          width:'90%',
-          marginBottom: 150,
-          marginLeft:'5%'}
-        }
-
-        >
+      <View style={styles.authInputs} >
         {this.renderError()}
 
         <Hoshi
-
           label={'Email'}
           borderColor={'#b76c94'}
           onChangeText={this.emailChanged.bind(this)}
@@ -280,6 +266,17 @@ const styles = StyleSheet.create({
         borderColor: '#e3e3e3',
         borderRadius:50,
     },
+    authInputs: {
+      borderRadius: 4,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      borderColor: '#e3e3e3',
+      /*padding: 1,*/
+      width:'90%',
+      marginBottom: 150,
+      marginLeft:'5%',
+    },
+    
     button: {
         height:20,
         borderRadius: 50,

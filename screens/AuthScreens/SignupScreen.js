@@ -9,6 +9,7 @@ import {
   TextInput,
   Text,
   Image,
+  Alert,
   KeyboardAvoidingView,
   Platform,
   AsyncStorage,
@@ -16,11 +17,13 @@ import {
 import { WebBrowser } from 'expo';
 
 import LoginForm from '../../components/LoginForm.js'
+import Container from '../../components/Container.js'
 
 import { Input,Button} from 'react-native-elements'
 // import Icon from 'react-native-vector-icons/FontAwesome';
-
+import * as EmailValidator from 'email-validator';
 import FAIcon from 'react-native-vector-icons/FontAwesome'
+
 import {API_URL} from '../../constants/types.js'
 
 import {postNewUser,setCurrentUser} from '../../actions/authActions'
@@ -55,23 +58,22 @@ signup = () => {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      phone: this.state.phone,
-      username: this.state.username,
+      // phone: this.state.phone,
+      // username: this.state.username,
     }
     if ((this.state.password.length > 5)
        && (this.state.password === this.state.passwordConfirmation)
-        // && EmailValidator.validate(this.state.email)
-         && (this.state.phone.length === 3)
+        && EmailValidator.validate(this.state.email)
+         // && (this.state.phone.length === 3)
           && (this.state.name !== null)
-          &&(this.state.username !==null)) {
+          // &&(this.state.username !==null)
+        )   {
             this.setState({credsChecked: false})
             this.props.postNewUser(user)
             .then(() => this.setUserToken())
-            // .then(() => this.props.clearAddPet())
 
             //try to refecator these fetches out and only pull setcurrentuser from
             //action
-            // .then(()=>this.props.setCurrentUser())
       }
       else {
           Alert.alert(
@@ -136,6 +138,21 @@ setUserToken = () => {
       }
     })
   }
+
+  renderHeader() {
+
+      return (
+          <View style={ styles.headerHolder }>
+            <Text type='h1White' style={ styles.siteName }>Welcome to Git-Gainz</Text>
+              <Image
+                size={100}
+                style={styles.logo}
+                source={require('../../assets/images/gitgainzicon.png')}
+              />
+          </View>
+      )
+  }
+
   renderSignupButon(){
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
@@ -169,14 +186,7 @@ setUserToken = () => {
         onChangeText={(email) => this.setState({email})}
         value={this.state.email}
       />
-      <TextInput
-        style={styles.input}
-        placeholder='Username'
-        autoCapitalize="none"
-        placeholderTextColor='white'
-        onChangeText={(username) => this.setState({username})}
-        value={this.state.username}
-      />
+
       {this.state.password.length < 6 && this.state.passSel ? <Text style={{color: 'red', marginLeft: 10}}>Password must be at least 6 characters</Text>: null}
         <TextInput
           style={styles.input}
@@ -199,15 +209,7 @@ setUserToken = () => {
           onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
           value={this.state.passwordConfirmation}
         />
-        <TextInput
-          style={styles.input}
-          placeholder='Phone Number'
-          keyboardType='phone-pad'
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={(phone) => this.setState({phone})}
-          value={this.state.phone}
-        />
+
 
       </>
         )
@@ -215,10 +217,11 @@ setUserToken = () => {
   }
   render() {
     return (
-      <View>
+      <Container style={[ styles.container, this.props.style || {} ]}>
+        {this.renderHeader()}
         {this.renderInputs()}
         {this.renderSignupButon()}
-      </View>
+      </Container>
     )
   }
 }
@@ -237,11 +240,26 @@ function mapStateToProps(state){
 export default connect(mapStateToProps,mapDispatchToProps)(SignupScreen)
 
 const styles = StyleSheet.create({
+    viewStyle: {
+      marginTop: 50,
+      padding: 10,
+    },
+    container: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.4,
+        shadowOffset: { height: -5, width:-5},
+        shadowRadius: 10,
+        backgroundColor: colors.bgMain,
+    },
+    headerHolder: {
+        padding: 25,
+        flex: 1
+    },
 
     navBar: {
       height: 50,
       justifyContent: 'center',
-      paddingHorizontal: 25
+      paddingHorizontal: 25,
 
     },
     input: {
@@ -257,13 +275,40 @@ const styles = StyleSheet.create({
       fontWeight: '500',
       justifyContent: 'center'
     },
+    button: {
+        height:20,
+        borderRadius: 50,
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: '#e3e3e3',
+        padding: 1,
+        width:'90%',
+        marginBottom: 20,
+        marginLeft:'5%',
+    },
+    buttonText:{
+        fontSize:20,
+        color:'white',
+        textAlign:'center',
+    },
+    authInputs: {
+      borderRadius: 4,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      borderColor: '#e3e3e3',
+      /*padding: 1,*/
+      width:'90%',
+      marginBottom: 150,
+      marginLeft:'5%'}
+    },
 
     signupButton: {
         width: '90%',
         marginLeft:'5%',
         marginVertical: 70,
         height: 50,
-        backgroundColor: '#00b894',
+        borderColor: colors.bdWhite,
+        backgroundColor: 'transparent',
         borderStyle: 'solid',
         borderWidth: 2,
         borderColor: '#e3e3e3',
@@ -278,6 +323,10 @@ const styles = StyleSheet.create({
         color:colors.bdWhite,
         marginLeft:80,
         marginTop:-27
+    },
+    logo: {
+        // ...styText,
+        marginTop: 10
     },
 
 })
