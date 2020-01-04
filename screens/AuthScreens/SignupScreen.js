@@ -16,17 +16,23 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
+// 3rd party lib imports
+import { Input,Button} from 'react-native-elements'
+import * as EmailValidator from 'email-validator';
+import FAIcon from 'react-native-vector-icons/FontAwesome'
+import { Hoshi } from 'react-native-textinput-effects';
+
+
+//components imports
 import LoginForm from '../../components/LoginForm.js'
 import Container from '../../components/Container.js'
 
-import { Input,Button} from 'react-native-elements'
-// import Icon from 'react-native-vector-icons/FontAwesome';
-import * as EmailValidator from 'email-validator';
-import FAIcon from 'react-native-vector-icons/FontAwesome'
-
-import {API_URL} from '../../constants/types.js'
-
+//actions imports
 import {postNewUser,setCurrentUser} from '../../actions/authActions'
+
+//constants imports
+import {API_URL} from '../../constants/types.js'
+//style imports
 import colors from '../../styles/colors'
 
 class SignupScreen extends React.Component {
@@ -168,26 +174,25 @@ setUserToken = () => {
   renderInputs() {
   if (this.state.credsChecked) {
   return (
-    <>
-      <TextInput
-        style={styles.input}
-        placeholder='Name'
-        autoCapitalize="words"
-        placeholderTextColor='white'
-        onChangeText={(name) => this.setState({name})}
-        value={this.state.name}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder='Email'
-        keyboardType='email-address'
-        autoCapitalize="none"
-        placeholderTextColor='white'
-        onChangeText={(email) => this.setState({email})}
-        value={this.state.email}
-      />
 
-      {this.state.password.length < 6 && this.state.passSel ? <Text style={{color: 'red', marginLeft: 10}}>Password must be at least 6 characters</Text>: null}
+      <View style={styles.authInputs}>
+
+        <Hoshi
+          label={'Name'}
+          borderColor={'#b76c94'}
+          onChangeText={(name) => this.setState({name})}
+          value={this.state.name}
+          />
+
+        <Hoshi
+          label={'Email'}
+          borderColor={'#b76c94'}
+          onChangeText={(email)=>this.setState({email})}
+          value={this.state.email}
+          />
+
+
+        {this.state.password.length < 6 && this.state.passSel ? <Text style={{color: 'red', marginLeft: 10}}>Password must be at least 6 characters</Text>: null}
         <TextInput
           style={styles.input}
           placeholder='Password'
@@ -197,7 +202,7 @@ setUserToken = () => {
           placeholderTextColor='white'
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
-        />
+          />
         {this.state.password !== this.props.passwordConfirmation && this.state.passConfSel ? <Text style={{color: 'red', marginLeft: 10}}>Passwords do not match</Text>: null}
         <TextInput
           style={styles.input}
@@ -208,10 +213,9 @@ setUserToken = () => {
           placeholderTextColor='white'
           onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
           value={this.state.passwordConfirmation}
-        />
+          />
+      </View>
 
-
-      </>
         )
       }
   }
@@ -296,12 +300,10 @@ const styles = StyleSheet.create({
       borderStyle: 'solid',
       borderWidth: 2,
       borderColor: '#e3e3e3',
-      /*padding: 1,*/
       width:'90%',
-      marginBottom: 150,
-      marginLeft:'5%'}
+      marginBottom: '10%',
+      marginLeft:'5%',
     },
-
     signupButton: {
         width: '90%',
         marginLeft:'5%',
@@ -328,5 +330,4 @@ const styles = StyleSheet.create({
         // ...styText,
         marginTop: 10
     },
-
 })
