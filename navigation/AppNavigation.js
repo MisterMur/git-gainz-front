@@ -12,15 +12,16 @@ import {Text} from 'react-native'
 import WorkoutScreen from '../screens/WorkoutScreen'
 import SettingsScreen from '../screens/SettingsScreen';
 import ScheduleListScreen from '../screens/ScheduleListScreen.js'
-import LoginScreen from '../screens/LoginScreen.js'
+
+import LoginScreen from '../screens/AuthScreens/LoginScreen.js'
 import SignupScreen from '../screens/AuthScreens/SignupScreen.js';
 import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen.js'
-import LoginForm from '../components/LoginForm'
+
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
 
 //login stack
 const LoginStack = createStackNavigator({
-  loginScreen: { screen: LoginForm },
+  loginScreen: { screen: LoginScreen },
   signupScreen: { screen: SignupScreen },
 }, {
   headerMode: 'float',

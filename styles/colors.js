@@ -1,5 +1,9 @@
 'use strict'
 const colors = {
+  primary: '#226B74',
+  secondary: '#254B5A',
+  tertiary: '#5DA6A7',
+
   txtMain: '#214559',
   txtMainRed: '#FE6165',
   txtDescription: '#757575',
@@ -18,7 +22,9 @@ const colors = {
   bdMainRed: '#FE6165',
   bdWhite: '#ffffff',
   bdLine: '#dddddd',
-  bdInput: '#cbcbcb'
+  bdInput: '#cbcbcb',
+
+  authBorder:'#b76c94',
 }
 
 export default colors

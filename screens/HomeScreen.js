@@ -12,7 +12,7 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-import LoginForm from '../components/LoginForm.js'
+import LoginScreen from './AuthScreens/LoginScreen.js'
 import {  navigate, NavigationActions, navigation } from 'react-navigation';
 
 import { Input,Button} from 'react-native-elements'
@@ -63,7 +63,7 @@ export default class HomeScreen extends React.Component {
             <Text style={styles.getStartedText}>Please Login</Text>
           </View>
 
-        <LoginForm navigation={this.props.navigation} />
+        <LoginScreen navigation={this.props.navigation} />
 
         <View style={styles.tabBarInfoContainer}>
 

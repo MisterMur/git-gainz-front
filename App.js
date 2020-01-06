@@ -1,14 +1,13 @@
 import React from 'react';
 import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity } from 'react-native';
 import { AppLoading, Font, Icon } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
 import PrimaryNav from './navigation/AppNavigation';
 import { DrawerActions } from 'react-navigation';
 import {Router, Scene} from 'react-native-router-flux';
 import {PersistGate} from 'redux-persist/integration/react'
 
 import ReduxNavigation from './navigation/ReduxNavigation';
-import {ActivityIndicator, AsyncStorage} from 'react-native';
+import { AsyncStorage} from 'react-native';
 
 // import MainDrawerNavigator from './navigation/MainDrawerNavigator'
 // import HorizontalMenu from './screens/drawers/HorizontalMenu'
@@ -20,13 +19,12 @@ import { Provider, connect } from 'react-redux';
 
 import storeObj from './store.js'
 
-import Authentication from './screens/LoginScreen'
-import ScheduleListScreen from './screens/ScheduleListScreen'
-import WorkoutListScreen from './screens/WorkoutListScreen'
-import WorkoutScreen from './screens/WorkoutScreen'
-
-
-import LoginForm from './components/LoginForm'
+// import ScheduleListScreen from './screens/ScheduleListScreen'
+// import WorkoutListScreen from './screens/WorkoutListScreen'
+// import WorkoutScreen from './screens/WorkoutScreen'
+//
+//
+// import LoginScreen from './screens/AuthScreens/LoginScreen'
 
 
 export default class App extends React.Component {
@@ -109,3 +107,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+// AppRegistry.registerComponent('App', () => App);
+// AppRegistry.runApplication('App', { rootTag: document.getElementById('react-root') });

@@ -4,12 +4,11 @@ import WorkoutListScreen from './screens/WorkoutListScreen'
 import WorkoutScreen from './screens/WorkoutScreen'
 
 
-import LoginForm from './components/LoginForm'
+import LoginScreen from './screens/AuthScreens/LoginScreen'
 
 export const fluxrender() {
     if (!this.state.isLoaded) {
       return (
-        <ActivityIndicator />
       )
     } else {
       return(
@@ -17,7 +16,7 @@ export const fluxrender() {
           <Router>
             <Scene key='root'>
               <Scene
-                component={LoginForm}
+                component={LoginScreen}
                 initial={!this.state.hasToken}
                 hideNavBar={true}
                 key='Authentication'

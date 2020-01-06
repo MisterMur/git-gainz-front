@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View} from 'react-native';
+import {  AsyncStorage, StatusBar, StyleSheet, View} from 'react-native';
 import { connect } from 'react-redux';
 import { getUserToken } from '../../Redux/actions'
 
@@ -30,9 +30,9 @@ class AuthLoadingScreen extends React.Component {
     // Render any loading content that you like here
     render() {
       console.log(this.props.token, this.props.token.token);
+      // <ActivityIndicator/>
         return (
             <View style={styles.container}>
-                <ActivityIndicator />
                 <StatusBar barStyle="default" />
             </View>
         );

@@ -24,7 +24,7 @@ import { Hoshi } from 'react-native-textinput-effects';
 
 
 //components imports
-import LoginForm from '../../components/LoginForm.js'
+import LoginScreen from './LoginScreen.js'
 import Container from '../../components/Container.js'
 
 //actions imports
@@ -34,6 +34,7 @@ import {postNewUser,setCurrentUser} from '../../actions/authActions'
 import {API_URL} from '../../constants/types.js'
 //style imports
 import colors from '../../styles/colors'
+import {styles} from '../../styles/styles'
 
 class SignupScreen extends React.Component {
   static navigationOptions = {
@@ -115,7 +116,10 @@ setUserToken = () => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({user})
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        })
     })
     .then(res => res.json())
     .then(response => {
@@ -160,16 +164,18 @@ setUserToken = () => {
   }
 
   renderSignupButon(){
-    return (
-      <View style={{flex: 1, flexDirection: 'row'}}>
-      <TouchableOpacity style={styles.signupButton}  onPress={ ()=>{this.signup()} }>
-        <Text style={styles.buttonText}>Sign Up!</Text>
-        <FAIcon name='sign-out' size={30} style={styles.buttonIcon}  />
+    if(this.state.credsChecked){
 
+      return (
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <TouchableOpacity style={styles.authButton}  onPress={ ()=>{this.signup()} }>
+            <Text style={styles.buttonText}>Sign Up!</Text>
+            <FAIcon name='sign-out' size={30} style={styles.buttonIcon}  />
+          </TouchableOpacity>
+        </View>
+      )
 
-      </TouchableOpacity>
-    </View>
-    )
+    }
   }
   renderInputs() {
   if (this.state.credsChecked) {
@@ -179,46 +185,43 @@ setUserToken = () => {
 
         <Hoshi
           label={'Name'}
-          borderColor={'#b76c94'}
+          borderColor={colors.authBorder}
           onChangeText={(name) => this.setState({name})}
           value={this.state.name}
           />
 
         <Hoshi
           label={'Email'}
-          borderColor={'#b76c94'}
+          borderColor={colors.authBorder}
           onChangeText={(email)=>this.setState({email})}
           value={this.state.email}
           />
 
 
         {this.state.password.length < 6 && this.state.passSel ? <Text style={{color: 'red', marginLeft: 10}}>Password must be at least 6 characters</Text>: null}
-        <TextInput
-          style={styles.input}
-          placeholder='Password'
+        <Hoshi
+          label={'Password'}
+          borderColor={colors.authBorder}
           onFocus={() => this.setState({passSel: true})}
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor='white'
-          onChangeText={(password) => this.setState({password})}
-          value={this.state.password}
+          onChangeText={(password)=>this.setState({password})}
+          value = {this.state.password}
+          secureTextEntry
           />
-        {this.state.password !== this.props.passwordConfirmation && this.state.passConfSel ? <Text style={{color: 'red', marginLeft: 10}}>Passwords do not match</Text>: null}
-        <TextInput
-          style={styles.input}
-          placeholder='Confirm Password'
+
+        {this.state.password !== this.state.passwordConfirmation && this.state.passConfSel ? <Text style={{color: 'red', marginLeft: 10}}>Passwords do not match</Text>: null}
+
+        <Hoshi
+          label={'Confirm Password'}
+          borderColor={colors.authBorder}
           onFocus={() => this.setState({passConfSel: true})}
-          secureTextEntry={true}
-          autoCapitalize="none"
-          placeholderTextColor='white'
           onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
           value={this.state.passwordConfirmation}
+          secureTextEntry
           />
       </View>
-
-        )
-      }
+        )}
   }
+
   render() {
     return (
       <Container style={[ styles.container, this.props.style || {} ]}>
@@ -242,92 +245,3 @@ function mapStateToProps(state){
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(SignupScreen)
-
-const styles = StyleSheet.create({
-    viewStyle: {
-      marginTop: 50,
-      padding: 10,
-    },
-    container: {
-        shadowColor: '#000000',
-        shadowOpacity: 0.4,
-        shadowOffset: { height: -5, width:-5},
-        shadowRadius: 10,
-        backgroundColor: colors.bgMain,
-    },
-    headerHolder: {
-        padding: 25,
-        flex: 1
-    },
-
-    navBar: {
-      height: 50,
-      justifyContent: 'center',
-      paddingHorizontal: 25,
-
-    },
-    input: {
-      width: 350,
-      height: 55,
-      backgroundColor: '#00b894',
-      opacity: 0.6,
-      margin: 10,
-      padding: 8,
-      color: 'white',
-      borderRadius: 14,
-      fontSize: 18,
-      fontWeight: '500',
-      justifyContent: 'center'
-    },
-    button: {
-        height:20,
-        borderRadius: 50,
-        borderStyle: 'solid',
-        borderWidth: 2,
-        borderColor: '#e3e3e3',
-        padding: 1,
-        width:'90%',
-        marginBottom: 20,
-        marginLeft:'5%',
-    },
-    buttonText:{
-        fontSize:20,
-        color:'white',
-        textAlign:'center',
-    },
-    authInputs: {
-      borderRadius: 4,
-      borderStyle: 'solid',
-      borderWidth: 2,
-      borderColor: '#e3e3e3',
-      width:'90%',
-      marginBottom: '10%',
-      marginLeft:'5%',
-    },
-    signupButton: {
-        width: '90%',
-        marginLeft:'5%',
-        marginVertical: 70,
-        height: 50,
-        borderColor: colors.bdWhite,
-        backgroundColor: 'transparent',
-        borderStyle: 'solid',
-        borderWidth: 2,
-        borderColor: '#e3e3e3',
-        borderRadius:50,
-    },
-    buttonText:{
-        fontSize:20,
-        color:'white',
-        textAlign:'center',
-    },
-    buttonIcon:{
-        color:colors.bdWhite,
-        marginLeft:80,
-        marginTop:-27
-    },
-    logo: {
-        // ...styText,
-        marginTop: 10
-    },
-})
