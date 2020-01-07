@@ -60,7 +60,7 @@ export function fetchSchedulesWorkouts(schedule){
   return dispatch=>{
     return ScheduleAdapter.getSchedulesWorkouts(schedule)
     .then(workouts=>{
-      console.log('fetching scheudle workouts',workouts)
+      // console.log('fetching scheudle workouts',workouts)
       dispatch(fetchWorkoutsSuccess(workouts))
       return workouts
     })

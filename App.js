@@ -1,16 +1,14 @@
 import React from 'react';
-import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity } from 'react-native';
+import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity,AsyncStorage } from 'react-native';
 import { AppLoading, Font, Icon } from 'expo';
 import PrimaryNav from './navigation/AppNavigation';
 import { DrawerActions } from 'react-navigation';
-import {Router, Scene} from 'react-native-router-flux';
 import {PersistGate} from 'redux-persist/integration/react'
 
 import ReduxNavigation from './navigation/ReduxNavigation';
-import { AsyncStorage} from 'react-native';
 
-// import MainDrawerNavigator from './navigation/MainDrawerNavigator'
-// import HorizontalMenu from './screens/drawers/HorizontalMenu'
+// import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity,AsyncStorage } from 'react-native-web';
+
 import {Asset} from 'expo-asset'
 
 import { createStore } from 'redux';
@@ -18,13 +16,6 @@ import { Provider, connect } from 'react-redux';
 
 
 import storeObj from './store.js'
-
-// import ScheduleListScreen from './screens/ScheduleListScreen'
-// import WorkoutListScreen from './screens/WorkoutListScreen'
-// import WorkoutScreen from './screens/WorkoutScreen'
-//
-//
-// import LoginScreen from './screens/AuthScreens/LoginScreen'
 
 
 export default class App extends React.Component {

@@ -55,12 +55,12 @@ class SettingsScreen extends React.Component {
         <TouchableOpacity
           onPress={null}
           style={styles.inactiveButtons}>
-          <Text style={styles.buttonText}>this.state.user.phonenumber</Text>
+          <Text style={styles.buttonText}>Phone:{this.state.user.phonenumber}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={null}
           style={styles.inactiveButtons}>
-          <Text style={styles.buttonText}>this.state.user.email</Text>
+          <Text style={styles.buttonText}>Email:{this.state.user.email}</Text>
         </TouchableOpacity>
         <TouchableOpacity
            onPress={this.logout}

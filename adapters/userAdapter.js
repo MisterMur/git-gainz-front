@@ -46,7 +46,8 @@ export default class UserAdapter {
         Authorization: token
       },
     }).then(this.handleErrors)
-      .then(res => res.json())//.then(console.log)
+      .then(res => res.json())
+      .then(console.log)
   }
 
   static async getUserSchedules() {
