@@ -1,13 +1,17 @@
 {
   "expo": {
     "name": "GitGainz",
-    "icon":"./assets/images/GooglePlayStore.png",
-    "version":"1.0.0",
+    "icon": "./assets/images/GooglePlayStore.png",
+    "version": "1.0.0",
     "slug": "git-gainz",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "ios":{  "bundleIdentifier":"com.brianmurillo.GitGainz"  },
-    "android":{"package":"com.brianmurillo.GitGainz"},
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.brianmurillo.GitGainz"
+    },
     "platforms": [
       "ios",
       "android"
@@ -24,8 +28,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    }
+    "description": ""
   }
 }

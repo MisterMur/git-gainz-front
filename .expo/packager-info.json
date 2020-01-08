@@ -1,10 +1,10 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 119148,
+  "packagerPid": 30568,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://if-ce4.anonymous.git-gainz-front.exp.direct",
-  "packagerNgrokUrl": "https://packager.if-ce4.anonymous.git-gainz-front.exp.direct",
-  "ngrokPid": 123052,
+  "expoServerNgrokUrl": "https://if-ce4.brian-murillo.git-gainz-front.exp.direct",
+  "packagerNgrokUrl": "https://packager.if-ce4.brian-murillo.git-gainz-front.exp.direct",
+  "ngrokPid": 30896,
   "webpackServerPort": 19006
 }
