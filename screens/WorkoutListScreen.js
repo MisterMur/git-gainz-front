@@ -108,7 +108,6 @@ class WorkoutListScreen extends React.Component {
         {this.renderNavBar()}
         {this.props.currentSchedule?this.renderWorkoutList():null}
         {this.renderAddWorkoutForm()}
-        {this.renderNav()}
 
       </ScrollView>
     );

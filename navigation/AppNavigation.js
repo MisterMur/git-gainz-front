@@ -16,6 +16,7 @@ import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 import LoginScreen from '../screens/AuthScreens/LoginScreen.js'
 import SignupScreen from '../screens/AuthScreens/SignupScreen.js';
 import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen.js'
+import HistoryScreen from '../screens/History/HistoryScreen.js'
 
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
 
@@ -64,6 +65,7 @@ const DrawerStack =createDrawerNavigator({
 
   // screen1: { screen: LoginScreen },
   "Workout Schedules": { screen: WorkoutStack},
+  "History":{screen:HistoryScreen}
   screen3: { screen: SettingsScreen},
 
 },

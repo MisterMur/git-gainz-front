@@ -62,6 +62,18 @@ export default class UserAdapter {
       .then(res => res.json())//.then(console.log)
   }
 
+  static async fetchCompletedWorkouts() {
+    const token = await AsyncStorage.getItem('access_token')
+    console.log('in fetch completedWorkouts ',token)
+    return fetch(API_URL+`users/${token.split(':')[0]}`, {
+      method: "GET",
+      headers: {
+        Authorization: token
+      },
+    }).then(this.handleErrors)
+      .then(res => res.json())//.then(console.log)
+  }
+
   static async isLoggedIn(){
     const token = await AsyncStorage.getItem('access_token')
     if (token){
