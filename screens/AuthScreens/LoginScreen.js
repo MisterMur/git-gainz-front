@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
      Alert,
      StyleSheet,
+     KeyboardAvoidingView,
    } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 // import Button from 'react-native-button';
@@ -89,11 +90,15 @@ userLogin = () => {
     )
     } else {
       this.setState({loading: false})
+      AsyncStorage.setItem('access_token', response.access_token)
 
-      this.saveLoginToken(response.access_token)
+      // this.saveLoginToken(response.access_token)
       this.props.setCurrentUser();
       // Actions.HomePage();
-      this.props.navigation.navigate('drawerStack')
+      if(this.props.currentUser){
+
+        this.props.navigation.navigate('drawerStack')
+      }
       // this.props.setCurrentUser(this.props.email, response.access_token, this.props.navigation, "log-in")
     }
   })
@@ -179,7 +184,8 @@ userLogin = () => {
 
   render() {
     return (
-      <Container style={[ styles.container, this.props.style || {} ]}>
+
+    <Container style={[ styles.container, this.props.style || {} ]}>
 
       {this.renderHeader()}
       <View style={styles.authInputs} >
@@ -209,7 +215,7 @@ userLogin = () => {
 }
 
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state)  {
   const {auth,user}=state;
   return {
     email: auth.email,

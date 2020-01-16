@@ -95,7 +95,7 @@ export function setCurrentUser(){
   return (dispatch)=>{
     return UserAdapter.fetchCurrentUser()
     .then(user=>{
-      console.log(user)
+      console.log('setting user',user)
       dispatch(fetchCurrentUserSuccess(user))
       return user
     })

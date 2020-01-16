@@ -65,7 +65,7 @@ const DrawerStack =createDrawerNavigator({
 
   // screen1: { screen: LoginScreen },
   "Workout Schedules": { screen: WorkoutStack},
-  "History":{screen:HistoryScreen}
+  "History":{screen:HistoryScreen},
   screen3: { screen: SettingsScreen},
 
 },

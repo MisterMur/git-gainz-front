@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import {
   ScrollView,
+  View,
   Text,
   Button,
   TouchableOpacity,
@@ -16,7 +17,10 @@ import FAIcon from 'react-native-vector-icons/FontAwesome'
 //component imports
 import Exercise from '../../components/Exercise.js'
 import WorkoutList from '../../components/WorkoutList.js'
+
+
 //action imports
+import fetchCompletedWorkouts from '../../actions/completedWorkoutActions'
 
 
 //constant imports
@@ -24,6 +28,7 @@ import WorkoutList from '../../components/WorkoutList.js'
 
 //style imports
 import colors from '../../styles/colors'
+import {styles} from '../../styles/styles'
 
 class HistoryScreen extends Component {
   static navigationOptions = {
@@ -67,13 +72,15 @@ class HistoryScreen extends Component {
     )
   }
 }
+
 const mapDispatchToProps=dispatch =>({
+  fetchCompletedWorkouts:()=>dispatch(fetchCompletedWorkouts()),
 
 })
 function mapStateToProps(state){
   const {history} = state;
   return {
-    completedWorkouts:history.completedWorkouts;
+    completedWorkouts:history.completedWorkouts,
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps) (HistoryScreen);

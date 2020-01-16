@@ -1,5 +1,5 @@
-export const API_URL = `http://gitgainz.herokuapp.com/api/v1/`
-// export const API_URL = 'http://192.168.2.243:3000/api/v1/'
+// export const API_URL = `http://gitgainz.herokuapp.com/api/v1/`
+export const API_URL = 'http://192.168.2.243:3000/api/v1/'
 // const API_URL=`http://192.168.2.243:3000/api/v1/`
 
 export const ADD_NEW_WORKOUT ='ADD_WORKOUT'

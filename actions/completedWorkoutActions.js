@@ -6,24 +6,45 @@ import {
   ADD_COMPLETED_WORKOUT,
   SET_COMPLETEDWORKOUTS,
 
-}
+} from '../constants/types.js'
 
-import UserAdapter from '../adapters/UserAdapter.js'
+import UserAdapter from '../adapters/userAdapter.js'
+import WorkoutAdapter from '../adapters/workoutAdapter.js'
 
-export function getCompletedWorkoutsBegin(){
+export function fetchCompletedWorkoutsBegin(){
   return {
     type:FETCH_COMPLETEDWORKOUTS_BEGIN,
   }
 }
-export function getCompletedWorkoutsFailure(error){
+export function fetchCompletedWorkoutsFailure(error){
   return {
     type:FETCH_COMPLETEDWORKOUTS_FAILURE,
     payload:{error}
   }
 }
-export function getCompletedWorkoutsSuccess(completedWorkouts){
+export function fetchCompletedWorkoutsSuccess(completedWorkouts){
   return {
     type:FETCH_COMPLETEDWORKOUTS_SUCCESS,
     payload: completeworkouts,
+  }
+}
+
+export function fetchCompletedWorkouts(){
+  return (dispatch)=>{
+    return UserAdapter.fetchCurrentUser()
+    .then(user=>{
+      dispatch(fetchCompletedWorkoutsSuccess(user.user_workouts))
+      return user.user_workouts
+    })
+    .catch(error=>dispatch(fetchCompletedWorkoutsFailure(error)))
+  }
+}
+export function addCompletedWorkout(workout){
+  return (dispatch)=>{
+    return WorkoutAdapter.addCompletedWorkout(workout)
+  .then(function(){
+    // console.warn('after fetchs in post new completeworkout')
+    dispatch(fetchCompletedWorkouts(currentUser))
+  })
   }
 }
