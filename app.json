@@ -29,42 +29,6 @@
       "**/*"
     ],
     "description": " Git-Gainz-Backend
-API built in conjunction with GITGAINZFRONT a react native mobile app for tracking workouts , reps, sets exercises.
-
-Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-Installing
-A step by step series of examples that tell you how to get a development env running
-
-bundle install
-rails db:migrate
-rails db:seed
-rails s
-End with an example of getting some data out of the system or using it for a little demo
-
-Deployment
-Frontend deployment is still in progress
-GITHUB - for github repo of frontend
-API - Backend API is deployed using heroku.com
-Built With
-Rails - The API framework used
-Heroku - Deployment
-Contributing
-
-Versioning
-I use Github for versioning.
-
-Authors
-**Brian Murillo ** 
-
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details
-
-Acknowledgments
-Hat tip to anyone whose code was used
-Inspiration
-etc
-"
+API built in conjunction with GITGAINZFRONT a react native mobile app for tracking workouts , reps, sets exercises.""
   }
 }
