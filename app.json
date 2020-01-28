@@ -28,7 +28,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "description": " Git-Gainz-Backend
-API built in conjunction with GITGAINZFRONT a react native mobile app for tracking workouts , reps, sets exercises.""
+    "description": "Git-Gainz-Backend API built in conjunction with GITGAINZFRONT a react native mobile app for tracking workouts , reps, sets exercises."
   }
 }
