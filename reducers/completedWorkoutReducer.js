@@ -36,6 +36,13 @@ export default function completedWorkoutReducer(state=initialState,action){
         completedWorkouts:action.payload.userWorkouts
 
       }
+    case ADD_COMPLETEDWORKOUT:
+      return {
+        ...state,
+        loading:false,
+        completedWorkouts:[...state.completedWorkouts,action.payload.completedWorkout]
+
+      }
 
 
 

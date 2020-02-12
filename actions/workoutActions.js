@@ -1,7 +1,18 @@
-import {fetchSchedulesFailure} from './scheduleActions.js'
+import {fetchSchedulesFailure,fetchMySchedules} from './scheduleActions.js'
 import {fetchExercisesSuccess,fetchExercisesFailure} from './exerciseActions.js'
 import {API_URL} from '../constants/types.js'
-import {ADD_NEW_WORKOUT,SET_WORKOUTS,SET_CURRENT_WORKOUT,FETCH_WORKOUTS_BEGIN,FETCH_WORKOUTS_SUCCESS,FETCH_WORKOUTS_FAILURE} from '../constants/types.js'
+import {
+  ADD_NEW_WORKOUT,SET_WORKOUTS,SET_CURRENT_WORKOUT,
+  FETCH_WORKOUTS_BEGIN,FETCH_WORKOUTS_SUCCESS,
+  FETCH_WORKOUTS_FAILURE,
+  
+  ADD_COMPLETEDWORKOUT,
+  FETCH_COMPLETEDWORKOUTS_BEGIN,
+  FETCH_COMPLETEDWORKOUTS_SUCCESS,
+  FETCH_COMPLETEDWORKOUTS_FAILURE,
+  SET_COMPLETEDWORKOUTS,
+
+} from '../constants/types.js'
 import WorkoutAdapter from '../adapters/workoutAdapter.js'
 import ScheduleAdapter from '../adapters/scheduleAdapter.js'
 import UserAdapter from '../adapters/userAdapter.js'
@@ -30,11 +41,11 @@ export function fetchWorkoutsBegin(){
   type:FETCH_WORKOUTS_BEGIN
 }
 export function fetchWorkoutsSuccess(workouts){
-  console.log('fetch success wrokouts: ',workouts.workouts)
+  // console.warn('fetch success wrokouts: ',workouts)
   return {
 
     type:FETCH_WORKOUTS_SUCCESS,
-    payload: workouts.workouts
+    payload: workouts
   }
 }
 export function fetchWorkoutsFailure(error){
@@ -45,6 +56,24 @@ export function fetchWorkoutsFailure(error){
     payload:{error}
   }
 }
+export function fetchCompletedWorkoutsBegin(){
+  return {
+    type:FETCH_COMPLETEDWORKOUTS_BEGIN,
+  }
+}
+export function fetchCompletedWorkoutsFailure(error){
+  return {
+    type:FETCH_COMPLETEDWORKOUTS_FAILURE,
+    payload:{error}
+  }
+}
+export function fetchCompletedWorkoutsSuccess(completedWorkouts){
+  return {
+    type:FETCH_COMPLETEDWORKOUTS_SUCCESS,
+    payload: completeworkouts,
+  }
+}
+
 
 export function fetchWorkouts(){
   return dispatch=>{
@@ -59,10 +88,10 @@ export function fetchWorkouts(){
 export function fetchSchedulesWorkouts(schedule){
   return dispatch=>{
     return ScheduleAdapter.getSchedulesWorkouts(schedule)
-    .then(workouts=>{
-      // console.log('fetching scheudle workouts',workouts)
-      dispatch(fetchWorkoutsSuccess(workouts))
-      return workouts
+    .then(sched=>{
+      // console.warn('fetching scheudle workouts',sched.workouts)
+      dispatch(fetchWorkoutsSuccess(sched.workouts))
+      return sched.workouts
     })
     .catch(error=> dispatch(fetchWorkoutsFailure(error)))
   }
@@ -84,16 +113,18 @@ export function postNewWorkout(workout,schedule){
   return (dispatch)=>{
     return WorkoutAdapter.addNewWorkout(workout,schedule)
     .then(function (){
-      // dispatch({type:ADD_NEW_WORKOUT,payload:{workout}})
+      dispatch({type:ADD_NEW_WORKOUT,payload:{workout}})
+      // fetchMySchedules()
       dispatch(fetchSchedulesWorkouts(schedule))
     })
   }
 }
-export function postNewCompleteWorkout(workout){
+export function postNewCompleteWorkout(completedWorkout){
   return (dispatch)=>{
-    return WorkoutAdapter.addCompletedWorkout(workout)
+    return WorkoutAdapter.addCompletedWorkout(completedWorkout)
   .then(function(){
-    // console.warn('after fetchs in post new completeworkout')
+    dispatch({type:ADD_COMPLETEDWORKOUT,payload:{completedWorkout}})
+    console.warn('after fetchs in post new completeworkout',completedWorkout)
     dispatch(fetchCompletedWorkouts())
   })
   }

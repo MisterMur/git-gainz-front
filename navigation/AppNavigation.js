@@ -52,7 +52,8 @@ const WorkoutStack = createStackNavigator({
 
   headerStyle: {backgroundColor: '#E73536'},
 
-  headerMode: 'none',
+  headerMode: 'screen',
+  cardStyle:{backgroundColor:'powderblue'},
   title:'Main',
   drawerLabel: 'Workout Schedules',
   initialRouteName: 'ScheduleList',

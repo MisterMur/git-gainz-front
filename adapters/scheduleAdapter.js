@@ -68,7 +68,7 @@ export default class ScheduleAdapter {
       headers:{Authorization:userToken}
     })
     .then(this.handleErrors)
-    .then(res=> res.json())
+    .then(sched=> sched.json())
 
   }
 

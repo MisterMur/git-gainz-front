@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   Button,
+  TextInput,
   TouchableOpacity
 } from 'react-native';
 import { DrawerActions } from 'react-navigation';
@@ -20,6 +21,10 @@ import WorkoutList from '../components/WorkoutList.js'
 import Workout from '../components/Workout.js'
 
 import colors from '../styles/colors'
+// import styles from '../styles/base'
+import navBar from '../styles/base'
+import addButton from '../styles/base'
+
 
 
 class WorkoutListScreen extends React.Component {
@@ -28,7 +33,7 @@ class WorkoutListScreen extends React.Component {
 
   };
   state={
-    text:'Enter Workout Name Here'
+    text:''
   }
 
   componentDidMount(){
@@ -74,13 +79,18 @@ class WorkoutListScreen extends React.Component {
       <>
 
         <Input
+          placeholder='Enter a Workout Name'
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
         />
-        <ButtonElement
+        <TouchableOpacity
+          style={styles.addButton}
           title="Add New Workout"
-          onPress={() => this.handleAddWorkout()}
-        />
+          onPress={() => this.handleAddWorkout()}>
+
+          <FAIcon name='plus' size={35} style={{ color: colors.txtWhite,bottom:-5,right:-5, }} />
+        </TouchableOpacity>
+
       </>
     )
 
@@ -104,12 +114,13 @@ class WorkoutListScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView className="WorkoutList">
+      <>
         {this.renderNavBar()}
-        {this.props.currentSchedule?this.renderWorkoutList():null}
         {this.renderAddWorkoutForm()}
-
-      </ScrollView>
+        <ScrollView className="WorkoutList">
+          {this.props.currentSchedule?this.renderWorkoutList():null}
+        </ScrollView>
+      </>
     );
   }
 }
@@ -123,7 +134,7 @@ function mapStateToProps(state){
 
   const {schedule,workout} = state
   return {
-    workouts: schedule.currentSchedule.workouts,
+    workouts: workout.workouts,
     currentSchedule:schedule.currentSchedule,
   }
 }

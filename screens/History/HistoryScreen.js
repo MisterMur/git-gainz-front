@@ -64,11 +64,13 @@ class HistoryScreen extends Component {
 
   render() {
     return (
+      <>
+      {this.renderNavBar()}
       <ScrollView className="WorkoutList">
-        {this.renderNavBar()}
         {this.renderCompletedWorkoutList()}
 
       </ScrollView>
+      </>
     )
   }
 }

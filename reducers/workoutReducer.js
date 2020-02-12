@@ -22,14 +22,15 @@ export default function workoutReducer(state=initialState,action){
         error:null
       }
     case FETCH_WORKOUTS_SUCCESS:
-      // console.log('fetch success')
+      // console.log('fetch workouts in reducer success',action.payload)
       return {
         ...state,
         loading:false,
         currentSchedule:{
           ...state.currentSchedule,
-          workouts:action.payload.workouts
+          workouts:action.payload
         },
+        workouts:action.payload,
       }
       case FETCH_WORKOUTS_FAILURE:
         return {
@@ -39,10 +40,15 @@ export default function workoutReducer(state=initialState,action){
           workouts:[]
         }
         case ADD_NEW_WORKOUT:
-        // console.log('workout reducer add new workout',action.payload.workout)
+        // console.log('workout reducer add new workout',state.workouts)
 
           return{
-            ...state,workouts:[...state.workouts,action.payload.workout]
+            ...state,
+            currentSchedule:{
+              ...state.currentSchedule,
+              workouts:[...state.workouts,action.payload.workout]
+            },
+            workouts:[...state.workouts,action.payload.workout]
           }
         case SET_WORKOUTS:
           return{

@@ -1,17 +1,18 @@
 // app/styles/base.js
 
 import {StyleSheet, Dimensions} from 'react-native'
+import colors from './colors'
 
 export const dimensions = {
   fullHeight: Dimensions.get('window').height,
   fullWidth: Dimensions.get('window').width
 }
 
-export const colors  = {
-  primary: '#226B74',
-  secondary: '#254B5A',
-  tertiary: '#5DA6A7'
-}
+// export const colors  = {
+//   primary: '#226B74',
+//   secondary: '#254B5A',
+//   tertiary: '#5DA6A7'
+// }
 
 export const padding = {
   sm: 10,
@@ -57,8 +58,25 @@ export const inputMain= {
     justifyContent: 'center',
     alignItems: 'center'
   }
+  export const navBar = {
+    height: 50,
+    justifyContent: 'center',
+    paddingHorizontal: 25
 
-  export const styles = StyleSheet.create({
+  }
+  export const addButton = {
+      position: 'absolute',
+      bottom:20,
+      right:20,
+      padding: 5,
+      height: 50,
+      width: 50,  //The Width must be the same as the height
+      borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+      backgroundColor:colors.bgMainRed,
+      zIndex:999,
+  }
+
+  export const styles = {
     navBar: {
         height: 50,
         justifyContent: 'center',
@@ -93,11 +111,23 @@ export const inputMain= {
       marginBottom: 150,
       marginLeft:'5%',
     },
+    addButton:{
+      position: 'absolute',
+      bottom:20,
+      right:20,
+      padding: 5,
+      height: 50,
+      width: 50,  //The Width must be the same as the height
+      borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+      backgroundColor:colors.bgMainRed,
+      zIndex:999,
 
-  })
+    },
+
+  }
 
 
-  const s = StyleSheet.create({
+  const s = {
       viewStyle: {
         marginTop: 50,
         padding: 10,
@@ -178,4 +208,5 @@ export const inputMain= {
           // ...styText,
           marginTop: 10
       },
-  })
+
+  }

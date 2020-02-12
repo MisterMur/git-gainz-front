@@ -42,7 +42,6 @@ class Workout extends React.Component {
           <Divider style={{ backgroundColor: 'red' }} />
 
           <Button
-            icon={<Icon name="user" color="#4F8EF7" />}
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
             title='VIEW NOW'

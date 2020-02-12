@@ -38,7 +38,10 @@ class WorkoutScreen extends Component {
   state={
     text:'',
     workout:{
-      exercises:{}
+      exercises:{
+        // reps:'',
+        // sets:'',
+      }
     }
   }
   openDrawer = () => {
@@ -70,10 +73,13 @@ class WorkoutScreen extends Component {
     }
   }
   addNewExercise=()=>{
-    this.props.postNewExercise({
-      name:this.state.text,
-      sets:[]
-    },this.props.currentWorkout)
+    if(this.state.text){
+
+      this.props.postNewExercise({
+        name:this.state.text,
+        sets:[]
+      },this.props.currentWorkout)
+    }
 
     this.setState({text:''})
   }
@@ -106,16 +112,17 @@ class WorkoutScreen extends Component {
   renderAddExerciseForm=()=>{
     return (
       <>
-      <Input
+      <TextInput
         onChangeText={(text) => this.setState({text})}
         value={this.state.text}
       />
-    <Button
-        backgroundColor='#03A9F4'
-        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-        title='Add New Exercise'
-        onPress={this.addNewExercise}
-      />
+      <TouchableOpacity
+        style={styles.addButton}
+        title="Add New Exercise"
+        onPress={() => this.addNewExercise()}>
+        <FAIcon name='plus' size={35} style={{ color: colors.txtWhite,bottom:-5,right:-5, }} />
+      </TouchableOpacity>
+
       </>
     )
   }
@@ -129,18 +136,21 @@ class WorkoutScreen extends Component {
     // const exercises = navigation.getParam("exercises",'NO-EXERCISES')
     // console.log('exercises',exercises)
     return (
+      <>
+      {this.renderNavBar()}
+      {this.renderAddExerciseForm()}
       <ScrollView>
-        {this.renderNavBar()}
-        {this.renderAddExerciseForm()}
         {this.renderExercises()}
-        <Button
-          backgroundColor='#03A9F4'
-          buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-          title='Finish Workout'
-          onPress={this.handleCompleteWorkout}
-        />
 
       </ScrollView>
+      <TouchableOpacity
+        backgroundColor='#03A9F4'
+        buttonStyle={{width:'100%',backgroundColor:'teal',borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+        title='Finish Workout'
+        onPress={this.handleCompleteWorkout}
+        ><Text>FInish Workout</Text>
+      </TouchableOpacity>
+      </>
     );
   }
 }
@@ -169,7 +179,7 @@ const styles = StyleSheet.create({
   },
   addButton:{
     position: 'absolute',
-    bottom:20,
+    bottom:60,
     right:20,
     padding: 5,
     height: 50,

@@ -22,14 +22,15 @@ import Container from '../components/Container.js'
 import { fetchMySchedules,fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
 
 import colors from '../styles/colors'
+import addButton from '../styles/base'
 
 class ScheduleListScreen extends Component {
   static navigationOptions = {
-    title: 'Schedules List',
+    title: 'Schedule List Screen',
 
   };
   state={
-    text:'Enter Schedule Name Here'
+    text:''
   }
 
 
@@ -71,7 +72,8 @@ class ScheduleListScreen extends Component {
     return (
       <>
         {this.renderNavBar()}
-        <Input
+        <TextInput
+          placeholder='Enter a Schedule Name'
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
           />

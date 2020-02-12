@@ -1,5 +1,9 @@
 import React from "react";
-import {Text,View,FlatList,StyleSheet} from 'react-native'
+import {
+  Text,
+  View,FlatList,
+  StyleSheet,Dimensions,
+} from 'react-native'
 import {connect} from 'react-redux'
 
 import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
@@ -27,25 +31,12 @@ class Set extends React.Component {
   handleWeightOnChange=(weight)=>{
     this.setState({weight})
   }
-  // addCircuitsButton=()=>{
-  //   // console.log('in handle press return set')
-  //   // let newCircuits = []
-  //   // this.state.circuits.map(c=>{newCircuits.push({...c})})
-  //   // let newCurentCircuit ={ ...this.state.curentCircuit}
-  //   newCircuits.push(  newCurentCircuit)
-  //   this.props.postNewCircuit({
-  //     this.state.reps,
-  //     this.state.weight,
-  //     this.state.exercise_id,
-  //     this.state.rest
-  //   })
-  //   // this.setState({circuit:{exercise_id:this.props.exercise.id,rest:0,reps:0,weight:0},circuits:newCircuits})
-  // }
+
   renderCompleteCircuit=()=>{
     return(
       <Button
         backgroundColor='#03A9F4'
-        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+        buttonStyle={{borderRadius: 0.5, marginLeft: 0, marginRight: 0, marginTop: 10}}
         title='Complete Set'
         onPress={()=>this.props.addCircuitsButton(this.state.reps,this.state.weight,this.state.rest)}
        />
@@ -54,31 +45,35 @@ class Set extends React.Component {
 
 
   renderCircuitInput=()=>{
+    var width = Dimensions.get('window').width;
     return (
-      <>
-      <View style={{width: 40, height: 40, backgroundColor: 'powderblue'}}>
+      <View style={{flex:5,flexDirection:"row"}}>
+      <View style={{flex:1, }}>
         <Text>Reps </Text>
-      </View>
-      <View style={{width:100,height:50}}>
         <Input
           value={this.state.reps}
           onChangeText={reps=>this.handleRepsOnChange(reps)}
           placeholder='Reps'
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
-        />
+          />
       </View>
-      <View style={{width: 50, height: 40, backgroundColor: 'powderblue'}}>
+
+      <View style={{flex:1, }}>
         <Text>Weight </Text>
-      </View>
-      <View style={{width:110,height:50}}>
         <Input
           value={this.state.weight}
           onChangeText={weight=>this.handleWeightOnChange(weight)}
           placeholder='Weight'
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
-        />
+          />
       </View>
-      </>
+      <View style={{flex:1}}>
+        {this.renderCompleteCircuit()}
+      </View>
+
+
+
+    </View>
     )
   }
 
@@ -86,16 +81,17 @@ class Set extends React.Component {
 
 
     return (
+      <>
       <View style={{
-        flex: 4,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'stretch'
-      }}>
+          flex: 6,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'stretch',
+        }}>
         {this.renderCircuitInput()}
-        {this.renderCompleteCircuit()}
 
       </View>
+      </>
     )
   }
 }
