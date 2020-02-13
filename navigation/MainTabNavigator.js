@@ -8,7 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import WorkoutListScreen from '../screens/WorkoutListScreen';
 import WorkoutScreen from '../screens/WorkoutScreen'
 import SettingsScreen from '../screens/SettingsScreen';
-import SignInScreen from '../screens/SignInScreen.js';
+import SignUpScreen from '../screens/AuthScreens/SignupScreen.js';
 import ScheduleListScreen from '../screens/ScheduleListScreen.js'
 
 const HomeStack = createStackNavigator({

@@ -24,7 +24,7 @@ import colors from '../styles/colors'
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
-    title: 'Workout',
+    // title: 'Workout',
 
   };
 
