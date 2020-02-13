@@ -39,7 +39,6 @@ export default class UserAdapter {
   }
   static async fetchCurrentUser() {
     const token = await AsyncStorage.getItem('access_token')
-    // console.log('in fetch current user',token)
     return fetch(API_URL+`users/${token.split(':')[0]}`, {
       method: "GET",
       headers: {
@@ -51,26 +50,24 @@ export default class UserAdapter {
 
   static async getUserSchedules() {
     const token = await AsyncStorage.getItem('access_token')
-    // console.log('inget user schedules',token)
     return fetch(API_URL+`users/${token.split(':')[0]}`, {
       method: "GET",
       headers: {
         Authorization: token
       },
     }).then(this.handleErrors)
-      .then(res => res.json())//.then(console.log)
+      .then(res => res.json())
   }
 
   static async fetchCompletedWorkouts() {
     const token = await AsyncStorage.getItem('access_token')
-    // console.log('in fetch completedWorkouts ',token)
     return fetch(API_URL+`users/${token.split(':')[0]}`, {
       method: "GET",
       headers: {
         Authorization: token
       },
     }).then(this.handleErrors)
-      .then(res => res.json())//.then(console.log)
+      .then(res => res.json())
   }
 
   static async isLoggedIn(){

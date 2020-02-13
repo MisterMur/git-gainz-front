@@ -58,14 +58,11 @@ class WorkoutScreen extends Component {
   }
 
   renderExercises=()=>{
-    // console.log('workout screen render exercises',this.props.currentWorkout)
     if(this.props.currentWorkout.exercises){
-      // console.log('render exercises currentworkoutExercises',this.props.currentWorkout.exercises)
-      return this.props.currentWorkout.exercises.map((exercise,id)=>{
-        // console.log(exercise)
+      return this.props.currentWorkout.exercises.map((exercise,idx)=>{
         return(
             <Exercise
-              key={exercise.id}
+              key={idx}
               exercise={exercise}
             />
         )
@@ -129,12 +126,6 @@ class WorkoutScreen extends Component {
 
 
   render() {
-    // const {navigation} = this.props
-    // console.log('workoutscreen props',this.props)
-    // console.log('navigation in render workoutScreen: ',navigation)
-    // const name = navigation.getParam("name",'NO-EXERCISES')
-    // const exercises = navigation.getParam("exercises",'NO-EXERCISES')
-    // console.log('exercises',exercises)
 
     // <TouchableOpacity
     //   backgroundColor='#03A9F4'

@@ -8,11 +8,8 @@ import {FormInput,FormLabel} from 'react-native-elements'
 const ScheduleList = (props) => {
 
   const renderSchedules=()=>{
-    // console.log('schedule list props:',props)
     if(props.schedules){
-      // console.log('in render schedules',props.schedules)
       return props.schedules.map((schedule,id)=>{
-        // console.log('schedule:',schedule)
         return (
 
             <Schedule
@@ -20,7 +17,7 @@ const ScheduleList = (props) => {
             schedule={schedule}
             handlePress={props.handlePress}
             />
-          
+
         )
       })
     }

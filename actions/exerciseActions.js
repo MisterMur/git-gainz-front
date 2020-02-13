@@ -53,7 +53,6 @@ export function fetchWorkoutsExercises(workout){
 
 export function postNewExercise(exercise,currentWorkout){
   return dispatch=>{
-    console.log('exercise action add new circuit ',currentWorkout)
     return WorkoutAdapter.postWorkoutExercise(exercise,currentWorkout)
     .then(function(){
       dispatch(fetchWorkoutsExercises(currentWorkout))
@@ -61,7 +60,7 @@ export function postNewExercise(exercise,currentWorkout){
   }
 }
 function handleErrors(response) {
-  console.log('in handle errors, response:', response)
+  console.error('in handle errors, response:', response)
   if (!response.ok) {
 
     throw Error(response.statusText);

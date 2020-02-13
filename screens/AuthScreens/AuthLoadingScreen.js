@@ -27,7 +27,6 @@ class AuthLoadingScreen extends React.Component {
 
   componentDidMount() {
     AsyncStorage.getItem('access_token').then((token) => {
-      console.log('token:',token);
       this.setState({ hasToken: token!==null, isLoaded: true })
     });
 
@@ -42,8 +41,6 @@ class AuthLoadingScreen extends React.Component {
 
   navigate(){
     navTo = this.state.hasToken?'drawerStack':'loginStack'
-    // console.log('this has token',this.state.hasToken)
-    // console.log('were going to ',navTo)
     this.props.navigation.navigate(navTo)
   }
 

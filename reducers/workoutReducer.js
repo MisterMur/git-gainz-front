@@ -12,17 +12,14 @@ const initialState={
 
 
 export default function workoutReducer(state=initialState,action){
-  // console.log('%c Workout reducer:', 'color: orange', action);
 
   switch(action.type){
     case FETCH_WORKOUTS_BEGIN:
-      // console.log('fetch begin')
       return {...state,
         loading:true,
         error:null
       }
     case FETCH_WORKOUTS_SUCCESS:
-      // console.log('fetch workouts in reducer success',action.payload)
       return {
         ...state,
         loading:false,
@@ -40,7 +37,6 @@ export default function workoutReducer(state=initialState,action){
           workouts:[]
         }
         case ADD_NEW_WORKOUT:
-        // console.log('workout reducer add new workout',state.workouts)
 
           return{
             ...state,
@@ -60,13 +56,11 @@ export default function workoutReducer(state=initialState,action){
           }
 
         case FETCH_USER_WORKOUTS_BEGIN:
-          // console.log('fetch begin')
           return {...state,
             loading:true,
             error:null
           }
         case FETCH_USER_WORKOUTS_SUCCESS:
-          // console.log('fetch success')
           return {
             ...state,
             loading:false,
@@ -122,7 +116,6 @@ export default function workoutReducer(state=initialState,action){
 
         default:
 
-          // console.log('no action type found')
           return state;
       }
   }

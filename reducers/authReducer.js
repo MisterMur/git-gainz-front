@@ -19,11 +19,9 @@ export default (state = initialState, action) => {
       return { ...state, errorFlag: true, password: '', spinner: false };
     case LOGIN_USER_SUCCESS:
       // if (action.payload.access_token) {
-      //   console.log('access token',action.payload.access_token)
       //   AsyncStorage.setItem('authentication_token', action.payload.authentication_token);
       // }
       // if (action.payload.user_id) {
-      //   console.log('action payload user_id',action.payload.user_id)
       //   AsyncStorage.setItem('userId', action.payload.user_id);
       // };
       // AsyncStorage.setItem('user', action.payload);
@@ -34,7 +32,6 @@ export default (state = initialState, action) => {
     case LOAD_SPINNER:
       return { ...state, spinner: true };
     case LOGOUT:
-      console.log('logging out auth reducer')
       return {
         email: '',
         password: '',

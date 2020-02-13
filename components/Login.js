@@ -28,7 +28,6 @@ const StorageKey = '@PillarValley:GoogleOAuthKey';
 async function signInAsync() {
   const authState = await AppAuth.authAsync(config);
   await cacheAuthAsync(authState);
-  console.log('signInAsync', authState);
   return authState;
 }
 
@@ -43,7 +42,6 @@ async function getCachedAuthAsync() {
   const value = await AsyncStorage.getItem(StorageKey);
   /* Async Storage stores data as strings, we should parse our data back into a JSON */
   const authState = JSON.parse(value);
-  console.log('getCachedAuthAsync', authState);
   if (authState) {
     /* If our data exists, than we should see if it's expired */
     if (checkIfTokenExpired(authState)) {
@@ -80,7 +78,6 @@ function checkIfTokenExpired({ accessTokenExpirationDate }) {
  */
 async function refreshAuthAsync({ refreshToken }) {
   const authState = await AppAuth.refreshAsync(config, refreshToken);
-  console.log('refreshAuthAsync', authState);
   await cacheAuthAsync(authState);
   return authState;
 }

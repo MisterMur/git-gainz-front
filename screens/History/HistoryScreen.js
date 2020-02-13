@@ -20,7 +20,7 @@ import WorkoutList from '../../components/WorkoutList.js'
 
 
 //action imports
-import fetchCompletedWorkouts from '../../actions/completedWorkoutActions'
+import {fetchCompletedWorkouts} from '../../actions/workoutActions'
 
 
 //constant imports
@@ -36,6 +36,10 @@ class HistoryScreen extends Component {
   }
 
   state = {
+
+  }
+  componentDidMount(){
+    this.props.fetchCompletedWorkouts()
 
   }
 

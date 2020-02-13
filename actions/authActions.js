@@ -43,23 +43,20 @@ export const loginUser = ({ email, password }) => {
           }
         })
       }).then((response) => {
-        console.log(response);
         if (response.status === 401) {
-          console.log('AUTHENTICATION server 401 ERROR!!');
+          console.warn('AUTHENTICATION server 401 ERROR!!');
           dispatch({
             type: LOGIN_FAILED
           });
         }
         if (response.status === 500) {
-          console.log('unkown server 500 ERROR!!');
+          console.error('unkown server 500 ERROR!!');
           dispatch({
             type: LOGIN_FAILED
           });
         }
         else {
-          console.log('SUCCESS!!');
           response.json().then(data => {
-            console.log(data);
             dispatch({
               type: LOGIN_USER_SUCCESS,
               payload: data
@@ -84,7 +81,6 @@ export function postNewUser(user){
   return dispatch =>{
     return UserAdapter.addNewUser(user)
     .then(res=>{
-      console.log(res)
       // dispatch()
 
     })
@@ -95,7 +91,6 @@ export function setCurrentUser(){
   return (dispatch)=>{
     return UserAdapter.fetchCurrentUser()
     .then(user=>{
-      console.log('setting user',user)
       dispatch(fetchCurrentUserSuccess(user))
       return user
     })

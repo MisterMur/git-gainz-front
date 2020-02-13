@@ -111,7 +111,6 @@ const mapDispatchToProps = dispatch => ({
 function mapStateToProps(state){
 
   const {schedule}=state;
-  console.log(schedule)
   return {
     schedules:schedule.schedules,
     loading:state.loading,

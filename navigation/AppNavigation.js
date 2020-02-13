@@ -45,8 +45,7 @@ const WorkoutStack = createStackNavigator({
   // Default config for all screens
   defaultNavigationOptions:  ({ navigation }) => ({
 
-    title: 'You are not logged in',
-    headerTintColor: 'white',
+    headerTintColor: 'black',
 
   }),
 
@@ -61,12 +60,34 @@ const WorkoutStack = createStackNavigator({
 }
 
 );
+const HistoryStack = createStackNavigator({
+  WorkoutHistory:HistoryScreen,
+  Workout: WorkoutScreen,
+},{
+  // Default config for all screens
+  defaultNavigationOptions:  ({ navigation }) => ({
+
+    headerTintColor: 'black',
+
+  }),
+
+  headerStyle: {backgroundColor: '#E73536'},
+
+  headerMode: 'screen',
+  cardStyle:{backgroundColor:'powderblue'},
+  title:'Completed Workouts',
+  drawerLabel: 'History',
+  initialRouteName: 'WorkoutHistory',
+
+}
+
+);
 
 const DrawerStack =createDrawerNavigator({
 
   // screen1: { screen: LoginScreen },
   "Workout Schedules": { screen: WorkoutStack},
-  "History":{screen:HistoryScreen},
+  "History":{screen:HistoryStack},
   screen3: { screen: SettingsScreen},
 
 },

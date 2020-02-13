@@ -8,8 +8,6 @@ import UserAdapter from '../adapters/userAdapter.js'
 import {AsyncStorage} from 'react-native'
 
 export const setCurrentSchedule=(schedule)=>({
-  // console.log('in setcurrent schedule',schedule)
-
     type: SET_CURRENT_SCHEDULE,
     payload:{schedule}
 
@@ -40,7 +38,6 @@ export function fetchMySchedules(){
   return (dispatch)=>{
     return UserAdapter.getUserSchedules()
     .then(user=>{
-      console.log(user)
       dispatch(fetchSchedulesSuccess(user.schedules))
       return user.schedules
     })
@@ -50,7 +47,6 @@ export function fetchMySchedules(){
 export function addNewCircuit(exercise,currentWorkout){
 
   return dispatch=>{
-    console.log('exercise action add new circuit ',currentWorkout)
     return WorkoutAdapter.postWorkoutExercise(exercise,currentWorkout)
     .then(function(){
       dispatch(fetchWorkoutsExercises(currentWorkout))

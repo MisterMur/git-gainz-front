@@ -16,7 +16,6 @@ const initialState={
 
 
 export default function userReducer(state=initialState,action){
-  // console.log('%c Schedule reducer:', 'color: orange', action);
   switch(action.type){
     case LOGOUT:
       return {...state,
@@ -30,9 +29,8 @@ export default function userReducer(state=initialState,action){
         loading: true,
         error: null,
       }
-    
+
     default:
-      // console.log('no action type found')
       return state;
   }
 }

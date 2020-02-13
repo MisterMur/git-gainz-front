@@ -20,7 +20,6 @@ class Schedule extends React.Component {
     super(props)
   }
   handlePressButton=()=>{
-    // console.log('in handle pressbutton schedule:',this.props.schedule)
     this.props.setCurrentSchedule(this.props.schedule)
     this.props.handlePress('WorkoutList')
     // Actions.WorkoutList()

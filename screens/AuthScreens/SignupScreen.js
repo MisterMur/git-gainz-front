@@ -124,7 +124,6 @@ setUserToken = () => {
     .then(res => res.json())
     .then(response => {
       if (response.errors) {
-        console.log("response: ", response);
           this.setState({ error: true, errMsg: response.errors })
           Alert.alert(
           'Invalid Credentials',

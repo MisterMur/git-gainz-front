@@ -29,7 +29,6 @@ class AuthLoadingScreen extends React.Component {
 
     // Render any loading content that you like here
     render() {
-      console.log(this.props.token, this.props.token.token);
       // <ActivityIndicator/>
         return (
             <View style={styles.container}>

@@ -4,7 +4,6 @@ import {API_URL} from '../constants/types.js'
 export default class ScheduleAdapter {
   static async getSchedules() {
   const item = await AsyncStorage.getItem('access_token')
-  // console.log('in schedule adapter',item)
   return fetch(`${API_URL+`schedules`}`, {
     method: "GET",
     headers: {
@@ -62,7 +61,6 @@ export default class ScheduleAdapter {
 
   static async getSchedulesWorkouts(schedule){
     const userToken = await AsyncStorage.getItem('access_token')
-    console.log('in getschedulewokouts schedule:',schedule)
     return fetch(API_URL+`schedules/${schedule.id}`,{
       method:"GET",
       headers:{Authorization:userToken}

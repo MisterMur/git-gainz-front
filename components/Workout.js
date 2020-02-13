@@ -21,8 +21,6 @@ class Workout extends React.Component {
   }
 
   handlePressButton=()=>{
-    // console.log('in handlepressbutton workout',this.props.workout
-    // console.log('in handlepressbutton store',store)
     // store.dispatch({
     //   type:SET_CURRENT_WORKOUT,
     //   payload:this.props.workout
