@@ -10,7 +10,7 @@ import {
  } from 'react-native';
  import { DrawerActions } from 'react-navigation';
 
-import {  Button as ButtonElement ,Input} from 'react-native-elements'
+import { Input} from 'react-native-elements'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 
 
@@ -135,6 +135,14 @@ class WorkoutScreen extends Component {
     // const name = navigation.getParam("name",'NO-EXERCISES')
     // const exercises = navigation.getParam("exercises",'NO-EXERCISES')
     // console.log('exercises',exercises)
+
+    // <TouchableOpacity
+    //   backgroundColor='#03A9F4'
+    //   buttonStyle={{width:'100%',backgroundColor:'teal',borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+    //   title='Finish Workout'
+    //   onPress={this.handleCompleteWorkout}
+    //   ><Text>FInish Workout</Text>
+    // </TouchableOpacity>
     return (
       <>
       {this.renderNavBar()}
@@ -143,13 +151,15 @@ class WorkoutScreen extends Component {
         {this.renderExercises()}
 
       </ScrollView>
-      <TouchableOpacity
+      <Button
         backgroundColor='#03A9F4'
-        buttonStyle={{width:'100%',backgroundColor:'teal',borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+        buttonStyle={{width:'100%',backgroundColor:'teal',borderRadius: 0.5, }}
         title='Finish Workout'
         onPress={this.handleCompleteWorkout}
-        ><Text>FInish Workout</Text>
-      </TouchableOpacity>
+        >
+        <Text>FInish Workout</Text>
+      </Button>
+
       </>
     );
   }
