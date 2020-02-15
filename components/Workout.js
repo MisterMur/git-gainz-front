@@ -1,17 +1,20 @@
+//react imports
 import React from "react";
 import {Text,View,FlatList,StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-// import {viewWorkouts} from '../reducer'
-import {setCurrentWorkout} from '../actions/workoutActions.js'
-import {SET_CURRENT_WORKOUT} from '../constants/types.js'
-import store from '../store.js'
-
-// import {colors, fonts, padding, dimensions} from '../styles/base.js'
+//libaray imports
 import { Card, ListItem, Button ,Divider} from 'react-native-elements'
-
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+//action imports
+import {setCurrentWorkout} from '../actions/workoutActions.js'
+import {resetExercises} from '../actions/exerciseActions.js'
+
+//constants imports
+import {SET_CURRENT_WORKOUT} from '../constants/types.js'
+
 
 
 class Workout extends React.Component {
@@ -26,6 +29,7 @@ class Workout extends React.Component {
     //   payload:this.props.workout
     // })
     this.props.setCurrentWorkout(this.props.workout)
+    this.props.resetExercises()
     this.props.handlePress('Workout')
   }
 
@@ -50,7 +54,8 @@ class Workout extends React.Component {
   }
 }
 const mapDispatchToProps=dispatch=>({
-  setCurrentWorkout:(w)=>dispatch(setCurrentWorkout(w))
+  setCurrentWorkout:(w)=>dispatch(setCurrentWorkout(w)),
+  resetExercises:()=>dispatch(resetExercises()),
 })
 function mapStateToProps(state){
   const {workout}=state

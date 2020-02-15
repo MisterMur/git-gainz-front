@@ -1,10 +1,15 @@
+//constants imports
 import {API_URL} from '../constants/types.js'
-
-import {FETCH_EXERCISES_BEGIN,FETCH_EXERCISES_SUCCESS,FETCH_EXERCISES_FAILURE} from '../constants/types.js'
+import {
+  FETCH_EXERCISES_BEGIN,FETCH_EXERCISES_SUCCESS,
+  FETCH_EXERCISES_FAILURE,RESET_EXERCISES,
+} from '../constants/types.js'
 
 import WorkoutAdapter from '../adapters/workoutAdapter.js'
 
-
+export const resetExercises=()=>({
+  type:RESET_EXERCISES,
+})
 export const fetchExercisesBegin=()=>({
   type:FETCH_EXERCISES_BEGIN
 })

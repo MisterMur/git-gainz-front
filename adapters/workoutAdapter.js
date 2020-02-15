@@ -70,6 +70,22 @@ export  default class WorkoutAdapter {
 
   }
 
+
+  static async postCircuit(circuit){
+    const userToken = await AsyncStorage.getItem('access_token')
+    return fetch(API_URL+'circuits',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        'Accepts':'application/json',
+        'Authorization':userToken
+      },
+      body:JSON.stringify({circuit})
+    }).then(this.handleErrors)
+
+  }
+
+
   static async addNewWorkout(workout,schedule){
     const userToken = await AsyncStorage.getItem('access_token')
     return fetch(API_URL+'workouts',{

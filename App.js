@@ -1,11 +1,16 @@
+//react imports
 import React from 'react';
-import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity,AsyncStorage } from 'react-native';
+import { AppRegistry,Platform, StatusBar,
+   StyleSheet, View,  Image,
+   TouchableOpacity,AsyncStorage
+ } from 'react-native';
+import {PersistGate} from 'redux-persist/integration/react'
 import { AppLoading, Font, Icon } from 'expo';
+
+//nav  imports
 import PrimaryNav from './navigation/AppNavigation';
 import { DrawerActions } from 'react-navigation';
-import {PersistGate} from 'redux-persist/integration/react'
 
-import ReduxNavigation from './navigation/ReduxNavigation';
 
 // import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity,AsyncStorage } from 'react-native-web';
 
@@ -32,9 +37,6 @@ export default class App extends React.Component {
       this.setState({ hasToken: token !== null, isLoaded: true })
     });
   }
-
-
-
 
 
   render() {

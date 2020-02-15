@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { createStackNavigator,createAppContainer,createDrawerNavigator} from 'react-navigation'
+import { createStackNavigator,createAppContainer,createDrawerNavigator,createSwitchNavigator} from 'react-navigation'
 
 import { DrawerActions } from 'react-navigation';
 import { View, Image, TouchableOpacity } from 'react-native';
@@ -110,20 +110,22 @@ const DrawerNavigation = createStackNavigator({
 })
 
 // Manifest of possible screens
-const PrimaryNav = createStackNavigator({
-  authStack:{screen:AuthLoadingScreen},
+// createStackNavigator
+const PrimaryNav = createSwitchNavigator({
+  // authStack:{screen:AuthLoadingScreen},
   loginStack: { screen: LoginStack },
   drawerStack: { screen: DrawerNavigation },
-  workoutStack:{screen:WorkoutStack}
+  workoutStack:{screen:WorkoutStack},
+  historySack:{screen:HistoryStack},
 }, {
   // Default config for all screens
 
 
-  headerMode: 'none',
-  title:'Main',
+  // headerMode: 'none',
+  // title:'Main',
   initialRouteName: 'loginStack',
 
-}
+  }
 )
 
 

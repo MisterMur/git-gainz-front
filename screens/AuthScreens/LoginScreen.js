@@ -46,6 +46,12 @@ componentDidMount(){
     this.props.navigation.navigate('drawerStack')
   }
 }
+componentWillReceiveProps(newProps){
+  if(newProps.currentUser){
+    newProps.navigation.navigate('drawerStack')
+  }
+}
+
 async saveLoginToken(userTok){
   try{
     await AsyncStorage.setItem('access_token',userTok);

@@ -15,6 +15,7 @@ export const setCurrentSchedule=(schedule)=>({
 
 
 
+
 export const fetchSchedulesBegin=()=>({
   type:FETCH_SCHEDULES_BEGIN
 })
@@ -56,10 +57,10 @@ export function addNewCircuit(exercise,currentWorkout){
 export function postNewSchedule(schedule){
 
   return (dispatch)=>{
+    dispatch({type:ADD_NEW_SCHEDULE,payload:{schedule}})
     return ScheduleAdapter.addNewSchedule(schedule)
     .then(function (){
       // dispatch(addNewSchedule(schedule))
-      dispatch({type:ADD_NEW_SCHEDULE,payload:{schedule}})
       fetchMySchedules()
 
     })

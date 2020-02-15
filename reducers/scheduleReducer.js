@@ -1,4 +1,8 @@
-import {SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_SUCCESS,FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_FAILURE,ADD_NEW_SCHEDULE,FETCH_SCHEDULES_WORKOUTS} from '../constants/types.js'
+import {
+  SET_CURRENT_SCHEDULE,FETCH_SCHEDULES_SUCCESS,
+  FETCH_SCHEDULES_BEGIN,FETCH_SCHEDULES_FAILURE,
+  ADD_NEW_SCHEDULE,FETCH_SCHEDULES_WORKOUTS,RESET_SCHEDULES,
+} from '../constants/types.js'
 import {LOGOUT} from '../constants/authTypes'
 const initialState={
   // workouts:[],
@@ -13,6 +17,11 @@ const initialState={
 
 export default function scheduleReducer(state=initialState,action){
   switch(action.type){
+    case RESET_SCHEDULES:
+      return {
+        ...state,
+        schedules:[],
+      }
     case FETCH_SCHEDULES_BEGIN:
       return {...state,
         loading:true,

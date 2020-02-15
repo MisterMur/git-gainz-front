@@ -1,5 +1,4 @@
-import {fetchSchedulesFailure,fetchMySchedules} from './scheduleActions.js'
-import {fetchExercisesSuccess,fetchExercisesFailure} from './exerciseActions.js'
+//constants imports
 import {API_URL} from '../constants/types.js'
 import {
   ADD_NEW_WORKOUT,SET_WORKOUTS,SET_CURRENT_WORKOUT,
@@ -10,16 +9,29 @@ import {
   FETCH_COMPLETEDWORKOUTS_BEGIN,
   FETCH_COMPLETEDWORKOUTS_SUCCESS,
   FETCH_COMPLETEDWORKOUTS_FAILURE,
-  SET_COMPLETEDWORKOUTS,
+  SET_COMPLETEDWORKOUTS,RESET_WORKOUTS,
 
 } from '../constants/types.js'
+
+//adapter imports
 import WorkoutAdapter from '../adapters/workoutAdapter.js'
 import ScheduleAdapter from '../adapters/scheduleAdapter.js'
 import UserAdapter from '../adapters/userAdapter.js'
+
+//actions imports
+import {fetchSchedulesFailure,fetchMySchedules} from './scheduleActions.js'
+import {fetchExercisesSuccess,fetchExercisesFailure} from './exerciseActions.js'
+
 export function setWorkouts(workouts){
   return{
     type:SET_WORKOUTS,
     payload:workouts
+  }
+}
+export function resetWorkouts(){
+  return {
+    type:RESET_WORKOUTS,
+
   }
 }
 export function setCurrentWorkout(workout){
@@ -108,14 +120,23 @@ export function fetchWorkoutsExercises(workout){
 }
 export function postNewWorkout(workout,schedule){
   return (dispatch)=>{
+    dispatch({type:ADD_NEW_WORKOUT,payload:{workout}})
     return WorkoutAdapter.addNewWorkout(workout,schedule)
     .then(function (){
-      dispatch({type:ADD_NEW_WORKOUT,payload:{workout}})
-      // fetchMySchedules()
       dispatch(fetchSchedulesWorkouts(schedule))
     })
   }
 }
+
+export function addCircuit(circuit){
+  return dispatch=>{
+    return WorkoutAdapter.postCircuit(circuit)
+    .then(function(){
+      // dispatch(fetchWorkoutsExercises(currentWorkout))
+    })
+  }
+}
+
 export function postNewCompleteWorkout(completedWorkout){
   return (dispatch)=>{
     return WorkoutAdapter.addCompletedWorkout(completedWorkout)

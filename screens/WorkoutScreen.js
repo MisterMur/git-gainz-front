@@ -38,10 +38,9 @@ class WorkoutScreen extends Component {
   state={
     text:'',
     workout:{
-      exercises:{
-        // reps:'',
-        // sets:'',
-      }
+      workout_id:this.props.currentWorkout.id,
+      exercises:[]
+
     }
   }
   openDrawer = () => {
@@ -71,15 +70,19 @@ class WorkoutScreen extends Component {
   }
   addNewExercise=()=>{
     if(this.state.text){
+      let ex = {name:this.state.text,sets:[]}
 
-      this.props.postNewExercise({
-        name:this.state.text,
-        sets:[]
-      },this.props.currentWorkout)
+      this.props.postNewExercise(ex,this.props.currentWorkout)
+      this.setState({text:'',
+        workout:{
+          ...this.state.workout,
+          exercises:[...this.state.workout.exercises,ex]
+        }})
     }
 
-    this.setState({text:''})
+
   }
+
   handleAddExercise=()=>{
     this.props.postNewExercise({
       name:this.state.text,
@@ -109,7 +112,8 @@ class WorkoutScreen extends Component {
   renderAddExerciseForm=()=>{
     return (
       <>
-      <TextInput
+      <Input
+        placeholder='Enter a Exercise Name'
         onChangeText={(text) => this.setState({text})}
         value={this.state.text}
       />

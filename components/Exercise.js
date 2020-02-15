@@ -1,12 +1,21 @@
+//react imports
 import React from "react";
 import {Text,View,FlatList,StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
 
+//libary imports
 import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+//component imports
+import Set from './Set.js'
+
+//actions imports
+import {addCircuit} from '../actions/workoutActions.js'
+
+//styles imports
 import fonts from '../styles/base.js'
 
-import Set from './Set.js'
 
 
 
@@ -31,9 +40,13 @@ class Exercise extends React.Component {
 
 
   addCircuitsButton=(reps,weight,rest)=>{
-    let newCircuits = {reps,weight,rest,exercise_id:this.props.exercise.id}
-    let copyCircuits=[...this.state.circuits,newCircuits]
+
+    reps==null? reps=0:null
+    weight==null? weight=0:null
+    let newCircuit = {reps,weight,rest,exercise_id:this.props.exercise.id}
+    let copyCircuits=[...this.state.circuits,newCircuit]
     this.setState({circuits:copyCircuits})
+    this.props.addCircuit(newCircuit)
   }
   renderCompleteCircuit=()=>{
     return(
@@ -72,6 +85,9 @@ class Exercise extends React.Component {
     )
   }
 }
+const mapDispatchToProps=dispatch=>({
+  addCircuit:(c)=>dispatch(addCircuit(c)),
+})
 
 function mapStateToProps(state){
   const {workout,user} = state
@@ -82,4 +98,4 @@ function mapStateToProps(state){
   }
 
 }
-export default connect(mapStateToProps) (Exercise)
+export default connect(mapStateToProps,mapDispatchToProps) (Exercise)

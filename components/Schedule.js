@@ -1,17 +1,21 @@
+//react imports
 import React from "react";
 import {Text,View,FlatList,StyleSheet} from 'react-native'
 import {connect} from 'react-redux'
-import SET_CURRENT_SCHEDULE from '../constants/types.js'
-// import {viewWorkouts} from '../reducer'
-import store from '../store.js'
 
-
-// import {colors, fonts, padding, dimensions} from '../styles/base.js'
+//library ipmorts
 import { Card, ListItem, Button ,Divider,FormInput,FormLabel} from 'react-native-elements'
-import {setCurrentSchedule} from '../actions/scheduleActions.js'
-import {Actions} from 'react-native-router-flux';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+//component imports
+
+//actions imports
+import {setCurrentSchedule} from '../actions/scheduleActions.js'
+import {resetWorkouts} from '../actions/workoutActions.js'
+
+//constants imports
+
+//styles imports
 
 
 class Schedule extends React.Component {
@@ -20,9 +24,9 @@ class Schedule extends React.Component {
     super(props)
   }
   handlePressButton=()=>{
+    this.props.resetWorkouts()
     this.props.setCurrentSchedule(this.props.schedule)
     this.props.handlePress('WorkoutList')
-    // Actions.WorkoutList()
   }
 
   render() {
@@ -46,7 +50,8 @@ class Schedule extends React.Component {
   }
 }
 const mapDispatchToProps= dispatch=> ({
-  setCurrentSchedule:(schedule)=>dispatch(setCurrentSchedule(schedule))
+  setCurrentSchedule:(schedule)=>dispatch(setCurrentSchedule(schedule)),
+  resetWorkouts:()=>dispatch(resetWorkouts()),
 })
 
 function mapStateToProps(state){

@@ -1,17 +1,18 @@
+//react imports
 import React from "react"
 import {View,Text} from 'react-native'
 import {connect} from 'react-redux'
+
+//component imports
 import Workout from './Workout.js'
-// import uuid from 'uuid'
 
 const WorkoutList = (props) => {
   const renderWorkouts=()=>{
     if(props.workouts){
-      return props.workouts.map((workout,id)=>{
+      return props.workouts.map((workout,idx)=>{
         return (
-
             <Workout
-              key={workout.id}
+              key={idx}
               workout={workout}
               handlePress={props.handlePress}
             />
@@ -20,9 +21,9 @@ const WorkoutList = (props) => {
     }
   }
   return (
-  <View className="WorkoutList">
-      {renderWorkouts()}
-  </View>
+    <View className="WorkoutList">
+        {renderWorkouts()}
+    </View>
   )
 }
 
