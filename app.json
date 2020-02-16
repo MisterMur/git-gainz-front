@@ -11,7 +11,7 @@
     },
     "android": {
       "package": "com.brianmurillo.GitGainz",
-			"versionCode":0.0.2,
+			"versionCode":2,
 
     },
     "platforms": [
