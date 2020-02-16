@@ -35,9 +35,11 @@ export const  styles = StyleSheet.create({
   },
 
   input: {
-    width: 350,
+    width: '80%',
     height: 55,
-    backgroundColor: '#00b894',
+		marginLeft:'auto',
+		marginRight:'auto',
+    backgroundColor: colors.input,
     opacity: 0.6,
     margin: 10,
     padding: 8,
@@ -146,6 +148,10 @@ export const  styles = StyleSheet.create({
 		zIndex:999,
 
 	},
+
+	card:{
+		borderRadius:0.25,
+	}
 
 
 })

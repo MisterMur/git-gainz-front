@@ -16,6 +16,7 @@ import {resetWorkouts} from '../actions/workoutActions.js'
 //constants imports
 
 //styles imports
+import {styles} from '../styles/styles'
 
 
 class Schedule extends React.Component {
@@ -32,7 +33,7 @@ class Schedule extends React.Component {
   render() {
     return (
       <View>
-        <Card  title={this.props.schedule.name} dividerStyle="3">
+        <Card style={styles.card} title={this.props.schedule.name} dividerStyle="3">
           <Text style={{marginBottom: 10,flex:2}}>
             {this.props.schedule.workouts.length} Workout(s)
           </Text>

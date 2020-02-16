@@ -29,9 +29,9 @@ import Workout from '../components/Workout.js'
 
 //style imports
 import colors from '../styles/colors'
-import {styles} from '../styles/base'
-import navBar from '../styles/base'
-import addButton from '../styles/base'
+import {styles} from '../styles/styles'
+// import navBar from '../styles/base'
+// import addButton from '../styles/base'
 
 
 
@@ -87,7 +87,7 @@ class WorkoutListScreen extends React.Component {
     return (
       <>
 
-        <Input
+        <TextInput
 					style={styles.input}
           placeholder='Enter a Workout Name'
           onChangeText={(text) => this.setState({text})}
@@ -127,7 +127,8 @@ class WorkoutListScreen extends React.Component {
       <>
         {this.renderNavBar()}
         {this.renderAddWorkoutForm()}
-				<ScrollView>
+				<ScrollView style={[ styles.container, this.props.style || {} ]}>
+
 
           {this.props.currentSchedule?this.renderWorkoutList():null}
         </ScrollView>

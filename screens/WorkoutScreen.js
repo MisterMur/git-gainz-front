@@ -124,7 +124,8 @@ class WorkoutScreen extends Component {
 		if(this.state.pastWorkout===false){
 			return (
 				<>
-				<Input
+				<TextInput
+					style={styles.input}
 					placeholder='Enter a Exercise Name'
 					onChangeText={(text) => this.setState({text})}
 					value={this.state.text}
@@ -200,7 +201,8 @@ class WorkoutScreen extends Component {
       <>
       {this.renderNavBar()}
       {this.renderAddExerciseForm()}
-      <ScrollView>
+			<ScrollView style={[ styles.container, this.props.style || {} ]}>
+
         {this.renderExercises()}
 
       </ScrollView>

@@ -26,6 +26,9 @@ const colors = {
   bdInput: '#cbcbcb',
 
   authBorder:'#b76c94',
+
+	input:'white',
+	inputOldColor:'#00b894',
 }
 
 export default colors
