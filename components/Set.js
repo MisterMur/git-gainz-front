@@ -25,6 +25,15 @@ class Set extends React.Component {
     exercise_id:this.props.exercise.id,
     showButton:true
   }
+	componentDidMount(){
+		if(this.props.pastWorkout){
+			this.setState({
+				reps:this.props.reps.toString(),
+				weight:this.props.weight.toString(),
+				rest:this.props.rest.toString(),
+			})
+		}
+	}
   handleRepsOnChange=(reps)=>{
     this.setState({reps})
   }
@@ -59,6 +68,7 @@ class Set extends React.Component {
           value={this.state.reps}
           onChangeText={reps=>this.handleRepsOnChange(reps)}
           placeholder='Reps'
+					editable={!this.props.pastWorkout}
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />
       </View>
@@ -69,6 +79,7 @@ class Set extends React.Component {
           value={this.state.weight}
           onChangeText={weight=>this.handleWeightOnChange(weight)}
           placeholder='Weight'
+					editable={!this.props.pastWorkout}
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />
       </View>

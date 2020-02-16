@@ -1,10 +1,10 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 18644,
+  "packagerPid": 92532,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://k6-hgy.brian-murillo.git-gainz-front.exp.direct",
-  "packagerNgrokUrl": "https://packager.k6-hgy.brian-murillo.git-gainz-front.exp.direct",
-  "ngrokPid": 68200,
+  "expoServerNgrokUrl": "https://3j-7wg.brian-murillo.git-gainz-front.exp.direct",
+  "packagerNgrokUrl": "https://packager.3j-7wg.brian-murillo.git-gainz-front.exp.direct",
+  "ngrokPid": 82888,
   "webpackServerPort": null
 }

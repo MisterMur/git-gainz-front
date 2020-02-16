@@ -73,6 +73,19 @@ class Exercise extends React.Component {
       addCircuitsButton={this.addCircuitsButton}
     />)
   }
+	renderFinishedSets(){
+		return this.props.exercise.circuits.map( (s,idx) =>
+		<Set
+			key={idx}
+			pastWorkout={this.props.pastWorkout}
+			exercise={this.props.exercise}
+			reps={s.reps}
+			weight={s.weight}
+			rest={s.rest}
+			handleRepsOnChange={this.handleRepsOnChange} handleWeightOnChange={this.handleWeightOnChange}
+			addCircuitsButton={this.addCircuitsButton}
+		/>)
+	}
 
 
 
@@ -81,7 +94,10 @@ class Exercise extends React.Component {
     return (
 
         <Card  title={this.props.exercise.name}>
-          {this.renderSets()}
+					{this.props.pastWorkout?
+						this.renderFinishedSets()
+						:
+						this.renderSets()}
         </Card>
 
     )
