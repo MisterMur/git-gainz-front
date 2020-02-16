@@ -1,3 +1,6 @@
+//screens/WorkkoutScreen.js
+
+//react imports
 import React, { Component } from 'react';
 import {
    ScrollView,
@@ -5,21 +8,31 @@ import {
    StyleSheet,
    TextInput,
    Text,
-   Button,
+   // Button,
    TouchableOpacity,
  } from 'react-native';
+ import {connect} from 'react-redux'
  import { DrawerActions } from 'react-navigation';
 
+//library imports
 import { Input} from 'react-native-elements'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
+import { Button } from 'react-native-material-design';
 
 
+//component imports
 import Exercise from '../components/Exercise.js'
-import {connect} from 'react-redux'
-import {postNewExercise} from '../actions/exerciseActions'
-import {postNewCompleteWorkout,fetchWorkoutsExercises,fetchWorkouts,addWorkout} from '../actions/workoutActions.js'
-import {fetchSchedules} from '../actions/scheduleActions.js'
 
+//action imports
+import {postNewExercise} from '../actions/exerciseActions'
+import {fetchSchedules} from '../actions/scheduleActions.js'
+import {
+	postNewCompleteWorkout,
+	fetchWorkoutsExercises,fetchWorkouts,
+	addWorkout
+} from '../actions/workoutActions.js'
+
+//styles imports
 import colors from '../styles/colors'
 
 class WorkoutScreen extends Component {
@@ -33,10 +46,12 @@ class WorkoutScreen extends Component {
 
   }
   componentDidMount(){
+		console.warn(this.props.navigation.state.params.pastWorkout)
     this.props.fetchWorkoutsExercises(this.props.currentWorkout)
   }
   state={
     text:'',
+		pastWorkout:this.props.navigation.state.params.pastwpastWorkout,
     workout:{
       workout_id:this.props.currentWorkout.id,
       exercises:[]
@@ -92,6 +107,7 @@ class WorkoutScreen extends Component {
   }
   handleCompleteWorkout=()=>{
     this.props.postNewCompleteWorkout(this.props.currentWorkout)
+    this.props.navigation.navigate('historySack')
 
   }
   renderNav=()=>{
@@ -127,6 +143,27 @@ class WorkoutScreen extends Component {
       </>
     )
   }
+	renderFinishWorkoutButon=()=>{
+		// <View style={[{height:100}]}>
+		// 	<Button
+		// 		backgroundColor='#03A9F4'
+		// 		buttonStyle={{backgroundColor:'teal',borderRadius: 0.5, }}
+		// 		title='Finish Workout'
+		// 		onPress={this.handleCompleteWorkout}
+		// 		>
+		// 		<Text>Copmlete Workout</Text>
+		// 	</Button>
+		// </View>
+		if(!this.state.pastWorkout){
+			return (
+				<View style={[{height:100,width:'100%'}]}>
+					<Button
+						value="NORMAL FLAT"
+						onPress={this.handleCompleteWorkout} />
+				</View>
+			)
+		}
+	}
 
 
   render() {
@@ -146,14 +183,8 @@ class WorkoutScreen extends Component {
         {this.renderExercises()}
 
       </ScrollView>
-      <Button
-        backgroundColor='#03A9F4'
-        buttonStyle={{width:'100%',backgroundColor:'teal',borderRadius: 0.5, }}
-        title='Finish Workout'
-        onPress={this.handleCompleteWorkout}
-        >
-        <Text>FInish Workout</Text>
-      </Button>
+			{this.renderFinishWorkoutButon()}
+
 
       </>
     );

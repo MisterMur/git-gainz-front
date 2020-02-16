@@ -31,6 +31,11 @@ class Set extends React.Component {
   handleWeightOnChange=(weight)=>{
     this.setState({weight})
   }
+	handleCompleteCircuit=()=>{
+		this.props.addCircuitsButton(this.state.reps,this.state.weight,this.state.rest)
+		this.setState((prevState)=>{return {showButton:!prevState.showButton}})
+
+	}
 
   renderCompleteCircuit=()=>{
     return(
@@ -38,7 +43,7 @@ class Set extends React.Component {
         backgroundColor='#03A9F4'
         buttonStyle={{borderRadius: 0.5, marginLeft: 0, marginRight: 0, marginTop: 10}}
         title='Complete Set'
-        onPress={()=>this.props.addCircuitsButton(this.state.reps,this.state.weight,this.state.rest)}
+        onPress={this.handleCompleteCircuit}
        />
     )
   }
@@ -68,7 +73,7 @@ class Set extends React.Component {
           />
       </View>
       <View style={{flex:1}}>
-        {this.renderCompleteCircuit()}
+        {this.state.showButton? this.renderCompleteCircuit():null}
       </View>
 
 

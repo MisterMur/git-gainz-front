@@ -1,3 +1,5 @@
+//actions/workoutActions.js
+
 //constants imports
 import {API_URL} from '../constants/types.js'
 import {
@@ -98,7 +100,6 @@ export function fetchSchedulesWorkouts(schedule){
   return dispatch=>{
     return ScheduleAdapter.getSchedulesWorkouts(schedule)
     .then(sched=>{
-      // console.warn('fetching scheudle workouts',sched.workouts)
       dispatch(fetchWorkoutsSuccess(sched.workouts))
       return sched.workouts
     })
@@ -141,8 +142,7 @@ export function postNewCompleteWorkout(completedWorkout){
   return (dispatch)=>{
     return WorkoutAdapter.addCompletedWorkout(completedWorkout)
   .then(function(){
-    dispatch({type:ADD_COMPLETEDWORKOUT,payload:{completedWorkout}})
-    // console.warn('after fetchs in post new completeworkout',completedWorkout)
+    dispatch({type:ADD_COMPLETEDWORKOUT,payload:completedWorkout})
     dispatch(fetchCompletedWorkouts())
   })
   }

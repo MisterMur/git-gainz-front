@@ -61,7 +61,7 @@ class HistoryScreen extends Component {
     return (
       <WorkoutList
         workouts = {this.props.completedWorkouts}
-        handlePress = {this.props.navigation.navigate}
+        handlePress = {()=>{this.props.navigation.navigate('Workout',{pastWorkout:true})}}
         />
     )
   }

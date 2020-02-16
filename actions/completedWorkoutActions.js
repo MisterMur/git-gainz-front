@@ -43,7 +43,6 @@ export function addCompletedWorkout(workout){
   return (dispatch)=>{
     return WorkoutAdapter.addCompletedWorkout(workout)
   .then(function(){
-    // console.warn('after fetchs in post new completeworkout')
     dispatch(fetchCompletedWorkouts(currentUser))
   })
   }

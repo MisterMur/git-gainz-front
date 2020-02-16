@@ -22,6 +22,10 @@ class Workout extends React.Component {
   constructor(props){
     super(props)
   }
+	componentDidMount(){
+		// const {pastWorkout}= this.props.navigation.state.params
+		// console.warn(pastWorkout)
+	}
 
   handlePressButton=()=>{
     // store.dispatch({
@@ -34,7 +38,6 @@ class Workout extends React.Component {
   }
 
   render() {
-    // console.warn('workout props',this.props.workout)
     return (
       <View>
         <Card  dividerStyle="3">

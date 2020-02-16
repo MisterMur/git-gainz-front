@@ -30,7 +30,6 @@ export default function completedWorkoutReducer(state=initialState,action){
         completedWorkouts:[],
       }
     case FETCH_COMPLETEDWORKOUTS_SUCCESS:
-    // console.warn('FETCH COMPLETED WORKOUTS SUCCeSS ', action.payloadCompletedWorkouts)
       return {
         ...state,
         loading:false,
@@ -41,7 +40,7 @@ export default function completedWorkoutReducer(state=initialState,action){
       return {
         ...state,
         loading:false,
-        completedWorkouts:[...state.completedWorkouts,action.payload.completedWorkout]
+        completedWorkouts:[...state.completedWorkouts,action.payload]
 
       }
 

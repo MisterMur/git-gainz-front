@@ -63,7 +63,7 @@ async saveLoginToken(userTok){
 userLogin = () => {
   // this.setState({ error: false, response: ''})
   const user = {
-    email: this.state.email,
+    email: this.state.email.toLowerCase(),
     password: this.state.password
   }
   fetch(API_URL+"login", {
@@ -72,11 +72,7 @@ userLogin = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-      email:this.state.email,
-      password:this.state.password,
-      // user
-    })
+      body: JSON.stringify(user)
   })
   .then(res => res.json())
   .then(response => {
