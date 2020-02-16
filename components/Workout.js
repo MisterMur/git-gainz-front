@@ -24,7 +24,6 @@ class Workout extends React.Component {
   }
 	componentDidMount(){
 		// const {pastWorkout}= this.props.navigation.state.params
-		// console.warn(pastWorkout)
 	}
 
   handlePressButton=()=>{

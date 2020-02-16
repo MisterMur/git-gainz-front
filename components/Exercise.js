@@ -64,9 +64,11 @@ class Exercise extends React.Component {
     return this.state.circuits.map( (s,id) =>
     <Set
       key={id}
+			pastWorkout={this.props.pastWorkout}
       exercise={this.props.exercise}
       reps={s.reps}
       weight={s.weight}
+			rest={s.rest}
       handleRepsOnChange={this.handleRepsOnChange} handleWeightOnChange={this.handleWeightOnChange}
       addCircuitsButton={this.addCircuitsButton}
     />)

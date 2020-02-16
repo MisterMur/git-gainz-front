@@ -72,14 +72,16 @@ class Set extends React.Component {
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />
       </View>
-      <View style={{flex:1}}>
-        {this.state.showButton? this.renderCompleteCircuit():null}
-      </View>
+			{this.state.showButton && !this.props.pastWorkout?
+				 this.renderCompleteCircuit()
+				 :null}
 
 
 
     </View>
     )
+		// <View style={{flex:1}}>
+		// </View>
   }
 
   render() {

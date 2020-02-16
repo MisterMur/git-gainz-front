@@ -93,10 +93,7 @@ class ScheduleListScreen extends Component {
             handlePress={this.props.navigation.navigate}
             />
 
-          <Button
-            title="Go to Home"
-            onPress={() => this.props.navigation.navigate('Home')}
-            />
+
 
         </ScrollView>
       </>

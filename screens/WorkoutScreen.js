@@ -8,7 +8,7 @@ import {
    StyleSheet,
    TextInput,
    Text,
-   // Button,
+   Button,
    TouchableOpacity,
  } from 'react-native';
  import {connect} from 'react-redux'
@@ -17,7 +17,7 @@ import {
 //library imports
 import { Input} from 'react-native-elements'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
-import { Button } from 'react-native-material-design';
+// import  {Button}   from 'react-native-material-design';
 
 
 //component imports
@@ -34,6 +34,7 @@ import {
 
 //styles imports
 import colors from '../styles/colors'
+import {styles} from '../styles/styles'
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
@@ -46,12 +47,11 @@ class WorkoutScreen extends Component {
 
   }
   componentDidMount(){
-		console.warn(this.props.navigation.state.params.pastWorkout)
     this.props.fetchWorkoutsExercises(this.props.currentWorkout)
   }
   state={
     text:'',
-		pastWorkout:this.props.navigation.state.params.pastwpastWorkout,
+		pastWorkout:this.props.navigation.state.params.pastWorkout,
     workout:{
       workout_id:this.props.currentWorkout.id,
       exercises:[]
@@ -76,6 +76,7 @@ class WorkoutScreen extends Component {
       return this.props.currentWorkout.exercises.map((exercise,idx)=>{
         return(
             <Exercise
+							pastWorkout={this.state.pastWorkout}
               key={idx}
               exercise={exercise}
             />
@@ -110,38 +111,28 @@ class WorkoutScreen extends Component {
     this.props.navigation.navigate('historySack')
 
   }
-  renderNav=()=>{
-    return (
-      <>
-      <Button
-        title="Go to Home"
-        onPress={() => this.props.navigation.navigate('Home')}
-      />
-      <Button
-        title="Go back"
-        onPress={() => this.props.navigation.navigate('WorkoutList')}
-      />
 
-      </>
-    )
-  }
   renderAddExerciseForm=()=>{
-    return (
-      <>
-      <Input
-        placeholder='Enter a Exercise Name'
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
-      />
-      <TouchableOpacity
-        style={styles.addButton}
-        title="Add New Exercise"
-        onPress={() => this.addNewExercise()}>
-        <FAIcon name='plus' size={35} style={{ color: colors.txtWhite,bottom:-5,right:-5, }} />
-      </TouchableOpacity>
+		if(this.state.pastWorkout===false){
+			return (
+				<>
+				<Input
+					placeholder='Enter a Exercise Name'
+					onChangeText={(text) => this.setState({text})}
+					value={this.state.text}
+					/>
+				<TouchableOpacity
+					style={styles.addButton}
+					title="Add New Exercise"
+					onPress={() => this.addNewExercise()}>
+					<FAIcon name='plus' size={35} style={{ color: colors.txtWhite,bottom:-5,right:-5, }} />
+				</TouchableOpacity>
 
-      </>
-    )
+				</>
+		)
+
+		}
+
   }
 	renderFinishWorkoutButon=()=>{
 		// <View style={[{height:100}]}>
@@ -154,12 +145,19 @@ class WorkoutScreen extends Component {
 		// 		<Text>Copmlete Workout</Text>
 		// 	</Button>
 		// </View>
-		if(!this.state.pastWorkout){
+		if(this.state.pastWorkout===false){
 			return (
-				<View style={[{height:100,width:'100%'}]}>
-					<Button
-						value="NORMAL FLAT"
-						onPress={this.handleCompleteWorkout} />
+				<View style={[{width:'100%'}]}>
+					<TouchableOpacity
+						onPress={this.handleCompleteWorkout}
+						backgroundColor='teal'
+						style={styles.button}
+						title="Complete Workout"
+						>
+						<Text style={styles.buttonText}>
+							Complete Workout
+						</Text>
+					</TouchableOpacity>
 				</View>
 			)
 		}
@@ -207,23 +205,23 @@ function mapStateToProps(state){
 }
 export default connect(mapStateToProps,mapDispatchToProps)(WorkoutScreen)
 
-const styles = StyleSheet.create({
-  navBar: {
-      height: 50,
-      justifyContent: 'center',
-      paddingHorizontal: 25
-  },
-  addButton:{
-    position: 'absolute',
-    bottom:60,
-    right:20,
-    padding: 5,
-    height: 50,
-    width: 50,  //The Width must be the same as the height
-    borderRadius:100, //Then Make the Border Radius twice the size of width or Height
-    backgroundColor:colors.bgMainRed,
-    zIndex:999,
-
-  },
-
-})
+// const styles = StyleSheet.create({
+//   navBar: {
+//       height: 50,
+//       justifyContent: 'center',
+//       paddingHorizontal: 25
+//   },
+//   addButton:{
+//     position: 'absolute',
+//     bottom:60,
+//     right:20,
+//     padding: 5,
+//     height: 50,
+//     width: 50,  //The Width must be the same as the height
+//     borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+//     backgroundColor:colors.bgMainRed,
+//     zIndex:999,
+//
+//   },
+//
+// })

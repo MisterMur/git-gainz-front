@@ -48,17 +48,6 @@ export const  styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
-  button: {
-      height:20,
-      borderRadius: 50,
-      borderStyle: 'solid',
-      borderWidth: 2,
-      borderColor: '#e3e3e3',
-      padding: 1,
-      width:'90%',
-      marginBottom: 20,
-      marginLeft:'5%',
-  },
 
   authInputs: {
     padding:5,
@@ -88,16 +77,45 @@ export const  styles = StyleSheet.create({
     textAlign:'center',
 
   },
+
+	button: {
+			height:50,
+			borderRadius: 50,
+			borderStyle: 'solid',
+			borderWidth: 4,
+			borderColor: '#e3e3e3',
+			backgroundColor:'skyblue',
+			padding: 1,
+			width:'90%',
+			marginLeft:'auto',
+			marginRight:'auto',
+			// marginLeft:'50%',
+			marginBottom: 10,
+			// marginLeft:'5%',
+	},
   buttonText:{
       fontSize:20,
       color:'white',
       textAlign:'center',
+			padding:5,
   },
   buttonIcon:{
       color:colors.bdWhite,
       marginLeft:80,
       marginTop:-27
   },
+	addButton:{
+		position: 'absolute',
+		bottom:60,
+		right:20,
+		padding: 5,
+		height: 50,
+		width: 50,  //The Width must be the same as the height
+		borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+		backgroundColor:colors.bgMainRed,
+		zIndex:999,
+
+	},
 
 
 })
