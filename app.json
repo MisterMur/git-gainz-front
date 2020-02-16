@@ -2,7 +2,7 @@
   "expo": {
     "name": "GitGainz",
     "icon": "./assets/images/GooglePlayStore.png",
-    "version": "1.0.0",
+    "version": "0.0.2",
     "slug": "git-gainz",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -10,7 +10,9 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.brianmurillo.GitGainz"
+      "package": "com.brianmurillo.GitGainz",
+			"versionCode":0.0.2,
+
     },
     "platforms": [
       "ios",
@@ -28,7 +30,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "description": "Git-Gainz-Backend API built in conjunction with GITGAINZFRONT a react native mobile app for tracking workouts , reps, sets exercises.",
+    "description": "Git-Gainz mobile app for tracking workouts , reps, sets & exercises.",
     "githubUrl": "https://github.com/MisterMur/git-gainz-front"
   }
 }
