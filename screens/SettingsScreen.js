@@ -129,17 +129,7 @@ const styles = StyleSheet.create({
       marginTop: 5,
       textAlign: 'center'
     },
-    petButtons: {
-      width: '95%',
-      height: 55,
-      backgroundColor: 'white',
-      margin: 10,
-      padding: 8,
-      color: '#00b894',
-      borderRadius: 14,
-      fontSize: 20,
-      fontWeight: '500',
-    },
+  
     inactiveButtons: {
       width: '95%',
       height: 55,
