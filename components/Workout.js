@@ -40,10 +40,9 @@ class Workout extends React.Component {
     return (
       <View>
         <Card  dividerStyle="3">
-          <Text style={{marginBottom: 10}}>
+          <Text style={{marginBottom: 10,textAlign:'center'}}>
             {this.props.workout.name}
           </Text>
-          <Divider style={{ backgroundColor: 'red' }} />
 
           <Button
             backgroundColor='#03A9F4'

@@ -1,6 +1,6 @@
+//react imports
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import FAIcon from 'react-native-vector-icons/FontAwesome'
 import {
    StyleSheet,
    TouchableOpacity,
@@ -11,17 +11,22 @@ import {
     ScrollView,
     AsyncStorage
   } from 'react-native';
+	import { DrawerActions } from 'react-navigation';
 
-import { DrawerActions } from 'react-navigation';
+//library imports
 import { Card, ListItem, Button as ButtonElements ,Divider,Input} from 'react-native-elements'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
 
+//component imports
 import ScheduleList from '../components/ScheduleList.js'
-import Container from '../components/Container.js'
+// import Container from '../components/Container.js'
 
-
+//action ipmorts
 import { fetchMySchedules,fetchSchedules,postNewSchedule} from '../actions/scheduleActions.js'
 
+//styles import
 import colors from '../styles/colors'
+import {styles} from '../styles/styles'
 import addButton from '../styles/base'
 
 class ScheduleListScreen extends Component {
@@ -73,6 +78,7 @@ class ScheduleListScreen extends Component {
       <>
         {this.renderNavBar()}
         <TextInput
+					style={styles.input}
           placeholder='Enter a Schedule Name'
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
@@ -117,23 +123,23 @@ function mapStateToProps(state){
 
 export default connect(mapStateToProps,mapDispatchToProps)(ScheduleListScreen)
 
-const styles = StyleSheet.create({
-  navBar: {
-      height: 50,
-      justifyContent: 'center',
-      paddingHorizontal: 25
-  },
-  addButton:{
-    position: 'absolute',
-    bottom:20,
-    right:20,
-    padding: 5,
-    height: 50,
-    width: 50,  //The Width must be the same as the height
-    borderRadius:100, //Then Make the Border Radius twice the size of width or Height
-    backgroundColor:colors.bgMainRed,
-    zIndex:999,
-
-  },
-
-})
+// const styles = StyleSheet.create({
+//   navBar: {
+//       height: 50,
+//       justifyContent: 'center',
+//       paddingHorizontal: 25
+//   },
+//   addButton:{
+//     position: 'absolute',
+//     bottom:20,
+//     right:20,
+//     padding: 5,
+//     height: 50,
+//     width: 50,  //The Width must be the same as the height
+//     borderRadius:100, //Then Make the Border Radius twice the size of width or Height
+//     backgroundColor:colors.bgMainRed,
+//     zIndex:999,
+//
+//   },
+//
+// })

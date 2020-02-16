@@ -31,7 +31,7 @@ export const  styles = StyleSheet.create({
       shadowOpacity: 0.4,
       shadowOffset: { height: -5, width:-5},
       shadowRadius: 10,
-      backgroundColor: colors.bgMain,
+      backgroundColor: colors.bg,
   },
 
   input: {
@@ -77,6 +77,36 @@ export const  styles = StyleSheet.create({
     textAlign:'center',
 
   },
+	startButton: {
+			height:50,
+			borderRadius: 50,
+			borderStyle: 'solid',
+			borderWidth: 4,
+			borderColor: '#e3e3e3',
+			backgroundColor:'green',
+			padding: 1,
+			width:'90%',
+			marginLeft:'auto',
+			marginRight:'auto',
+			// marginLeft:'50%',
+			marginBottom: 10,
+			// marginLeft:'5%',
+	},
+	stopButton: {
+			height:50,
+			borderRadius: 50,
+			borderStyle: 'solid',
+			borderWidth: 4,
+			borderColor: '#e3e3e3',
+			backgroundColor:'red',
+			padding: 1,
+			width:'90%',
+			marginLeft:'auto',
+			marginRight:'auto',
+			// marginLeft:'50%',
+			marginBottom: 10,
+			// marginLeft:'5%',
+	},
 
 	button: {
 			height:50,

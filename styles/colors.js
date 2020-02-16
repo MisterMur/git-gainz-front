@@ -11,6 +11,7 @@ const colors = {
   txtWhite: '#ffffff',
 
   bgMain: '#214559',
+	bg:'powderblue',
   bgMainDark: '#214559', // For screens > auth
   bgMainRed: '#FE6165',
   bgWhite: '#ffffff',

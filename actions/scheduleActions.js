@@ -57,9 +57,9 @@ export function addNewCircuit(exercise,currentWorkout){
 export function postNewSchedule(schedule){
 
   return (dispatch)=>{
-    dispatch({type:ADD_NEW_SCHEDULE,payload:{schedule}})
     return ScheduleAdapter.addNewSchedule(schedule)
     .then(function (){
+			dispatch({type:ADD_NEW_SCHEDULE,payload:{schedule}})
       // dispatch(addNewSchedule(schedule))
       fetchMySchedules()
 

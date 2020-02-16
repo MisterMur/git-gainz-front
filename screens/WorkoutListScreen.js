@@ -1,6 +1,8 @@
+//screens/WorkoutListScren.js
+
+//react imports
 import React from "react";
 import {connect} from 'react-redux'
-
 import {
   ScrollView,
   View,
@@ -12,16 +14,22 @@ import {
 } from 'react-native';
 import { DrawerActions } from 'react-navigation';
 
+
+//library imports
 import { Card,Input, Button as ButtonElement } from 'react-native-elements'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 
+
+//action imports
 import {fetchSchedulesWorkouts,fetchWorkout,postNewWorkout} from '../actions/workoutActions.js'
 
+//component imports
 import WorkoutList from '../components/WorkoutList.js'
 import Workout from '../components/Workout.js'
 
+//style imports
 import colors from '../styles/colors'
-// import styles from '../styles/base'
+import {styles} from '../styles/base'
 import navBar from '../styles/base'
 import addButton from '../styles/base'
 
@@ -37,6 +45,7 @@ class WorkoutListScreen extends React.Component {
   }
 
   componentDidMount(){
+		//error when adding a new schedule then viewing its workouts
     this.props.fetchSchedulesWorkouts(this.props.currentSchedule)
 
   }
@@ -79,6 +88,7 @@ class WorkoutListScreen extends React.Component {
       <>
 
         <Input
+					style={styles.input}
           placeholder='Enter a Workout Name'
           onChangeText={(text) => this.setState({text})}
           value={this.state.text}
@@ -117,7 +127,8 @@ class WorkoutListScreen extends React.Component {
       <>
         {this.renderNavBar()}
         {this.renderAddWorkoutForm()}
-        <ScrollView className="WorkoutList">
+				<ScrollView>
+
           {this.props.currentSchedule?this.renderWorkoutList():null}
         </ScrollView>
       </>
@@ -140,26 +151,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(WorkoutListScreen);
-
-
-
-const styles = StyleSheet.create({
-  navBar: {
-      height: 50,
-      justifyContent: 'center',
-      paddingHorizontal: 25
-  },
-  addButton:{
-    position: 'absolute',
-    bottom:20,
-    right:20,
-    padding: 5,
-    height: 50,
-    width: 50,  //The Width must be the same as the height
-    borderRadius:100, //Then Make the Border Radius twice the size of width or Height
-    backgroundColor:colors.bgMainRed,
-    zIndex:999,
-
-  },
-
-})

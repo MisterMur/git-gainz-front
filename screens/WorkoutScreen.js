@@ -52,6 +52,9 @@ class WorkoutScreen extends Component {
   state={
     text:'',
 		pastWorkout:this.props.navigation.state.params.pastWorkout,
+		inProgress:false,
+		startTime:null,
+		endTime:null,
     workout:{
       workout_id:this.props.currentWorkout.id,
       exercises:[]
@@ -111,6 +114,11 @@ class WorkoutScreen extends Component {
     this.props.navigation.navigate('historySack')
 
   }
+	handleStartWorkout=()=>{
+		this.setState({
+			inProgress:true,
+		})
+	}
 
   renderAddExerciseForm=()=>{
 		if(this.state.pastWorkout===false){
@@ -134,32 +142,47 @@ class WorkoutScreen extends Component {
 		}
 
   }
-	renderFinishWorkoutButon=()=>{
-		// <View style={[{height:100}]}>
-		// 	<Button
-		// 		backgroundColor='#03A9F4'
-		// 		buttonStyle={{backgroundColor:'teal',borderRadius: 0.5, }}
-		// 		title='Finish Workout'
-		// 		onPress={this.handleCompleteWorkout}
-		// 		>
-		// 		<Text>Copmlete Workout</Text>
-		// 	</Button>
-		// </View>
+	// renderFinishWorkoutButon=()=>{
+	//
+	// 	if(this.state.pastWorkout===false
+	// 		&& this.state.inProgress ===true		){
+	// 		return (
+	//
+	// 		)
+	// 	}
+	// }
+	renderStartFinishWorkoutButton=()=>{
+
 		if(this.state.pastWorkout===false){
-			return (
-				<View style={[{width:'100%'}]}>
-					<TouchableOpacity
-						onPress={this.handleCompleteWorkout}
-						backgroundColor='teal'
-						style={styles.button}
-						title="Complete Workout"
-						>
-						<Text style={styles.buttonText}>
-							Complete Workout
-						</Text>
-					</TouchableOpacity>
-				</View>
-			)
+			if(this.state.inProgress===false){
+				return (
+					<View style={[{width:'100%'}]}>
+						<TouchableOpacity
+							onPress={this.handleStartWorkout}
+							style={styles.startButton}
+							title="Start Workout"
+							>
+							<Text style={styles.buttonText}>
+								Start Workout
+							</Text>
+						</TouchableOpacity>
+					</View>
+				)
+			}else{
+				return (
+					<View style={[{width:'100%'}]}>
+						<TouchableOpacity
+							onPress={this.handleCompleteWorkout}
+							style={styles.stopButton}
+							title="Complete Workout"
+							>
+							<Text style={styles.buttonText}>
+								Complete Workout
+							</Text>
+						</TouchableOpacity>
+					</View>
+				)
+			}
 		}
 	}
 
@@ -181,8 +204,7 @@ class WorkoutScreen extends Component {
         {this.renderExercises()}
 
       </ScrollView>
-			{this.renderFinishWorkoutButon()}
-
+				{this.renderStartFinishWorkoutButton()}
 
       </>
     );
@@ -204,24 +226,3 @@ function mapStateToProps(state){
 
 }
 export default connect(mapStateToProps,mapDispatchToProps)(WorkoutScreen)
-
-// const styles = StyleSheet.create({
-//   navBar: {
-//       height: 50,
-//       justifyContent: 'center',
-//       paddingHorizontal: 25
-//   },
-//   addButton:{
-//     position: 'absolute',
-//     bottom:60,
-//     right:20,
-//     padding: 5,
-//     height: 50,
-//     width: 50,  //The Width must be the same as the height
-//     borderRadius:100, //Then Make the Border Radius twice the size of width or Height
-//     backgroundColor:colors.bgMainRed,
-//     zIndex:999,
-//
-//   },
-//
-// })
