@@ -33,7 +33,7 @@ class Schedule extends React.Component {
   render() {
     return (
       <View>
-        <Card style={styles.card} title={this.props.schedule.name} dividerStyle="3">
+        <Card containerStyle={styles.card} title={this.props.schedule.name} dividerStyle="3">
           <Text style={{marginBottom: 10,flex:2}}>
             {this.props.schedule.workouts.length} Workout(s)
           </Text>

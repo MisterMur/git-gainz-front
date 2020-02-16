@@ -150,7 +150,8 @@ export const  styles = StyleSheet.create({
 	},
 
 	card:{
-		borderRadius:0.25,
+		borderRadius:20,
+		// backgroundColor:'orange'
 	}
 
 

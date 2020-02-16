@@ -60,7 +60,7 @@ class SettingsScreen extends React.Component {
         <TouchableOpacity
           onPress={null}
           style={styles.inactiveButtons}>
-          <Text style={styles.buttonText}>Email}</Text>
+          <Text style={styles.buttonText}>Username</Text>
         </TouchableOpacity>
         <TouchableOpacity
            onPress={this.logout}

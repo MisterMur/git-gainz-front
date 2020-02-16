@@ -15,6 +15,8 @@ import {resetExercises} from '../actions/exerciseActions.js'
 //constants imports
 import {SET_CURRENT_WORKOUT} from '../constants/types.js'
 
+//styles imports
+import {styles} from '../styles/styles.js'
 
 
 class Workout extends React.Component {
@@ -39,7 +41,7 @@ class Workout extends React.Component {
   render() {
     return (
       <View>
-        <Card  dividerStyle="3">
+        <Card  containerStyle={styles.card} dividerStyle="3">
           <Text style={{marginBottom: 10,textAlign:'center'}}>
             {this.props.workout.name}
           </Text>

@@ -15,6 +15,7 @@ import {addCircuit} from '../actions/workoutActions.js'
 
 //styles imports
 import fonts from '../styles/base.js'
+import {styles} from '../styles/styles.js'
 
 
 
@@ -93,7 +94,7 @@ class Exercise extends React.Component {
   render() {
     return (
 
-        <Card  title={this.props.exercise.name}>
+        <Card containerStyle={styles.card} title={this.props.exercise.name}>
 					{this.props.pastWorkout?
 						this.renderFinishedSets()
 						:
