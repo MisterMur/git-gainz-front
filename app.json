@@ -2,7 +2,7 @@
   "expo": {
     "name": "GitGainz",
     "icon": "./assets/images/GooglePlayStore.png",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "slug": "git-gainz",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -11,7 +11,7 @@
     },
     "android": {
       "package": "com.brianmurillo.GitGainz",
-      "versionCode": 2
+      "versionCode": 3
     },
     "platforms": [
       "ios",

@@ -25,8 +25,27 @@ export  default class WorkoutAdapter {
   }
 
 
+ 	static async postExerciseMuscle(exercise,muscles){
+		  const item  = await AsyncStorage.getItem('access_token')
+			return muscles.map(m=>{
+				fetch(API_URL+`exercise_muscles`,{
+					method:"POST",
+					headers:{
+						'Content-Type':'application/json',
+						'Accepts':'application/json',
+						Authorization:item
+					},
+					body:JSON.stringify({
+						exercise_id:exercise.id,
+						muscle_id:m.id
+					})
+				})
+				.then(res=>{return res.json() })
+			})
 
-  static async postWorkoutExercise(exercise,currentWorkout){
+	}
+
+  static async postWorkoutExercise(exercise,currentWorkout,muscles){
     const item  = await AsyncStorage.getItem('access_token')
     return fetch(API_URL+`exercises`,{
       method:"POST",
@@ -39,7 +58,6 @@ export  default class WorkoutAdapter {
     })
     .then(res=>{return res.json() })
     .then(exer=>{
-
       return fetch( API_URL+'workout_exercises',{
         method:"POST",
         headers:{
@@ -51,8 +69,28 @@ export  default class WorkoutAdapter {
           workout_id:currentWorkout.id,
           exercise_id:exer.id
         })
-      }).then(this.handleErrors)
-    }).then(this.handleErrors)
+      })
+
+    })
+		.then(res=>res.json())
+		.then(ex=>{
+			return muscles.map(m=>{
+				fetch(API_URL+`exercise_muscles`,{
+					method:"POST",
+					headers:{
+						'Content-Type':'application/json',
+						'Accepts':'application/json',
+						Authorization:item
+					},
+					body:JSON.stringify({
+						exercise_id:ex.exercise_id,
+						muscle_id:m.id
+					})
+				})
+				.then(res=>{return res.json() })
+			})
+		})
+		.then(this.handleErrors)
   }
 
 

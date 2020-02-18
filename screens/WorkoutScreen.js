@@ -10,6 +10,7 @@ import {
    Text,
    Button,
    TouchableOpacity,
+	 Alert,
  } from 'react-native';
  import {connect} from 'react-redux'
  import { DrawerActions } from 'react-navigation';
@@ -64,6 +65,7 @@ class WorkoutScreen extends Component {
 
     },
 		modalVisible:false,
+		selectedMuscles:[],
   }
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
@@ -95,7 +97,7 @@ class WorkoutScreen extends Component {
     if(this.state.text){
       let ex = {name:this.state.text,sets:[]}
 
-      this.props.postNewExercise(ex,this.props.currentWorkout)
+      this.props.postNewExercise(ex,this.props.currentWorkout,this.state.selectedMuscles)
       this.setState({text:'',
         workout:{
           ...this.state.workout,
@@ -127,10 +129,36 @@ class WorkoutScreen extends Component {
 	setModalVisible=(visible) =>{
 		this.setState({modalVisible: visible});
 	}
+	onSelectedItemsChange = selectedMuscles => {
+		this.setState({ selectedMuscles });
+	};
+	addMuscle=(m)=>{
+		if(!this.state.selectedMuscles.includes(m)){
+			let tempItems = [...this.state.selectedMuscles,m]
+			this.setState({selectedMuscles:tempItems})
+		}
+		else if (this.state.selectedMuscles.includes(m)) {
+
+			let tempItems = [...this.state.selectedMuscles]
+			tempItems.pop(m)
+			this.setState({selectedMuscles:tempItems})
+		}
+
+	}
+	closeModal=()=>{
+
+		this.setModalVisible(!this.state.modalVisible);
+		Alert.alert(`Modal has been closed.Selected Muscles: ${this.props.selectedMuscles}`);
+		this.addNewExercise()
+
+	}
 	renderMuscleModal=()=>{
 		return (
 			<MuscleModal
-				postNewExercise={this.props.postNewExercise}
+				addMuscle={this.addMuscle}
+				closeModal={this.closeModal}
+				onSelectedItemsChange={this.onSelectedItemsChange}
+				selectedMuscles={this.state.selectedMuscles}
 				setModalVisible={this.setModalVisible}
 				modalVisible={this.state.modalVisible}
 				exercise={this.state.text}
@@ -219,7 +247,7 @@ class WorkoutScreen extends Component {
   }
 }
 const mapDispatchToProps=dispatch=>({
-  postNewExercise:(e,w)=>dispatch(postNewExercise(e,w)),
+  postNewExercise:(e,w,m)=>dispatch(postNewExercise(e,w,m)),
   fetchSchedules:()=>dispatch(fetchSchedules()),
   fetchWorkoutsExercises:(w)=>dispatch(fetchWorkoutsExercises(w)),
   postNewCompleteWorkout:(w)=>dispatch(postNewCompleteWorkout(w)),

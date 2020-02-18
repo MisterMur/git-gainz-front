@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {
 	Modal, Text, TouchableHighlight,TouchableOpacity,
-	View, Alert, Picker,Button,
+	View, Alert,Button,
 } from 'react-native';
 
 //library imports
@@ -20,23 +20,9 @@ class MuscleModal extends Component {
 
 
 
-	onSelectedItemsChange = selectedItems => {
-		this.setState({ selectedItems });
-	};
 
-	addMuscle=(m)=>{
-		if(!this.state.selectedItems.includes(m)){
-			let tempItems = [...this.state.selectedItems,m]
-			this.setState({selectedItems:tempItems})
-		}
-		else if (this.state.selectedItems.includes(m)) {
 
-			let tempItems = [...this.state.selectedItems]
-			tempItems.pop(m)
-			this.setState({selectedItems:tempItems})
-		}
 
-	}
 
 	setModalVisible=(visible) =>{
 		this.setState({modalVisible: visible});
@@ -52,33 +38,29 @@ class MuscleModal extends Component {
 	}
 
 	renderMuscle=(muscle,idx)=>{
-		if(this.state.selectedItems.includes(muscle)){
+		if(this.props.selectedMuscles.includes(muscle)){
 			return (
 				<TouchableOpacity
 				key={idx}
 				style={modalStyle.itemUnselected}
-				onPress={()=>this.addMuscle(muscle)}>
+				onPress={()=>this.props.addMuscle(muscle)}>
 				<Text key={idx} style={modalStyle.itemText}>{muscle.name}</Text>
 				</TouchableOpacity>
 			)
 		}
-		else if(!this.state.selectedItems.includes(muscle)){
+		else if(!this.props.selectedMuscles.includes(muscle)){
 			return (
 				<TouchableOpacity
 					key={idx}
 					style={modalStyle.itemSelected}
-					onPress={()=>this.addMuscle(muscle)}>
+					onPress={()=>this.props.addMuscle(muscle)}>
 					<Text key={idx} style={modalStyle.itemText}>{muscle.name}</Text>
 				</TouchableOpacity>
 
 			)
 		}
 	}
-	closeModal=()=>{
 
-		this.props.setModalVisible(!this.props.modalVisible);
-		Alert.alert('Modal has been closed.');
-	}
 
 	renderModal=()=>{
 		return (
@@ -86,7 +68,7 @@ class MuscleModal extends Component {
 				animationType="fade"
 				transparent={true}
 				visible={this.props.modalVisible}
-				onRequestClose={() =>this.closeModal()}>
+				onRequestClose={() =>this.props.closeModal()}>
 				<View style={modalStyle.modal}>
 					<View>
 						<View style={modalStyle.itemContainer}>
@@ -94,7 +76,7 @@ class MuscleModal extends Component {
 							<View styles={{marginBottom:'90%',width:'100%'}}>
 								<TouchableHighlight
 								style={styles.button}
-								onPress={() =>this.closeModal()}>
+								onPress={() =>this.props.closeModal()}>
 								<Text style={modalStyle.itemText}>Hide Modal</Text>
 								</TouchableHighlight>
 							</View>

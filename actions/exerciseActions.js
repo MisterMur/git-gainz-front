@@ -56,9 +56,9 @@ export function fetchWorkoutsExercises(workout){
 
 
 
-export function postNewExercise(exercise,currentWorkout){
+export function postNewExercise(exercise,currentWorkout,muscles){
   return dispatch=>{
-    return WorkoutAdapter.postWorkoutExercise(exercise,currentWorkout)
+    return WorkoutAdapter.postWorkoutExercise(exercise,currentWorkout,muscles)
     .then(function(){
       dispatch(fetchWorkoutsExercises(currentWorkout))
     })

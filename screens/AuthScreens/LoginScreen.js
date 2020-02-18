@@ -190,7 +190,8 @@ userLogin = () => {
     <Container style={[ styles.container, this.props.style || {} ]}>
 
       {this.renderHeader()}
-      <View style={styles.authInputs} >
+
+      <KeyboardAvoidingView style={styles.authInputs} >
         {this.renderError()}
 
         <Hoshi
@@ -199,7 +200,6 @@ userLogin = () => {
           onChangeText={this.emailChanged.bind(this)}
           value={this.state.email}
         />
-
         <Hoshi
           label={'Password'}
           borderColor={'#b76c94'}
@@ -208,9 +208,9 @@ userLogin = () => {
           secureTextEntry
         />
 
+      </KeyboardAvoidingView>
+			{this.renderButtons()}
 
-      </View>
-      {this.renderButtons()}
     </Container>
     );
   }
