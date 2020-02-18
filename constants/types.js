@@ -1,5 +1,5 @@
-export const API_URL = `http://gitgainz.herokuapp.com/api/v1/`
-// export const API_URL = 'http://192.168.2.243:3000/api/v1/'
+// export const API_URL = `http://gitgainz.herokuapp.com/api/v1/`
+export const API_URL = 'http://192.168.2.243:3000/api/v1/'
 
 // const API_URL=`http://192.168.2.243:3000/api/v1/`
 
@@ -34,6 +34,12 @@ export const FETCH_USER_WORKOUTS_BEGIN='FETCH_USER_WORKOUTS_BEGIN'
 export const FETCH_USER_WORKOUTS_SUCCESS='FETCH_USER_WORKOUTS_SUCCESS'
 export const FETCH_USER_WORKOUTS_FAILURE='FETCH_USER_WORKOUTS_FAILURE'
 
+
+export const FETCH_MUSCLES_BEGIN='FETCH_MUSCLES_BEGIN'
+export const FETCH_MUSCLES_SUCCESS='FETCH_MUSCLES_SUCCESS'
+export const FETCH_MUSCLES_FAILURE='FETCH_MUSCLES_FAILURE'
+export const SET_MUSCLES='SET_MUSCLES'
+export const RESET_MUSCLES='RESET_MUSCLES'
 
 //completedworkout constants
 export const SET_COMPLETEDWORKOUTS="SET_COMPLETEDWORKOUTS"

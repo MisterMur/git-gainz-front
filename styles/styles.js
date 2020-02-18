@@ -2,7 +2,91 @@
 import {StyleSheet, Dimensions} from 'react-native'
 import colors from './colors'
 
+export const modalStyle = StyleSheet.create({
+	modal:{
+		width:'80%',
+		height:'75%',
+		backgroundColor:colors.bdWhite,
+		borderColor:'black',
+		borderWidth:3,
+		borderRadius:0.3,
+		opacity:0.9,
+		marginTop:'20%',
+		marginLeft:'auto',
+		marginRight:'auto',
 
+	},
+	musclesButton:{
+		width:'50%',
+		height:50,
+		marginLeft:'auto',
+		marginRight:'auto',
+		borderRadius: 50,
+		borderStyle: 'solid',
+		borderWidth: 4,
+		borderColor: '#e3e3e3',
+		backgroundColor:'skyblue',
+
+	},
+	buttonText:{
+		fontSize:30,
+		color:'black',
+		textAlign:'center',
+	},
+
+	itemContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start' // if you want to fill rows left to right
+  },
+  // item: {
+  //   width: '50%' // is 50% of container width
+  // }
+	itemSelected:{
+		width:'50%',
+		height:50,
+		borderStyle:'solid',
+		borderWidth:3,
+		borderColor: '#e3e3e3',
+		backgroundColor:'red',
+		padding:1,
+		marginLeft:'auto',
+		marginRight:'auto',
+	},
+	itemUnselected:{
+		width:'50%',
+		height:50,
+		borderStyle:'solid',
+		borderWidth:3,
+		borderColor: '#e3e3e3',
+		backgroundColor:'green',
+		padding:1,
+		marginLeft:'auto',
+		marginRight:'auto',
+	},
+	itemText:{
+		fontSize:25,
+		color:'black',
+		textAlign:'center',
+
+	},
+
+	closeModal:{
+		height:50,
+		borderRadius: 50,
+		borderStyle: 'solid',
+		borderWidth: 4,
+		borderColor: '#e3e3e3',
+		backgroundColor:'red',
+		padding: 1,
+		width:'90%',
+		marginLeft:'auto',
+		marginRight:'auto',
+		marginBottom: 10,
+	},
+
+})
 
 export const  styles = StyleSheet.create({
   logo: {

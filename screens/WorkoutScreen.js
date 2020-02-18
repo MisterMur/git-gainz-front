@@ -22,6 +22,7 @@ import FAIcon from 'react-native-vector-icons/FontAwesome'
 
 //component imports
 import Exercise from '../components/Exercise.js'
+import MuscleModal from '../components/MuscleModal.js'
 
 //action imports
 import {postNewExercise} from '../actions/exerciseActions'
@@ -31,6 +32,7 @@ import {
 	fetchWorkoutsExercises,fetchWorkouts,
 	addWorkout
 } from '../actions/workoutActions.js'
+import {fetchMuscles} from '../actions/muscleActions.js'
 
 //styles imports
 import colors from '../styles/colors'
@@ -48,6 +50,7 @@ class WorkoutScreen extends Component {
   }
   componentDidMount(){
     this.props.fetchWorkoutsExercises(this.props.currentWorkout)
+		this.props.fetchMuscles()
   }
   state={
     text:'',
@@ -59,7 +62,8 @@ class WorkoutScreen extends Component {
       workout_id:this.props.currentWorkout.id,
       exercises:[]
 
-    }
+    },
+		modalVisible:false,
   }
   openDrawer = () => {
     this.props.navigation.dispatch(DrawerActions.openDrawer());
@@ -120,6 +124,22 @@ class WorkoutScreen extends Component {
 		})
 	}
 
+	setModalVisible=(visible) =>{
+		this.setState({modalVisible: visible});
+	}
+	renderMuscleModal=()=>{
+		return (
+			<MuscleModal
+				postNewExercise={this.props.postNewExercise}
+				setModalVisible={this.setModalVisible}
+				modalVisible={this.state.modalVisible}
+				exercise={this.state.text}
+				muscles={this.props.muscles}
+				/>
+
+		)
+	}
+
   renderAddExerciseForm=()=>{
 		if(this.state.pastWorkout===false){
 			return (
@@ -130,10 +150,12 @@ class WorkoutScreen extends Component {
 					onChangeText={(text) => this.setState({text})}
 					value={this.state.text}
 					/>
+				{this.renderMuscleModal()}
+
 				<TouchableOpacity
 					style={styles.addButton}
 					title="Add New Exercise"
-					onPress={() => this.addNewExercise()}>
+					onPress={() => this.setModalVisible(true)}>
 					<FAIcon name='plus' size={35} style={{ color: colors.txtWhite,bottom:-5,right:-5, }} />
 				</TouchableOpacity>
 
@@ -143,15 +165,7 @@ class WorkoutScreen extends Component {
 		}
 
   }
-	// renderFinishWorkoutButon=()=>{
-	//
-	// 	if(this.state.pastWorkout===false
-	// 		&& this.state.inProgress ===true		){
-	// 		return (
-	//
-	// 		)
-	// 	}
-	// }
+
 	renderStartFinishWorkoutButton=()=>{
 
 		if(this.state.pastWorkout===false){
@@ -189,14 +203,6 @@ class WorkoutScreen extends Component {
 
 
   render() {
-
-    // <TouchableOpacity
-    //   backgroundColor='#03A9F4'
-    //   buttonStyle={{width:'100%',backgroundColor:'teal',borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-    //   title='Finish Workout'
-    //   onPress={this.handleCompleteWorkout}
-    //   ><Text>FInish Workout</Text>
-    // </TouchableOpacity>
     return (
       <>
       {this.renderNavBar()}
@@ -216,14 +222,16 @@ const mapDispatchToProps=dispatch=>({
   postNewExercise:(e,w)=>dispatch(postNewExercise(e,w)),
   fetchSchedules:()=>dispatch(fetchSchedules()),
   fetchWorkoutsExercises:(w)=>dispatch(fetchWorkoutsExercises(w)),
-  postNewCompleteWorkout:(w)=>dispatch(postNewCompleteWorkout(w))
+  postNewCompleteWorkout:(w)=>dispatch(postNewCompleteWorkout(w)),
+	fetchMuscles:()=>dispatch(fetchMuscles())
 })
 function mapStateToProps(state){
-  const {workout,user} = state
+  const {workout,user,muscles} = state
 
   return {
     currentWorkout:workout.currentWorkout,
-    currentUser:user.currentUser
+    currentUser:user.currentUser,
+		muscles:muscles.muscles,
   }
 
 }
