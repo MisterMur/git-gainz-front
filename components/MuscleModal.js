@@ -77,7 +77,8 @@ class MuscleModal extends Component {
 								<TouchableHighlight
 								style={styles.button}
 								onPress={() =>this.props.closeModal()}>
-								<Text style={modalStyle.itemText}>Hide Modal</Text>
+								<Text style={modalStyle.itemText}>
+								Add Exercise To Workout</Text>
 								</TouchableHighlight>
 							</View>
 						</View>

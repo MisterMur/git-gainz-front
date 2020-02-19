@@ -98,11 +98,14 @@ class WorkoutScreen extends Component {
       let ex = {name:this.state.text,sets:[]}
 
       this.props.postNewExercise(ex,this.props.currentWorkout,this.state.selectedMuscles)
-      this.setState({text:'',
+      this.setState({
+				text:'',
         workout:{
           ...this.state.workout,
           exercises:[...this.state.workout.exercises,ex]
-        }})
+        },
+				selectedMuscles:[],
+			})
     }
 
 
@@ -148,7 +151,6 @@ class WorkoutScreen extends Component {
 	closeModal=()=>{
 
 		this.setModalVisible(!this.state.modalVisible);
-		Alert.alert(`Modal has been closed.Selected Muscles: ${this.props.selectedMuscles}`);
 		this.addNewExercise()
 
 	}
