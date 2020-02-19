@@ -31,7 +31,7 @@ import {fetchSchedules} from '../actions/scheduleActions.js'
 import {
 	postNewCompleteWorkout,
 	fetchWorkoutsExercises,fetchWorkouts,
-	addWorkout
+	addWorkout,startStopWorkout,
 } from '../actions/workoutActions.js'
 import {fetchMuscles} from '../actions/muscleActions.js'
 
@@ -56,7 +56,6 @@ class WorkoutScreen extends Component {
   state={
     text:'',
 		pastWorkout:this.props.navigation.state.params.pastWorkout,
-		inProgress:false,
 		startTime:null,
 		endTime:null,
     workout:{
@@ -120,13 +119,15 @@ class WorkoutScreen extends Component {
   }
   handleCompleteWorkout=()=>{
     this.props.postNewCompleteWorkout(this.props.currentWorkout)
+		this.props.startStopWorkout()
     this.props.navigation.navigate('historySack')
 
   }
 	handleStartWorkout=()=>{
-		this.setState({
-			inProgress:true,
-		})
+		this.props.startStopWorkout()
+		// this.setState({
+		// 	inProgress:true,
+		// })
 	}
 
 	setModalVisible=(visible) =>{
@@ -199,7 +200,7 @@ class WorkoutScreen extends Component {
 	renderStartFinishWorkoutButton=()=>{
 
 		if(this.state.pastWorkout===false){
-			if(this.state.inProgress===false){
+			if(this.props.inProgress===false){
 				return (
 					<View style={[{width:'100%'}]}>
 						<TouchableOpacity
@@ -253,12 +254,16 @@ const mapDispatchToProps=dispatch=>({
   fetchSchedules:()=>dispatch(fetchSchedules()),
   fetchWorkoutsExercises:(w)=>dispatch(fetchWorkoutsExercises(w)),
   postNewCompleteWorkout:(w)=>dispatch(postNewCompleteWorkout(w)),
-	fetchMuscles:()=>dispatch(fetchMuscles())
+	fetchMuscles:()=>dispatch(fetchMuscles()),
+	startStopWorkout:()=>dispatch(startStopWorkout()),
 })
 function mapStateToProps(state){
   const {workout,user,muscles} = state
 
   return {
+		startTime:workout.startTime,
+		endTime:workout.endTime,
+		inProgress:workout.inProgress,
     currentWorkout:workout.currentWorkout,
     currentUser:user.currentUser,
 		muscles:muscles.muscles,

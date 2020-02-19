@@ -27,7 +27,9 @@
     "react-native-material-design": "^0.3.7",
     "react-native-material-design-styles": "^0.2.7",
     "react-native-multiple-select": "^0.5.5",
+    "react-native-pathjs-charts": "0.0.34",
     "react-native-router-flux": "^4.0.6",
+    "react-native-svg": "^9.9.5",
     "react-native-textinput-effects": "^0.5.1",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^3.6.1",
@@ -36,7 +38,8 @@
     "redux-action": "^1.2.2",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "regexp": "^1.0.0"
+    "regexp": "^1.0.0",
+    "victory-native": "^34.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.0.0",

@@ -5,23 +5,42 @@ import {
   FETCH_CIRCUITS_FAILURE,FETCH_WORKOUTS_BEGIN,
   FETCH_WORKOUTS_SUCCESS,FETCH_WORKOUTS_FAILURE,
   ADD_NEW_WORKOUT,SET_WORKOUTS,SET_CURRENT_WORKOUT,
-  RESET_WORKOUTS,
+  RESET_WORKOUTS,STARTSTOP_WORKOUT,
 } from '../constants/types.js'
 import {LOGOUT} from '../constants/authTypes'
 
 const initialState={
   workouts:[],
-
+	inProgress:false,
   loading:false,
   error:null,
   currentWorkout:null,
-  // currentUser:{id:29,name:'Brad',password:'1234'}
+	startTime:null,
+	endTime:null,
+	duration:null,
 }
 
 
 export default function workoutReducer(state=initialState,action){
 
   switch(action.type){
+
+		case STARTSTOP_WORKOUT:
+			if(!state.inProgress){
+				console.warn(Date.now())
+				return{
+					...state,
+					inProgress:!state.inProgress,
+					startTime:Date.now()
+				}
+			}else if (state.inProgress){
+				return{
+					...state,
+					inProgress:!state.inProgress,
+					endTime:Date.now(),
+					duration:Date.now()-state.startTime,
+				}
+			}
     case RESET_WORKOUTS:
       return{
         ...state,

@@ -19,6 +19,7 @@ import AuthLoadingScreen from '../screens/AuthScreens/AuthLoadingScreen.js'
 import HistoryScreen from '../screens/History/HistoryScreen.js'
 
 import WorkoutListScreen from '../screens/WorkoutListScreen.js';
+import StatScreen from '../screens/StatScreen/StatScreen.js'
 
 //login stack
 const LoginStack = createStackNavigator({
@@ -83,11 +84,35 @@ const HistoryStack = createStackNavigator({
 
 );
 
+
+const StatStack = createStackNavigator({
+  WorkoutStats:StatScreen,
+},{
+  // Default config for all screens
+  defaultNavigationOptions:  ({ navigation }) => ({
+
+    headerTintColor: 'black',
+
+  }),
+
+  headerStyle: {backgroundColor: '#E73536'},
+
+  headerMode: 'screen',
+  cardStyle:{backgroundColor:'powderblue'},
+  title:'Workout Statistics',
+  drawerLabel: 'Stats',
+  initialRouteName: 'WorkoutStats',
+
+}
+
+);
+
 const DrawerStack =createDrawerNavigator({
 
   // screen1: { screen: LoginScreen },
   "Workout Schedules": { screen: WorkoutStack},
   "History":{screen:HistoryStack},
+	"Stats":{screen:StatStack},
   screen3: { screen: SettingsScreen},
 
 },
@@ -116,7 +141,8 @@ const PrimaryNav = createSwitchNavigator({
   loginStack: { screen: LoginStack },
   drawerStack: { screen: DrawerNavigation },
   workoutStack:{screen:WorkoutStack},
-  historySack:{screen:HistoryStack},
+  historyStack:{screen:HistoryStack},
+	statStack:{screen:StatStack},
 }, {
   // Default config for all screens
 

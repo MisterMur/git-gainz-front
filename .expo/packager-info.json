@@ -1,10 +1,10 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 43296,
+  "packagerPid": 81444,
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://3j-7wg.brian-murillo.git-gainz-front.exp.direct",
-  "packagerNgrokUrl": "https://packager.3j-7wg.brian-murillo.git-gainz-front.exp.direct",
-  "ngrokPid": 23768,
+  "expoServerNgrokUrl": "https://92-jzc.brian-murillo.git-gainz-front.exp.direct",
+  "packagerNgrokUrl": "https://packager.92-jzc.brian-murillo.git-gainz-front.exp.direct",
+  "ngrokPid": 90064,
   "webpackServerPort": null
 }

@@ -1,5 +1,5 @@
-export const API_URL = `http://gitgainz.herokuapp.com/api/v1/`
-// export const API_URL = 'http://192.168.2.243:3000/api/v1/'
+// export const API_URL = `http://gitgainz.herokuapp.com/api/v1/`
+export const API_URL = 'http://192.168.2.243:3000/api/v1/'
 
 // const API_URL=`http://192.168.2.243:3000/api/v1/`
 
@@ -17,6 +17,7 @@ export const FETCH_WORKOUTS_SUCCESS='FETCH_WORKOUTS_SUCCESS'
 export const FETCH_WORKOUTS_FAILURE='FETCH_WORKOUTS_FAILURE'
 export const ADD_NEW_WORKOUT ='ADD_WORKOUT'
 export const RESET_WORKOUTS='RESET_WORKOUTS'
+export const STARTSTOP_WORKOUT='STARTSTOP_WORKOUT'
 
 export const FETCH_EXERCISES_BEGIN='FETCH_EXERCISES_BEGIN'
 export const FETCH_EXERCISES_SUCCESS='FETCH_EXERCISES_SUCCESS'

@@ -12,6 +12,7 @@ import {
   FETCH_COMPLETEDWORKOUTS_SUCCESS,
   FETCH_COMPLETEDWORKOUTS_FAILURE,
   SET_COMPLETEDWORKOUTS,RESET_WORKOUTS,
+	STARTSTOP_WORKOUT,
 
 } from '../constants/types.js'
 
@@ -127,6 +128,13 @@ export function postNewWorkout(workout,schedule){
       dispatch(fetchSchedulesWorkouts(schedule))
     })
   }
+}
+
+export function startStopWorkout(){
+	return dispatch=>{
+		console.warn('in dispatching start stop')
+		dispatch({type:STARTSTOP_WORKOUT})
+	}
 }
 
 export function addCircuit(circuit){

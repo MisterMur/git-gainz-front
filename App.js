@@ -4,23 +4,25 @@ import { AppRegistry,Platform, StatusBar,
    StyleSheet, View,  Image,
    TouchableOpacity,AsyncStorage
  } from 'react-native';
+
 import {PersistGate} from 'redux-persist/integration/react'
 import { AppLoading, Font, Icon } from 'expo';
+import {Asset} from 'expo-asset'
+
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import storeObj from './store.js'
 
 //nav  imports
 import PrimaryNav from './navigation/AppNavigation';
 import { DrawerActions } from 'react-navigation';
 
-
-// import { AppRegistry,Platform, StatusBar, StyleSheet, View,  Image,TouchableOpacity,AsyncStorage } from 'react-native-web';
-
-import {Asset} from 'expo-asset'
-
-import { createStore } from 'redux';
-import { Provider, connect } from 'react-redux';
+//library imports
+import FAIcon from 'react-native-vector-icons/FontAwesome'
 
 
-import storeObj from './store.js'
+//styles imports
+import colors from './styles/colors'
 
 
 export default class App extends React.Component {
@@ -37,6 +39,18 @@ export default class App extends React.Component {
       this.setState({ hasToken: token !== null, isLoaded: true })
     });
   }
+	// openDrawer = () => {
+	// 	this.props.navigation.dispatch(DrawerActions.openDrawer());
+	// }
+	// renderNavBar() {
+	// 		return (
+	// 				<View style={ styles.navBar }>
+	// 						<TouchableOpacity onPress={ this.openDrawer }>
+	// 								<FAIcon name='bars' size={22} style={{ color: colors.bdMainRed }} />
+	// 						</TouchableOpacity>
+	// 				</View>
+	// 		)
+	// }
 
 
   render() {
