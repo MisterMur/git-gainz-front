@@ -27,7 +27,7 @@ export  default class WorkoutAdapter {
 
 	static async fetchMuscleSetsData(completedWorkout) {
 	  const item = await AsyncStorage.getItem('access_token')
-	  return fetch(`${API_URL}+user_workouts\\${completedWorkout.id}\\muscle_sets_data`, {
+	  return fetch(`${API_URL}user_workouts/${completedWorkout.id}/muscle_sets_data`, {
 	    method: "GET",
 	    headers: {
 	      Authorization: item
@@ -38,7 +38,7 @@ export  default class WorkoutAdapter {
 
 	static async fetchMuscleRepsData(completedWorkout) {
 		const item = await AsyncStorage.getItem('access_token')
-		return fetch(`${API_URL}+user_workouts\\${completedWorkout.id}\\muscle_reps_data`, {
+		return fetch(`${API_URL}user_workouts/${completedWorkout.id}/muscle_reps_data`, {
 			method: "GET",
 			headers: {
 				Authorization: item

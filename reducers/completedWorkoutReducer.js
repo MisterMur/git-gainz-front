@@ -20,13 +20,11 @@ const initialState={
 export default function completedWorkoutReducer(state=initialState,action){
   switch(action.type){
 		case FETCH_MUSCLEREPS:
-			console.warn('recucer',action.payload)
 			return {
 				...state,
 				workoutSetsData:action.payload
 			}
 		case FETCH_MUSCLESETS:
-		console.warn('reducer',action.payload)
 
 			return {
 				...state,
