@@ -67,21 +67,45 @@ class WorkoutMuscleChart extends React.Component {
 				}
 			}
 	}
+	convertData=(data)=>{
+		arr=[]
+		Object.entries(data).map(el=>{
+			let obj = {x:el[0],y:el[1],label:el[0]}
+			return arr.push(obj)
+		})
+		// console.warn(arr)
+		return arr;
+	}
 	componentDidMount(){
 		this.props.fetchMuscleRepsData(this.props.completedWorkout)
 		this.props.fetchMuscleSetsData(this.props.completedWorkout)
 	}
 	render(){
-
-		console.warn(this.props.workoutSetsData)
+		// <BarChart
+		// 		// style={graphStyle}
+		// 	data={barData}
+		// 	width={300}
+		// 	height={220}
+		// 	yAxisLabel={'$'}
+		// 	chartConfig={{
+		// 		backgroundColor: '#e26a00',
+		// 		backgroundGradientFrom: '#fb8c00',
+		// 		backgroundGradientTo: '#ffa726',
+		// 		decimalPlaces: 2, // optional, defaults to 2dp
+		// 		color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+		// 		style: {
+		// 			borderRadius: 16
+		// 		}
+		// 	}}
+		// />
 		return (
 			<View style={chartStyles.container}>
 
 				<VictoryPie
 					 innerRadius={75}
 					 labelRadius={125}
-					 style={{ labels: { fontSize: 20 } }}
-					 data={this.props.workoutSetsData}
+					 style={{ backgroundColor:'powderblue',labels: { fontSize: 20 } }}
+					 data={this.convertData(this.props.workoutSetsData)}
 					 animate={{ duration: 1500 }}
 					 colorScale={[
 					 	"#D85F49",
@@ -93,23 +117,6 @@ class WorkoutMuscleChart extends React.Component {
 					 	"#F6A57F"
 					 ]}
 					 />
-				<BarChart
-				    // style={graphStyle}
-			    data={barData}
-			    width={300}
-			    height={220}
-			    yAxisLabel={'$'}
-					chartConfig={{
-			      backgroundColor: '#e26a00',
-			      backgroundGradientFrom: '#fb8c00',
-			      backgroundGradientTo: '#ffa726',
-			      decimalPlaces: 2, // optional, defaults to 2dp
-			      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-			      style: {
-			        borderRadius: 16
-			      }
-			    }}
-				/>
 
 			</View>
 		)
