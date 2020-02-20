@@ -5,6 +5,7 @@ import {
   FETCH_COMPLETEDWORKOUTS_FAILURE,
   ADD_COMPLETED_WORKOUT,
   SET_COMPLETEDWORKOUTS,
+	FETCH_MUSCLEREPS,FETCHMUSCLESETS
 
 } from '../constants/types.js'
 
@@ -45,5 +46,18 @@ export function addCompletedWorkout(workout){
   .then(function(){
     dispatch(fetchCompletedWorkouts(currentUser))
   })
+  }
+}
+export function fetchMuscleRepsData(completedWorkout){
+  return (dispatch)=>{
+    return WorkoutAdapter.fetchMuscleRepsData(completedWorkout)
+  .then(data=>   dispatch({type:FETCH_MUSCLEREPS,payload:data}) )
+  }
+}
+
+export function fetchMuscleSetsData(completedWorkout){
+  return (dispatch)=>{
+    return WorkoutAdapter.fetchMuscleSetsData(completedWorkout)
+  .then(data=>   dispatch({type:FETCH_MUSCLESETS,payload:data}) )
   }
 }

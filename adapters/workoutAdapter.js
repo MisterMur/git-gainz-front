@@ -12,6 +12,7 @@ export  default class WorkoutAdapter {
     })
     .then(res => res.json())
   }
+
   static async getWorkoutsExercises(workout){
     const item = await AsyncStorage.getItem('access_token')
     return fetch(API_URL+`workouts/${workout.id}`,{
@@ -23,6 +24,28 @@ export  default class WorkoutAdapter {
       .then(this.handleErrors)
       .then(res=>res.json())
   }
+
+	static async fetchMuscleSetsData(completedWorkout) {
+	  const item = await AsyncStorage.getItem('access_token')
+	  return fetch(`${API_URL}+user_workouts\\${completedWorkout.id}\\muscle_sets_data`, {
+	    method: "GET",
+	    headers: {
+	      Authorization: item
+	    }
+	    })
+	    .then(res => res.json())
+  }
+
+	static async fetchMuscleRepsData(completedWorkout) {
+		const item = await AsyncStorage.getItem('access_token')
+		return fetch(`${API_URL}+user_workouts\\${completedWorkout.id}\\muscle_reps_data`, {
+			method: "GET",
+			headers: {
+				Authorization: item
+			}
+			})
+			.then(res => res.json())
+	}
 
 
  	static async postExerciseMuscle(exercise,muscles){

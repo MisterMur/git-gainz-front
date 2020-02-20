@@ -75,17 +75,20 @@ class Exercise extends React.Component {
     />)
   }
 	renderFinishedSets(){
-		return this.props.exercise.circuits.map( (s,idx) =>
-		<Set
-			key={idx}
-			pastWorkout={this.props.pastWorkout}
-			exercise={this.props.exercise}
-			reps={s.reps}
-			weight={s.weight}
-			rest={s.rest}
-			handleRepsOnChange={this.handleRepsOnChange} handleWeightOnChange={this.handleWeightOnChange}
-			addCircuitsButton={this.addCircuitsButton}
-		/>)
+		if(this.props.exercise.circuits){
+			return this.props.exercise.circuits.map( (s,idx) =>
+			<Set
+				key={idx}
+				pastWorkout={this.props.pastWorkout}
+				exercise={this.props.exercise}
+				reps={s.reps}
+				weight={s.weight}
+				rest={s.rest}
+				handleRepsOnChange={this.handleRepsOnChange} handleWeightOnChange={this.handleWeightOnChange}
+				addCircuitsButton={this.addCircuitsButton}
+				/>)
+
+		}
 	}
 
 

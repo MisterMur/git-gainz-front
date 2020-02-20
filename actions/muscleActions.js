@@ -32,7 +32,6 @@ export function fetchMuscles(){
   return (dispatch)=>{
     return MuscleAdapter.fetchMuscles()
     .then(muscles=>{
-			// console.warn('in muscle actions fetching muscles',muscles)
       dispatch(fetchMusclesSuccess(muscles))
       return muscles
     })

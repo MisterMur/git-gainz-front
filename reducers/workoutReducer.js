@@ -27,7 +27,6 @@ export default function workoutReducer(state=initialState,action){
 
 		case STARTSTOP_WORKOUT:
 			if(!state.inProgress){
-				console.warn(Date.now())
 				return{
 					...state,
 					inProgress:!state.inProgress,

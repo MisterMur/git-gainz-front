@@ -24,7 +24,7 @@ import FAIcon from 'react-native-vector-icons/FontAwesome'
 //component imports
 import Exercise from '../components/Exercise.js'
 import MuscleModal from '../components/MuscleModal.js'
-
+import WorkoutMuscleChart from './StatScreen/workoutMuscleChart'
 //action imports
 import {postNewExercise} from '../actions/exerciseActions'
 import {fetchSchedules} from '../actions/scheduleActions.js'
@@ -155,6 +155,16 @@ class WorkoutScreen extends Component {
 		this.addNewExercise()
 
 	}
+	renderCharts=()=>{
+		if(this.state.pastWorkout){
+			return (
+				<WorkoutMuscleChart
+					completedWorkout={this.props.currentWorkout}
+					/>
+			)
+
+		}
+	}
 	renderMuscleModal=()=>{
 		return (
 			<MuscleModal
@@ -239,8 +249,11 @@ class WorkoutScreen extends Component {
       {this.renderNavBar()}
       {this.renderAddExerciseForm()}
 			<ScrollView style={[ styles.container, this.props.style || {} ]}>
+				{this.renderCharts()}
 
         {this.renderExercises()}
+
+
 
       </ScrollView>
 				{this.renderStartFinishWorkoutButton()}

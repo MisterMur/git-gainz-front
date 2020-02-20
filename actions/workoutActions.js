@@ -132,7 +132,6 @@ export function postNewWorkout(workout,schedule){
 
 export function startStopWorkout(){
 	return dispatch=>{
-		console.warn('in dispatching start stop')
 		dispatch({type:STARTSTOP_WORKOUT})
 	}
 }

@@ -90,7 +90,6 @@ class MuscleModal extends Component {
 	}
 
   render() {
-		// console.warn('rendering modal',this.props.modalVisible)
 
     return (
       <View >
