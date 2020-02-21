@@ -1,5 +1,8 @@
 //adapter/circuitAdapter
 
+//react imports
+import {AsyncStorage} from 'react-native'
+
 //constant imports
 import {API_URL} from '../constants/types.js'
 
@@ -16,6 +19,7 @@ export default class CircuitAdapter{
 			.then(res => res.json())
 	}
 	static async deleteCircuit(circuit) {
+		console.warn('in circadapters delting:',circuit)
 		const item = await AsyncStorage.getItem('access_token')
 		return fetch(`${API_URL}circuits/${circuit.id}`, {
 			method: "DELETE",
@@ -36,7 +40,8 @@ export default class CircuitAdapter{
 				'Authorization':userToken
 			},
 			body:JSON.stringify({circuit})
-		}).then(this.handleErrors)
+		}).then(res=>res.json())
+		.then(this.handleErrors)
 
 	}
 

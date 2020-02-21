@@ -5,6 +5,7 @@ import workoutReducer from './workoutReducer';
 import authReducer from './authReducer'
 import muscleReducer from './muscleReducer'
 import completedWorkoutReducer from './completedWorkoutReducer'
+import circuitReducer from './circuitReducer'
 export default combineReducers({
   user: userReducer,
   schedule: scheduleReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   auth:authReducer,
   history:completedWorkoutReducer,
 	muscles:muscleReducer,
+	circuits:circuitReducer,
 })

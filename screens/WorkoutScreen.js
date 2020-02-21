@@ -35,7 +35,10 @@ import {
 	stopWorkout,
 } from '../actions/workoutActions.js'
 import {fetchMuscles} from '../actions/muscleActions.js'
-
+import {
+	deleteAllCircuits,deleteCircuit,
+	resetCircuits,
+} from '../actions/circuitActions.js'
 //styles imports
 import colors from '../styles/colors'
 import {styles} from '../styles/styles'
@@ -53,6 +56,7 @@ class WorkoutScreen extends Component {
   componentDidMount(){
     this.props.fetchWorkoutsExercises(this.props.currentWorkout)
 		this.props.fetchMuscles()
+		this.props.stopWorkout()
   }
   state={
     text:'',
@@ -121,6 +125,7 @@ class WorkoutScreen extends Component {
   handleCompleteWorkout=()=>{
 		this.props.stopWorkout()
     this.props.postNewCompleteWorkout(this.props.currentWorkout)
+		this.props.deleteAllCircuits(this.props.circuits)
     this.props.navigation.navigate('historyStack')
 
   }
@@ -272,9 +277,12 @@ const mapDispatchToProps={
 	startStopWorkout,
 	startWorkout,
 	stopWorkout,
+	// deleteCircuit,
+	deleteAllCircuits,
+	resetCircuits,
 }
 function mapStateToProps(state){
-  const {workout,user,muscles} = state
+  const {workout,user,muscles,circuits} = state
 
   return {
 		startTime:workout.startTime,
@@ -283,6 +291,7 @@ function mapStateToProps(state){
     currentWorkout:workout.currentWorkout,
     currentUser:user.currentUser,
 		muscles:muscles.muscles,
+		circuits:circuits.circuits,
   }
 
 }

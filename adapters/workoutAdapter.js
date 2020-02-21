@@ -146,7 +146,7 @@ export  default class WorkoutAdapter {
       },
       body:JSON.stringify({completedWorkout,user_id:userToken.split(':')[0]})
     }).then(this.handleErrors)
-		.then(this.updateResetWorkout(completedWorkout))
+		// .then(this.updateResetWorkout(completedWorkout))
 
   }
 
