@@ -18,20 +18,21 @@ import {
 //library imports
 import { Input} from 'react-native-elements'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
-// import  {Button}   from 'react-native-material-design';
 
 
 //component imports
 import Exercise from '../components/Exercise.js'
 import MuscleModal from '../components/MuscleModal.js'
 import WorkoutMuscleChart from './StatScreen/workoutMuscleChart'
+
 //action imports
 import {postNewExercise} from '../actions/exerciseActions'
 import {fetchSchedules} from '../actions/scheduleActions.js'
 import {
 	postNewCompleteWorkout,
 	fetchWorkoutsExercises,fetchWorkouts,
-	addWorkout,startStopWorkout,
+	addWorkout,startStopWorkout,startWorkout,
+	stopWorkout,
 } from '../actions/workoutActions.js'
 import {fetchMuscles} from '../actions/muscleActions.js'
 
@@ -118,13 +119,13 @@ class WorkoutScreen extends Component {
     this.props.fetchSchedules()
   }
   handleCompleteWorkout=()=>{
+		this.props.stopWorkout()
     this.props.postNewCompleteWorkout(this.props.currentWorkout)
-		this.props.startStopWorkout()
-    this.props.navigation.navigate('historySack')
+    this.props.navigation.navigate('historyStack')
 
   }
 	handleStartWorkout=()=>{
-		this.props.startStopWorkout()
+		this.props.startWorkout()
 		// this.setState({
 		// 	inProgress:true,
 		// })
@@ -262,14 +263,16 @@ class WorkoutScreen extends Component {
     );
   }
 }
-const mapDispatchToProps=dispatch=>({
-  postNewExercise:(e,w,m)=>dispatch(postNewExercise(e,w,m)),
-  fetchSchedules:()=>dispatch(fetchSchedules()),
-  fetchWorkoutsExercises:(w)=>dispatch(fetchWorkoutsExercises(w)),
-  postNewCompleteWorkout:(w)=>dispatch(postNewCompleteWorkout(w)),
-	fetchMuscles:()=>dispatch(fetchMuscles()),
-	startStopWorkout:()=>dispatch(startStopWorkout()),
-})
+const mapDispatchToProps={
+  postNewExercise,
+  fetchSchedules,
+  fetchWorkoutsExercises,
+  postNewCompleteWorkout,
+	fetchMuscles,
+	startStopWorkout,
+	startWorkout,
+	stopWorkout,
+}
 function mapStateToProps(state){
   const {workout,user,muscles} = state
 

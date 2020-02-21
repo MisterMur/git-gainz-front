@@ -1,14 +1,24 @@
+//actions/circuitActions.js
 //adapter imports
-import WorkoutAdapter from '../adapters/workoutAdapter'
+import CircuitAdapter from '../adapters/circuitAdapter'
 
+
+//constatn imports
+import {
+	API_URL,
+	ADD_CIRCUIT,FETCH_CIRCUITS_BEGIN,FETCH_CIRCUITS_SUCCESS,
+	FETCH_CIRCUITS_FAILURE,
+} from '../constants/types.js'
 
 
 
 export function addCircuit(circuit){
   return dispatch=>{
-    return WorkoutAdapter.postCircuit(circuit)
+    return CircuitAdapter.postCircuit(circuit)
     .then(function(){
-      // dispatch(fetchWorkoutsExercises(currentWorkout))
+			dispatch({type:ADD_CIRCUIT,payload:circuit})
+
+
     })
   }
 }

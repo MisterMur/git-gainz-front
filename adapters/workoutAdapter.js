@@ -116,6 +116,24 @@ export  default class WorkoutAdapter {
 		.then(this.handleErrors)
   }
 
+	static async updateResetWorkout(workout){
+		const userToken = await AsyncStorage.getItem('access_token')
+		return fetch(`${API_URL}workouts/${workout.id}`,{
+			method:"PATCH",
+			headers:{
+				'Content-Type':'application/json',
+				'Accepts':'application/json',
+				'Authorization':userToken
+			},
+			body:JSON.stringify({
+				workout,
+				// user_id:userToken.split(':')[0]
+			})
+		}).then(this.handleErrors)
+
+	}
+
+
 
   static async addCompletedWorkout(completedWorkout){
     const userToken = await AsyncStorage.getItem('access_token')
@@ -128,23 +146,12 @@ export  default class WorkoutAdapter {
       },
       body:JSON.stringify({completedWorkout,user_id:userToken.split(':')[0]})
     }).then(this.handleErrors)
+		.then(this.updateResetWorkout(completedWorkout))
 
   }
 
 
-  static async postCircuit(circuit){
-    const userToken = await AsyncStorage.getItem('access_token')
-    return fetch(API_URL+'circuits',{
-      method:"POST",
-      headers:{
-        'Content-Type':'application/json',
-        'Accepts':'application/json',
-        'Authorization':userToken
-      },
-      body:JSON.stringify({circuit})
-    }).then(this.handleErrors)
 
-  }
 
 
   static async addNewWorkout(workout,schedule){

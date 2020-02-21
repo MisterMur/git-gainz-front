@@ -41,9 +41,11 @@ class Workout extends React.Component {
   render() {
     return (
       <View>
-        <Card  containerStyle={styles.card} dividerStyle="3">
-          <Text style={{marginBottom: 10,textAlign:'center'}}>
-            {this.props.workout.name}
+        <Card
+					containerStyle={styles.card}
+					dividerStyle="3" title={this.props.workout.name}>
+          <Text style={{marginBottom: 10,flex:2,textAlign:'center'}}>
+            {this.props.workout.exercises.length} Exercises
           </Text>
 
           <Button

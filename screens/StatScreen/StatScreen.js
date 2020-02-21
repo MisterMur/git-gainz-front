@@ -2,7 +2,7 @@
 import React from "react";
 import {
 	ScrollView,View,
-	TouchableOpacity,
+	TouchableOpacity,Text,
 
 } from 'react-native'
 
@@ -39,7 +39,7 @@ class StatScreen extends React.Component {
     return (
       <View>
 				{this.renderNavBar()}
-				<WorkoutMuscleChart/>
+				<Text>STATS WILL GO HERE</Text>
 
       </View>
     )

@@ -9,7 +9,7 @@ import {connect} from 'react-redux'
 import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
 import fonts from '../styles/base.js'
 
-import {postNewCircuit,startStopWorkout} from '../actions/workoutActions.js'
+import {postNewCircuit,startStopWorkout,startWorkout} from '../actions/workoutActions.js'
 
 
 class Set extends React.Component {
@@ -43,7 +43,9 @@ class Set extends React.Component {
 	handleCompleteCircuit=()=>{
 		this.props.addCircuitsButton(this.state.reps,this.state.weight,this.state.rest)
 		this.setState((prevState)=>{return {showButton:!prevState.showButton}})
-		this.props.startStopWorkout()
+		if(!this.props.inProgress){
+			this.props.startWorkout()
+		}
 
 	}
 
@@ -116,7 +118,7 @@ class Set extends React.Component {
 }
 
 const mapDispatchToProps={
-  postNewCircuit,startStopWorkout
+  postNewCircuit,startStopWorkout,startWorkout,
 }
 function mapStateToProps(state){
 	const {workout} = state

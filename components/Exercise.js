@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Set from './Set.js'
 
 //actions imports
-import {addCircuit} from '../actions/workoutActions.js'
+import {addCircuit} from '../actions/circuitActions.js'
 
 //styles imports
 import fonts from '../styles/base.js'

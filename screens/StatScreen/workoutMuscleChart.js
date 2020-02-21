@@ -1,3 +1,6 @@
+// statscreen/workoutMuscleChart.js
+
+//react imports
 import React from "react"
 import {
 	View,ScrollView,Text,

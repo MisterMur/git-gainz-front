@@ -12,7 +12,9 @@ import {
   FETCH_COMPLETEDWORKOUTS_SUCCESS,
   FETCH_COMPLETEDWORKOUTS_FAILURE,
   SET_COMPLETEDWORKOUTS,RESET_WORKOUTS,
-	STARTSTOP_WORKOUT,
+	STARTSTOP_WORKOUT,START_WORKOUT,STOP_WORKOUT,
+	ADD_CIRCUIT,
+
 
 } from '../constants/types.js'
 
@@ -135,11 +137,21 @@ export function startStopWorkout(){
 		dispatch({type:STARTSTOP_WORKOUT})
 	}
 }
-
+export function startWorkout(){
+	return dispatch=>{
+		dispatch({type:START_WORKOUT})
+	}
+}
+export function stopWorkout(){
+	return dispatch=>{
+		dispatch({type:STOP_WORKOUT})
+	}
+}
 export function addCircuit(circuit){
   return dispatch=>{
     return WorkoutAdapter.postCircuit(circuit)
     .then(function(){
+			dispatch({type:ADD_CIRCUIT,payload:circuit})
       // dispatch(fetchWorkoutsExercises(currentWorkout))
     })
   }
