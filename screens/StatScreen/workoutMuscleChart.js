@@ -68,13 +68,16 @@ class WorkoutMuscleChart extends React.Component {
 			}
 	}
 	convertData=(data)=>{
-		arr=[]
-		Object.entries(data).map(el=>{
-			let obj = {x:el[0],y:el[1],label:el[0]}
-			return arr.push(obj)
-		})
-		// console.warn(arr)
-		return arr;
+		if(data){
+			arr=[]
+			Object.entries(data).map(el=>{
+				let obj = {x:el[0],y:el[1],label:el[0]}
+				return arr.push(obj)
+			})
+			// console.warn(arr)
+			return arr;
+
+		}
 	}
 	componentDidMount(){
 		this.props.fetchMuscleRepsData(this.props.completedWorkout)
@@ -102,11 +105,11 @@ class WorkoutMuscleChart extends React.Component {
 			<View style={chartStyles.container}>
 
 				<VictoryPie
-					 innerRadius={75}
-					 labelRadius={125}
-					 style={{ backgroundColor:'powderblue',labels: { fontSize: 20 } }}
+					 innerRadius={60}
+					 labelRadius={90}
+					 style={{labels: { fontSize: 22 } }}
 					 data={this.convertData(this.props.workoutSetsData)}
-					 animate={{ duration: 1500 }}
+					 animate={{ duration: 2500 }}
 					 colorScale={[
 					 	"#D85F49",
 					 	"#F66D3B",
@@ -148,6 +151,6 @@ const chartStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f5fcff"
+    // backgroundColor: "#f5fcff"
   }
 });
