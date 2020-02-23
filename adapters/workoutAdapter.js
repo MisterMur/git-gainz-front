@@ -24,6 +24,17 @@ export  default class WorkoutAdapter {
       .then(this.handleErrors)
       .then(res=>res.json())
   }
+	static async getCompletedWorkoutExercises(completedWorkout){
+		const item = await AsyncStorage.getItem('access_token')
+		return fetch(API_URL+`user_workouts/${completedWorkout.id}`,{
+			method:"GET",
+			headers:{
+				Authorization:item
+			}
+		})
+			.then(this.handleErrors)
+			.then(res=>res.json())
+	}
 
 	static async fetchMuscleSetsData(completedWorkout) {
 	  const item = await AsyncStorage.getItem('access_token')

@@ -26,6 +26,7 @@ import MuscleModal from '../components/MuscleModal.js'
 import WorkoutMuscleChart from './StatScreen/workoutMuscleChart'
 
 //action imports
+import {fetchCompletedWorkoutExercises} from '../actions/completedWorkoutActions'
 import {postNewExercise} from '../actions/exerciseActions'
 import {fetchSchedules} from '../actions/scheduleActions.js'
 import {
@@ -54,8 +55,16 @@ class WorkoutScreen extends Component {
 
   }
   componentDidMount(){
-    this.props.fetchWorkoutsExercises(this.props.currentWorkout)
+		// if(!this.state.pastWorkout){
+
+
+			this.props.fetchWorkoutsExercises(this.props.currentWorkout)
+		// }
+		// else{
+			// this.props.fetchCompletedWorkoutExercises(this.props.currentWorkout)
+		// }
 		this.props.fetchMuscles()
+		this.props.resetCircuits()
 		this.props.stopWorkout()
   }
   state={
@@ -124,8 +133,8 @@ class WorkoutScreen extends Component {
   }
   handleCompleteWorkout=()=>{
 		this.props.stopWorkout()
-    this.props.postNewCompleteWorkout(this.props.currentWorkout)
-		this.props.deleteAllCircuits(this.props.circuits)
+    this.props.postNewCompleteWorkout(this.props.currentWorkout,this.props.circuits)
+		// this.props.deleteAllCircuits(this.props.circuits)
     this.props.navigation.navigate('historyStack')
 
   }
@@ -280,6 +289,7 @@ const mapDispatchToProps={
 	// deleteCircuit,
 	deleteAllCircuits,
 	resetCircuits,
+	fetchCompletedWorkoutExercises,
 }
 function mapStateToProps(state){
   const {workout,user,muscles,circuits} = state

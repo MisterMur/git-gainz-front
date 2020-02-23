@@ -19,7 +19,6 @@ export default class CircuitAdapter{
 			.then(res => res.json())
 	}
 	static async deleteCircuit(circuit) {
-		console.warn('in circadapters delting:',circuit)
 		const item = await AsyncStorage.getItem('access_token')
 		return fetch(`${API_URL}circuits/${circuit.id}`, {
 			method: "DELETE",

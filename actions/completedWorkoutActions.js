@@ -1,3 +1,7 @@
+//actions/completedWorkoutActions.js
+
+
+//constants imports
 import {API_URL} from '../constants/types.js'
 import {
   FETCH_COMPLETEDWORKOUTS_BEGIN,
@@ -9,6 +13,11 @@ import {
 
 } from '../constants/types.js'
 
+//action imports
+import {fetchExercisesSuccess,fetchExercisesFailure} from './exerciseActions.js'
+
+
+//adapter imports
 import UserAdapter from '../adapters/userAdapter.js'
 import WorkoutAdapter from '../adapters/workoutAdapter.js'
 
@@ -27,6 +36,21 @@ export function fetchCompletedWorkoutsSuccess(completedWorkouts){
   return {
     type:FETCH_COMPLETEDWORKOUTS_SUCCESS,
     payload: completeworkouts,
+  }
+}
+
+export function fetchCompletedWorkoutExercises(workout){
+  return dispatch=>{
+    return WorkoutAdapter.getCompletedWorkoutExercises(workout)
+        .then(userWorkout=>{
+					//workout snapshot is copy of exercises
+					console.warn(userWorkout)
+          dispatch(fetchExercisesSuccess(userWorkout.exercises))
+          return userWorkout.exercises
+        })
+        .catch(error=>
+          dispatch(fetchExercisesFailure(error))
+        )
   }
 }
 

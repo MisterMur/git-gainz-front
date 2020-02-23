@@ -8,9 +8,15 @@ import {
 	API_URL,
 	ADD_CIRCUIT,DELETE_CIRCUIT,
 	FETCH_CIRCUITS_BEGIN,FETCH_CIRCUITS_SUCCESS,
-	FETCH_CIRCUITS_FAILURE,
+	FETCH_CIRCUITS_FAILURE,RESET_CIRCUITS,
 } from '../constants/types.js'
 
+export function resetCircuits(){
+  return {
+    type:RESET_CIRCUITS,
+
+  }
+}
 
 export function addCircuit(circuit){
   return dispatch=>{
@@ -22,13 +28,13 @@ export function addCircuit(circuit){
 }
 
 export function deleteAllCircuits(circuits){
-	return dispatch=>{
-		return circuits.map(c=>{
-			return CircuitAdapter.deleteCircuit(c)
+	return (dispatch)=>{
+		return circuits.map(c=>
+			 CircuitAdapter.deleteCircuit(c)
 			.then(function(){
 				dispatch({type:DELETE_CIRCUIT,payload:c})
 			})
-		})
+		)
 	}
 }
 

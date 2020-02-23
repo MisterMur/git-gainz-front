@@ -13,7 +13,7 @@ import {
   FETCH_COMPLETEDWORKOUTS_FAILURE,
   SET_COMPLETEDWORKOUTS,RESET_WORKOUTS,
 	STARTSTOP_WORKOUT,START_WORKOUT,STOP_WORKOUT,
-	ADD_CIRCUIT,
+	ADD_CIRCUIT,DELETE_CIRCUIT,
 
 
 } from '../constants/types.js'
@@ -22,10 +22,11 @@ import {
 import WorkoutAdapter from '../adapters/workoutAdapter.js'
 import ScheduleAdapter from '../adapters/scheduleAdapter.js'
 import UserAdapter from '../adapters/userAdapter.js'
-
+import CircuitAdapter from '../adapters/circuitAdapter.js'
 //actions imports
 import {fetchSchedulesFailure,fetchMySchedules} from './scheduleActions.js'
 import {fetchExercisesSuccess,fetchExercisesFailure} from './exerciseActions.js'
+import {deleteAllCircuits} from './circuitActions.js'
 
 export function setWorkouts(workouts){
   return{
@@ -157,23 +158,35 @@ export function addCircuit(circuit){
   }
 }
 
-export function postNewCompleteWorkout(completedWorkout){
+export function postNewCompleteWorkout(completedWorkout,circuits){
   return (dispatch)=>{
     return WorkoutAdapter.addCompletedWorkout(completedWorkout)
   .then(function(){
     dispatch({type:ADD_COMPLETEDWORKOUT,payload:completedWorkout})
     dispatch(fetchCompletedWorkouts())
   })
+	// .then(
+	// 	circuits.map(c=>
+	// 		 CircuitAdapter.deleteCircuit(c)
+	// 		.then(function(){
+	// 			dispatch({type:DELETE_CIRCUIT,payload:c})
+	// 		})
+	// 	)
+	// )
+	// .then(deleteAllCircuits(circuits))
   }
 }
 export function fetchCompletedWorkouts(){
   return (dispatch)=>{
     return UserAdapter.fetchCurrentUser()
-    .then(user=>{
+		.then(user=>{
+			console.warn('in fetch completedworkouts user',user)
       dispatch(fetchCompletedWorkoutsSuccess(user.user_workouts))
       return user.user_workouts
     })
-    .catch(error=>dispatch(fetchCompletedWorkoutsFailure(error)))
+    .catch(error=>{
+			console.error('error fetchingcompletedworkouts',error)
+			dispatch(fetchCompletedWorkoutsFailure(error))})
   }
 }
 

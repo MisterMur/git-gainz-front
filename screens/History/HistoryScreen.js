@@ -58,12 +58,16 @@ class HistoryScreen extends Component {
   }
 
   renderCompletedWorkoutList=()=>{
-    return (
-      <WorkoutList
-        workouts = {this.props.completedWorkouts}
-        handlePress = {()=>{this.props.navigation.navigate('Workout',{pastWorkout:true})}}
-        />
-    )
+		// console.warn(this.props.completedWorkouts)
+		if(this.props.completedWorkouts){
+			return (
+				<WorkoutList
+					workouts = {this.props.completedWorkouts}
+					handlePress = {()=>{this.props.navigation.navigate('Workout',{pastWorkout:true})}}
+					/>
+			)
+
+		}
   }
 
   render() {

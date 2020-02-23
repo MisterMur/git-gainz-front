@@ -2,11 +2,11 @@ import React from "react";
 import {
   Text,
   View,FlatList,
-  StyleSheet,Dimensions,
+  StyleSheet,Dimensions,Button
 } from 'react-native'
 import {connect} from 'react-redux'
 
-import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
+import { Card, ListItem ,Divider,Input} from 'react-native-elements'
 import fonts from '../styles/base.js'
 
 import {postNewCircuit,startStopWorkout,startWorkout} from '../actions/workoutActions.js'
@@ -71,6 +71,7 @@ class Set extends React.Component {
           value={this.state.reps}
           onChangeText={reps=>this.handleRepsOnChange(reps)}
           placeholder='Reps'
+					keyboardType={'numeric'}
 					editable={!this.props.pastWorkout}
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />
@@ -82,6 +83,7 @@ class Set extends React.Component {
           value={this.state.weight}
           onChangeText={weight=>this.handleWeightOnChange(weight)}
           placeholder='Weight'
+					keyboardType={'numeric'}
 					editable={!this.props.pastWorkout}
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />

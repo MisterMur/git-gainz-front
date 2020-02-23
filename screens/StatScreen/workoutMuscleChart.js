@@ -86,6 +86,29 @@ class WorkoutMuscleChart extends React.Component {
 		this.props.fetchMuscleRepsData(this.props.completedWorkout)
 		this.props.fetchMuscleSetsData(this.props.completedWorkout)
 	}
+	renderSetsChart(){
+		if(this.props.workoutSetsData){
+			return (
+				<VictoryPie
+					innerRadius={60}
+					labelRadius={90}
+					style={{labels: { fontSize: 22 } }}
+					data={this.convertData(this.props.workoutSetsData)}
+					animate={{ duration: 2500 }}
+					colorScale={[
+						"#D85F49",
+						"#F66D3B",
+						"#D92E1D",
+						"#D73C4C",
+						"#FFAF59",
+						"#E28300",
+						"#F6A57F"
+					]}
+					/>
+			)
+
+		}
+	}
 	render(){
 		// <BarChart
 		// 		// style={graphStyle}
@@ -104,25 +127,12 @@ class WorkoutMuscleChart extends React.Component {
 		// 		}
 		// 	}}
 		// />
+
 		return (
 			<View style={chartStyles.container}>
+				{this.renderSetsChart()}
 
-				<VictoryPie
-					 innerRadius={60}
-					 labelRadius={90}
-					 style={{labels: { fontSize: 22 } }}
-					 data={this.convertData(this.props.workoutSetsData)}
-					 animate={{ duration: 2500 }}
-					 colorScale={[
-					 	"#D85F49",
-					 	"#F66D3B",
-					 	"#D92E1D",
-					 	"#D73C4C",
-					 	"#FFAF59",
-					 	"#E28300",
-					 	"#F6A57F"
-					 ]}
-					 />
+
 
 			</View>
 		)
