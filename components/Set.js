@@ -64,17 +64,21 @@ class Set extends React.Component {
     return(
       <TouchableOpacity
 				style={{
-					// backgroundColor:'orange',
 					backgroundColor:'#03A9F4',
-					borderRadius: 25,
+					// borderRadius: 25,
+					height:'70%',
 					marginLeft: 0,
-					marginRight: 0, marginTop: 10}}
+					marginRight: 0, marginTop: 15}}
 				onPress={this.handleCompleteCircuit}
 				>
 				<Text style={{
-						fontSize:10,
+						justifyContent:'center',
+						fontSize:13,
 						fontWeight: 'bold',
-						marginTop:20,
+						marginTop:'auto',
+						marginLeft:'auto',
+						marginRight:'auto',
+						marginBottom:'auto',
 						color:colors.bdWhite}}
 					>Finish Set</Text>
 			</TouchableOpacity>
@@ -86,7 +90,7 @@ class Set extends React.Component {
     var width = Dimensions.get('window').width;
     return (
       <View style={{flex:5,flexDirection:"row"}}>
-      <View style={{flex:1, }}>
+      <View style={{flex:2, }}>
         <Text>Reps </Text>
         <Input
           value={this.state.reps}
@@ -98,7 +102,7 @@ class Set extends React.Component {
           />
       </View>
 
-      <View style={{flex:1, }}>
+      <View style={{flex:2, }}>
         <Text>Weight </Text>
         <Input
           value={this.state.weight}
@@ -109,9 +113,12 @@ class Set extends React.Component {
           leftIcon={{ type: 'font-awesome', name: 'chevron-left' }}
           />
       </View>
-			{this.state.showButton && !this.props.pastWorkout?
-				 this.renderCompleteCircuit()
-				 :null}
+
+			<View style={{flex:1}}>
+				{this.state.showButton && !this.props.pastWorkout?
+					this.renderCompleteCircuit()
+					:null}
+			</View>
 
 
 

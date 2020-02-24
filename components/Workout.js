@@ -51,7 +51,7 @@ class Workout extends React.Component {
           <Button
             backgroundColor='#03A9F4'
             buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-            title='VIEW NOW'
+            title='View Now'
             onPress={()=>this.handlePressButton()} />
         </Card>
       </View>
