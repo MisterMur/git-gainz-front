@@ -1,15 +1,26 @@
+///components/set.js
+
+//react imports
 import React from "react";
 import {
-  Text,
+  Text,TouchableOpacity,
   View,FlatList,
   StyleSheet,Dimensions,Button
 } from 'react-native'
 import {connect} from 'react-redux'
 
-import { Card, ListItem ,Divider,Input} from 'react-native-elements'
-import fonts from '../styles/base.js'
 
+//library imports
+import { Card, ListItem ,Divider,Input} from 'react-native-elements'
+
+//actions imports
 import {postNewCircuit,startStopWorkout,startWorkout} from '../actions/workoutActions.js'
+
+// constants imports
+import fonts from '../styles/base.js'
+import colors from '../styles/colors.js'
+import styles from '../styles/styles.js'
+
 
 
 class Set extends React.Component {
@@ -51,15 +62,25 @@ class Set extends React.Component {
 
   renderCompleteCircuit=()=>{
     return(
-      <Button
-        backgroundColor='#03A9F4'
-        buttonStyle={{borderRadius: 0.5, marginLeft: 0, marginRight: 0, marginTop: 10}}
-        title='Complete Set'
-        onPress={this.handleCompleteCircuit}
-       />
+      <TouchableOpacity
+				style={{
+					// backgroundColor:'orange',
+					backgroundColor:'#03A9F4',
+					borderRadius: 25,
+					marginLeft: 0,
+					marginRight: 0, marginTop: 10}}
+				onPress={this.handleCompleteCircuit}
+				>
+				<Text style={{
+						fontSize:10,
+						fontWeight: 'bold',
+						marginTop:20,
+						color:colors.bdWhite}}
+					>Finish Set</Text>
+			</TouchableOpacity>
+
     )
   }
-
 
   renderCircuitInput=()=>{
     var width = Dimensions.get('window').width;

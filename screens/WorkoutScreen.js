@@ -46,7 +46,7 @@ import {styles} from '../styles/styles'
 
 class WorkoutScreen extends Component {
   static navigationOptions = {
-    // title: 'Workout',
+    title: 'Workout',
 
   };
 
@@ -66,6 +66,7 @@ class WorkoutScreen extends Component {
 		this.props.fetchMuscles()
 		this.props.resetCircuits()
 		this.props.stopWorkout()
+		// this.navigationOptions.title=this.props.currentWorkout.name
   }
   state={
     text:'',

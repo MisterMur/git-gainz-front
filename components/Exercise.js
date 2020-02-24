@@ -1,10 +1,13 @@
 //react imports
 import React from "react";
-import {Text,View,FlatList,StyleSheet} from 'react-native'
+import {
+	Text,TouchableOpacity,
+	View,FlatList,StyleSheet,
+} from 'react-native'
 import {connect} from 'react-redux'
 
 //libary imports
-import { Card, ListItem, Button ,Divider,Input} from 'react-native-elements'
+import { Card, ListItem ,Divider,Input} from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 //component imports
@@ -49,17 +52,6 @@ class Exercise extends React.Component {
     this.setState({circuits:copyCircuits})
     this.props.addCircuit(newCircuit)
   }
-  renderCompleteCircuit=()=>{
-    return(
-      <Button
-        backgroundColor='#03A9F4'
-        buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-        title='Complete Set'
-        onPress={this.addCircuitsButton}
-       />
-    )
-  }
-
 
   renderSets(){
     return this.state.circuits.map( (s,id) =>
@@ -91,12 +83,8 @@ class Exercise extends React.Component {
 		}
 	}
 
-
-
-
   render() {
     return (
-
         <Card containerStyle={styles.card} title={this.props.exercise.name}>
 					{this.props.pastWorkout?
 						this.renderFinishedSets()

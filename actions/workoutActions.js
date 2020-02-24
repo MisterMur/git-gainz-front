@@ -180,7 +180,6 @@ export function fetchCompletedWorkouts(){
   return (dispatch)=>{
     return UserAdapter.fetchCurrentUser()
 		.then(user=>{
-			console.warn('in fetch completedworkouts user',user)
       dispatch(fetchCompletedWorkoutsSuccess(user.user_workouts))
       return user.user_workouts
     })
