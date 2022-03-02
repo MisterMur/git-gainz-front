@@ -39,19 +39,6 @@ export default class App extends React.Component {
       this.setState({ hasToken: token !== null, isLoaded: true })
     });
   }
-	// openDrawer = () => {
-	// 	this.props.navigation.dispatch(DrawerActions.openDrawer());
-	// }
-	// renderNavBar() {
-	// 		return (
-	// 				<View style={ styles.navBar }>
-	// 						<TouchableOpacity onPress={ this.openDrawer }>
-	// 								<FAIcon name='bars' size={22} style={{ color: colors.bdMainRed }} />
-	// 						</TouchableOpacity>
-	// 				</View>
-	// 		)
-	// }
-
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
@@ -86,13 +73,7 @@ export default class App extends React.Component {
         require('./assets/images/robot-dev.png'),
         require('./assets/images/robot-prod.png'),
       ]),
-      // Font.loadAsync({
-      //   // This is the font that we are using for our tab bar
-      //   ...Icon.Ionicons.font,
-      //   // We include SpaceMono because we use it in HomeScreen.js. Feel free
-      //   // to remove this if you are not using it in your app
-      //   'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      // }),
+ 
     ]);
   };
 
